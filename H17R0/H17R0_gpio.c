@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H02R0_gpio.c
+  * File Name          : H17R0_gpio.c
   * Description        : This file provides code for the configuration
   *                      of all used GPIO pins.
   ******************************************************************************
@@ -33,7 +33,7 @@
   */
 
 /*
-		MODIFIED by Hexabitz for BitzOS (BOS) V0.0.0 - Copyright (C) 2016 Hexabitz
+		MODIFIED by Hexabitz for BitzOS (BOS) V0.0.0 - Copyright (C) 2017 Hexabitz
     All rights reserved
 */
 
@@ -71,58 +71,30 @@ void IND_LED_Init(void)
 	HAL_GPIO_Init(_IND_LED_PORT, &GPIO_InitStruct);
 }
 
-
-/* --- Configure BT800 EN_RST / BT900 RST GPO --- 
+/* --- Configure ENC28J60 RST GPO --- 
 */
-void BT_RST_GPO_Init(void)
+void ETH_RST_GPIO_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
-	GPIO_InitStruct.Pin = _BT_RST_PIN;
+	GPIO_InitStruct.Pin = _ETH_RST_PIN;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_BT_RST_PORT, &GPIO_InitStruct);
+	HAL_GPIO_Init(_ETH_RST_PORT, &GPIO_InitStruct);
 }
 
-#ifdef H02R1
-/* --- Configure BT900 VSP Command Mode GPO --- 
+/* --- Configure ENC28J60 INT GPI --- 
 */
-void BT_VSP_GPO_Init(void)
+void ETH_INT_GPIO_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
-	GPIO_InitStruct.Pin = _BT_VSP_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_BT_VSP_PORT, &GPIO_InitStruct);
-}
-
-/* --- Configure BT900 Module Mode GPO --- 
-*/
-void BT_MODE_GPO_Init(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-	
-	GPIO_InitStruct.Pin = _BT_MODE_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-	HAL_GPIO_Init(_BT_MODE_PORT, &GPIO_InitStruct);
-}
-
-/* --- Configure BT900 Host Wakeup GPI --- 
-*/
-void BT_HOST_WKUP_GPI_Init(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-	
-	GPIO_InitStruct.Pin = _BT_HOST_WKUP_PIN;
+	GPIO_InitStruct.Pin = _ETH_INT_PIN;
 	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(_BT_HOST_WKUP_PORT, &GPIO_InitStruct);
+	HAL_GPIO_Init(_ETH_INT_PORT, &GPIO_InitStruct);
 }
-#endif
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,16 +1,17 @@
 /*
-    BitzOS (BOS) V0.0.0 - Copyright (C) 2016 Hexabitz
+    BitzOS (BOS) V0.0.0 - Copyright (C) 2017 Hexabitz
     All rights reserved
 
-    File Name     : H02R0.c
-    Description   : Source code for module H02R0.
-										Bluetooth module (BT800) 
+    File Name     : H17R0.c
+    Description   : Source code for module H17R0.
+										Ethernet-SPI module (ENC28J60) 
 		
 		Required MCU resources : 
 		
-			>> USARTs 1,2,4,5,6 for module ports.
-			>> USART 3 for FT234XD connected to BT800 USB.
-			>> PB15 for BT800 EN_RST.
+			>> USARTs 1,2,3,4,5 for module ports.
+			>> SPI 1 for ENC28J60.
+			>> PC13 for ENC28J60 RST.
+			>> PB0 for ENC28J60 INT (EXTI0).
 			
 */
 	
@@ -24,7 +25,6 @@ UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
 UART_HandleTypeDef huart4;
 UART_HandleTypeDef huart5;
-UART_HandleTypeDef huart6;
 
 
 /* Private variables ---------------------------------------------------------*/
@@ -50,36 +50,32 @@ void Module_Init(void)
 	/* Array ports */
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+	MX_USART3_UART_Init();
   MX_USART4_UART_Init();
   MX_USART5_UART_Init();
-	MX_USART6_UART_Init();
+	
+	/* ENC28J60 SPI Init */
+	MX_SPI1_Init();
+	
+	/* ENC28J60 RST and INT Init */
+	ETH_RST_GPIO_Init();	 
+	ETH_INT_GPIO_Init();
 
-	/* FT234XD UART */
-  MX_USART3_UART_Init();
-	
-	/* BT800 EN_RST */
-	BT_RST_GPO_Init();
-#ifdef H02R1	 
-	BT_VSP_GPO_Init();
-	BT_MODE_GPO_Init();
-	BT_HOST_WKUP_GPI_Init();
-#endif	
-	
   
 }
 /*-----------------------------------------------------------*/
 
-/* --- H02R0 message processing task. 
+/* --- H17R0 message processing task. 
 */
 Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
 {
-	Module_Status result = H02R0_OK;
+	Module_Status result = H17R0_OK;
 	
 	switch (code)
 	{
 
 		default:
-			result = H02R0_ERR_UnknownMessage;
+			result = H17R0_ERR_UnknownMessage;
 			break;
 	}			
 
@@ -96,7 +92,7 @@ uint8_t GetPort(UART_HandleTypeDef *huart)
 			return P1;
 	else if (huart->Instance == USART2)
 			return P2;
-	else if (huart->Instance == USART6)
+	else if (huart->Instance == USART3)
 			return P3;
 	else if (huart->Instance == USART1)
 			return P4;

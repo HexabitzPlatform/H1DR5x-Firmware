@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H02R0_gpio.h
+  * File Name          : H17R0_gpio.h
   * Description        : This file contains all the functions prototypes for 
   *                      the gpio  
   ******************************************************************************
@@ -33,13 +33,13 @@
   */
 	
 /*
-		MODIFIED by Hexabitz for BitzOS (BOS) V0.0.0 - Copyright (C) 2016 Hexabitz
+		MODIFIED by Hexabitz for BitzOS (BOS) V0.0.0 - Copyright (C) 2017 Hexabitz
     All rights reserved
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __H02R0_gpio_H
-#define __H02R0_gpio_H
+#ifndef __H17R0_gpio_H
+#define __H17R0_gpio_H
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -51,18 +51,15 @@
 extern void MX_GPIO_Init(void);
 extern void IND_LED_Init(void);
 	 
-extern void BT_RST_GPO_Init(void);
-#ifdef H02R1	 
-extern void BT_VSP_GPO_Init(void);
-extern void BT_MODE_GPO_Init(void);
-extern void BT_HOST_WKUP_GPI_Init(void);
-#endif
+extern void ETH_RST_GPIO_Init(void);	 
+extern void ETH_INT_GPIO_Init(void);
+
 
 
 #ifdef __cplusplus
 }
 #endif
-#endif /*__H02R0_gpio_H */
+#endif /*__H17R0_gpio_H */
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
