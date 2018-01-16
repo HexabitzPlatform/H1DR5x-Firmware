@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H17R0_uart.c
+  * File Name          : H1DR5_uart.c
   * Description        : This file provides code for the configuration
   *                      of the USART instances.
   ******************************************************************************

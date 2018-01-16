@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H17R0_spi.c
+  * File Name          : H1DR5_spi.c
   * Description        : This file provides code for the configuration
   *                      of the SPI instances.
   ******************************************************************************

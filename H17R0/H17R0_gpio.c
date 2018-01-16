@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H17R0_gpio.c
+  * File Name          : H1DR5_gpio.c
   * Description        : This file provides code for the configuration
   *                      of all used GPIO pins.
   ******************************************************************************

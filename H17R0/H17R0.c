@@ -2,8 +2,8 @@
     BitzOS (BOS) V0.0.0 - Copyright (C) 2017 Hexabitz
     All rights reserved
 
-    File Name     : H17R0.c
-    Description   : Source code for module H17R0.
+    File Name     : H1DR5.c
+    Description   : Source code for module H1DR5.
 										Ethernet-SPI module (ENC28J60) 
 		
 		Required MCU resources : 
@@ -65,17 +65,17 @@ void Module_Init(void)
 }
 /*-----------------------------------------------------------*/
 
-/* --- H17R0 message processing task. 
+/* --- H1DR5 message processing task. 
 */
 Module_Status Module_MessagingTask(uint16_t code, uint8_t port, uint8_t src, uint8_t dst)
 {
-	Module_Status result = H17R0_OK;
+	Module_Status result = H1DR5_OK;
 	
 	switch (code)
 	{
 
 		default:
-			result = H17R0_ERR_UnknownMessage;
+			result = H1DR5_ERR_UnknownMessage;
 			break;
 	}			
 

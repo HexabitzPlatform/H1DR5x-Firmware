@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H17R0_gpio.h
+  * File Name          : H1DR5_gpio.h
   * Description        : This file contains all the functions prototypes for 
   *                      the gpio  
   ******************************************************************************
@@ -38,8 +38,8 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __H17R0_gpio_H
-#define __H17R0_gpio_H
+#ifndef __H1DR5_gpio_H
+#define __H1DR5_gpio_H
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -59,7 +59,7 @@ extern void ETH_INT_GPIO_Init(void);
 #ifdef __cplusplus
 }
 #endif
-#endif /*__H17R0_gpio_H */
+#endif /*__H1DR5_gpio_H */
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

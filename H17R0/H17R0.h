@@ -2,25 +2,25 @@
     BitzOS (BOS) V0.0.0 - Copyright (C) 2017 Hexabitz
     All rights reserved
 		
-    File Name     : H17R0.h
-    Description   : Header file for module H17R0.
+    File Name     : H1DR5.h
+    Description   : Header file for module H1DR5.
 										Ethernet-SPI module (ENC28J60) 
 */
 	
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef H17R0_H
-#define H17R0_H
+#ifndef H1DR5_H
+#define H1DR5_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "BOS.h"
-#include "H17R0_uart.h"	
-#include "H17R0_gpio.h"	
-#include "H17R0_dma.h"	
-#include "H17R0_spi.h"	
+#include "H1DR5_uart.h"	
+#include "H1DR5_gpio.h"	
+#include "H1DR5_dma.h"	
+#include "H1DR5_spi.h"	
 
 /* Exported definitions -------------------------------------------------------*/
 
-#define	modulePN		_H17R0
+#define	modulePN		_H1DR5
 
 /* Port-related definitions */
 #define	NumOfPorts		5
@@ -93,12 +93,12 @@
 #define	_ETH_INT_PIN				GPIO_PIN_0
 
 
-/* H17R0_Status Type Definition */  
+/* H1DR5_Status Type Definition */  
 typedef enum 
 {
-  H17R0_OK = 0,
-	H17R0_ERR_UnknownMessage = 1,
-	H17R0_ERROR = 255
+  H1DR5_OK = 0,
+	H1DR5_ERR_UnknownMessage = 1,
+	H1DR5_ERROR = 255
 } Module_Status;
 
 /* Indicator LED */
@@ -145,6 +145,6 @@ extern void MX_USART5_UART_Init(void);
 
 
 
-#endif /* H17R0_H */
+#endif /* H1DR5_H */
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/

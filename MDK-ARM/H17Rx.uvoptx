@@ -460,7 +460,7 @@
   </Group>
 
   <Group>
-    <GroupName>BITZ/H17R0</GroupName>
+    <GroupName>BITZ/H1DR5</GroupName>
     <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -472,8 +472,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\H17R0.c</PathWithFileName>
-      <FilenameWithoutPath>H17R0.c</FilenameWithoutPath>
+      <PathWithFileName>..\H1DR5\H1DR5.c</PathWithFileName>
+      <FilenameWithoutPath>H1DR5.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -484,8 +484,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\H17R0_dma.c</PathWithFileName>
-      <FilenameWithoutPath>H17R0_dma.c</FilenameWithoutPath>
+      <PathWithFileName>..\H1DR5\H1DR5_dma.c</PathWithFileName>
+      <FilenameWithoutPath>H1DR5_dma.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -496,8 +496,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\H17R0_gpio.c</PathWithFileName>
-      <FilenameWithoutPath>H17R0_gpio.c</FilenameWithoutPath>
+      <PathWithFileName>..\H1DR5\H1DR5_gpio.c</PathWithFileName>
+      <FilenameWithoutPath>H1DR5_gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -508,8 +508,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\H17R0_it.c</PathWithFileName>
-      <FilenameWithoutPath>H17R0_it.c</FilenameWithoutPath>
+      <PathWithFileName>..\H1DR5\H1DR5_it.c</PathWithFileName>
+      <FilenameWithoutPath>H1DR5_it.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -520,8 +520,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\H17R0_spi.c</PathWithFileName>
-      <FilenameWithoutPath>H17R0_spi.c</FilenameWithoutPath>
+      <PathWithFileName>..\H1DR5\H1DR5_spi.c</PathWithFileName>
+      <FilenameWithoutPath>H1DR5_spi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -532,8 +532,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\H17R0_uart.c</PathWithFileName>
-      <FilenameWithoutPath>H17R0_uart.c</FilenameWithoutPath>
+      <PathWithFileName>..\H1DR5\H1DR5_uart.c</PathWithFileName>
+      <FilenameWithoutPath>H1DR5_uart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -544,7 +544,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\H17R0\startup_stm32f091xc.s</PathWithFileName>
+      <PathWithFileName>..\H1DR5\startup_stm32f091xc.s</PathWithFileName>
       <FilenameWithoutPath>startup_stm32f091xc.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
