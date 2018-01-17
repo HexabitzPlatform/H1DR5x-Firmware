@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * File Name          : H17R0_spi.h
+  * File Name          : H1DR5_spi.c
   * Description        : This file provides code for the configuration
   *                      of the SPI instances.
   ******************************************************************************
@@ -31,41 +31,42 @@
   *
   ******************************************************************************
   */
-	 
+
 /*
-		MODIFIED by Hexabitz for BitzOS (BOS) V0.0.0 - Copyright (C) 2016 Hexabitz
+		MODIFIED by Hexabitz for BitzOS (BOS) V0.0.0 - Copyright (C) 2017 Hexabitz
     All rights reserved
 */
 
-
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __spi_H
-#define __spi_H
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-	 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f0xx_hal.h"
+#include "BOS.h"
+
+/*----------------------------------------------------------------------------*/
+/* Configure SPI                                                              */
+/*----------------------------------------------------------------------------*/
 
 
-extern SPI_HandleTypeDef hspi1;
-void MX_SPI1_Init(void);
+SPI_HandleTypeDef hspi1;
+
+/* SPI1 init function */
+void MX_SPI1_Init(void)
+{
 
 
 
-#ifdef __cplusplus
 }
-#endif
-#endif /*__ spi_H */
 
-/**
-  * @}
-  */
+void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
+{
 
-/**
-  * @}
-  */
+
+}
+
+void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
+{
+
+
+} 
+
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
