@@ -50,10 +50,35 @@
 #include "stm32f0xx_hal.h"
 
 
+/* Define variable SPIs */
+#define _Spi1                       (1)
+/* #define _Spi2                       (1) */
+
+/* Port-SPI mapping */
+#define P1spi &hspi1
+/* #define P2spi &hspi2 */
+
+/* Define macros use for SPIs */
+#define Spi1Port        (0)
+#define Spi2Port        (1)
+
+
+/* Semaphore for SPIs */
+extern SemaphoreHandle_t SPIxSemaphoreHandle[2];
+
+
+/* External function prototypes -----------------------------------------------*/
 extern SPI_HandleTypeDef hspi1;
 void MX_SPI1_Init(void);
 
 
+HAL_StatusTypeDef readSPIxMutex(uint8_t port, uint8_t *buffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
+HAL_StatusTypeDef writeSPIxMutex(uint8_t port, uint8_t *buffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
+HAL_StatusTypeDef writereadSPIxMutex(uint8_t port, uint8_t *txbuffer, uint8_t *rxbuffer, uint16_t n, uint32_t mutexTimeout, uint32_t portTimeout);
+
+HAL_StatusTypeDef readSPIxITMutex(uint8_t port, uint8_t *buffer, uint16_t n, uint32_t mutexTimeout);
+HAL_StatusTypeDef writeSPIxITMutex(uint8_t port, uint8_t *buffer, uint16_t n, uint32_t mutexTimeout);
+HAL_StatusTypeDef writereadSPIxITMutex(uint8_t port, uint8_t *txbuffer, uint8_t *rxbuffer, uint16_t n, uint32_t mutexTimeout);
 
 #ifdef __cplusplus
 }

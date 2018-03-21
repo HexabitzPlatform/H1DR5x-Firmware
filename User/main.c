@@ -44,7 +44,7 @@
 
 
 /* Private function prototypes -----------------------------------------------*/
-
+extern void UDP_ExampleInit(void);
 
 
 /* Main functions ------------------------------------------------------------*/
@@ -68,7 +68,8 @@ int main(void)
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
-
+  UDP_ExampleInit();
+  
   /* Start scheduler */
   osKernelStart();
   

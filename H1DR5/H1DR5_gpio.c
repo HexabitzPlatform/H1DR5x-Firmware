@@ -91,9 +91,13 @@ void ETH_INT_GPIO_Init(void)
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
 	GPIO_InitStruct.Pin = _ETH_INT_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(_ETH_INT_PORT, &GPIO_InitStruct);
+    
+    /* External interrupt init*/
+    HAL_NVIC_SetPriority(EXTI0_1_IRQn, 1, 0);
+    HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
 }
 
 

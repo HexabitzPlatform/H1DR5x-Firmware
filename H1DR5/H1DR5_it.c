@@ -46,7 +46,7 @@
 extern TaskHandle_t xCommandConsoleTaskHandle;
 extern void NotifyMessagingTaskFromISR(uint8_t port);
 
-
+extern void NetIrq_Handler(void);
 
 /******************************************************************************/
 /*            Cortex-M0 Processor Interruption and Exception Handlers         */ 
@@ -185,6 +185,25 @@ void DMA1_Ch2_3_DMA2_Ch1_2_IRQHandler(void)
 /*-----------------------------------------------------------*/
 
 /**
+  * @brief  This function handles external lines 0 to 1 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void EXTI0_1_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(_ETH_INT_PIN);
+}
+
+/*-----------------------------------------------------------*/
+
+void SPI1_IRQHandler(void)
+{
+    HAL_SPI_IRQHandler(&hspi1);
+}
+
+/*-----------------------------------------------------------*/
+
+/**
 * @brief This function handles DMA1 channel 4 to 7 and DMA2 channel 3 to 5 interrupts.
 */
 void DMA1_Ch4_7_DMA2_Ch3_5_IRQHandler(void)
@@ -282,6 +301,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	}
 	
 	UartRxReady = SET;
+}
+
+/*-----------------------------------------------------------*/
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin == _ETH_INT_PIN)
+    {
+        NetIrq_Handler();
+    }
 }
 
 /*-----------------------------------------------------------*/

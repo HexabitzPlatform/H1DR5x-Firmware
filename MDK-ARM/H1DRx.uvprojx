@@ -10,7 +10,7 @@
       <TargetName>Module 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -133,8 +133,8 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <Capability>1</Capability>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
@@ -311,7 +311,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>3</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F091xB,H1DR5,_module=1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\User;..\H1DR5;..\BOS;..\Thirdparty\Middleware\FreeRTOS\Source\CMSIS_RTOS;..\Thirdparty\Middleware\FreeRTOS\Source\include;..\Thirdparty\Middleware\FreeRTOS\Source\portable\RVDS\ARM_CM0;..\Thirdparty\STM32F0xx_HAL_Driver\Inc\Legacy;..\Thirdparty\STM32F0xx_HAL_Driver\Inc;..\Thirdparty\CMSIS\Device\ST\STM32F0xx\Include;..\Thirdparty\CMSIS\Include</IncludePath>
+              <IncludePath>..\User;..\H1DR5;..\BOS;..\Thirdparty\Middleware\FreeRTOS\Source\CMSIS_RTOS;..\Thirdparty\Middleware\FreeRTOS\Source\include;..\Thirdparty\Middleware\FreeRTOS\Source\portable\RVDS\ARM_CM0;..\Thirdparty\STM32F0xx_HAL_Driver\Inc\Legacy;..\Thirdparty\STM32F0xx_HAL_Driver\Inc;..\Thirdparty\CMSIS\Device\ST\STM32F0xx\Include;..\Thirdparty\CMSIS\Include;..\Thirdparty\BSP\Components\enc28j60;..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\include;..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\portable\Compiler\RVDS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -480,6 +480,16 @@
               <FileType>1</FileType>
               <FilePath>..\Thirdparty\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc_ex.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f0xx_hal_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_hal_spi_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -545,6 +555,11 @@
               <FileType>2</FileType>
               <FilePath>..\H1DR5\startup_stm32f091xc.s</FilePath>
             </File>
+            <File>
+              <FileName>udp_cli_commands.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\H1DR5\udp_cli_commands.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -599,6 +614,51 @@
               <FileName>cmsis_os.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\thirdparty\Middleware\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FreeRTOS_Plus_UDP</GroupName>
+          <Files>
+            <File>
+              <FileName>FreeRTOS_DHCP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\FreeRTOS_DHCP.c</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOS_DNS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\FreeRTOS_DNS.c</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOS_Sockets.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\FreeRTOS_Sockets.c</FilePath>
+            </File>
+            <File>
+              <FileName>BufferAllocation_2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\portable\BufferManagement\BufferAllocation_2.c</FilePath>
+            </File>
+            <File>
+              <FileName>NetworkInterface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\portable\NetworkInterface\enc28j60\NetworkInterface.c</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOS_UDP_IP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\Middleware\FreeRTOS-Plus-UDP\FreeRTOS_UDP_IP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Enc28j60</GroupName>
+          <Files>
+            <File>
+              <FileName>enc28j60.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Thirdparty\BSP\Components\enc28j60\enc28j60.c</FilePath>
             </File>
           </Files>
         </Group>
