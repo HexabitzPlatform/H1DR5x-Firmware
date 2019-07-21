@@ -106,7 +106,7 @@ void MX_USART3_UART_Init(void)
   huart3.Init.OneBitSampling = UART_ONEBIT_SAMPLING_DISABLED;
   huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
 	HAL_UART_Init(&huart3);
-	#if _P6pol_reversed
+	#if _P3pol_reversed
 		huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
 		huart3.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
 	  HAL_UART_Init(&huart3);
@@ -411,6 +411,26 @@ HAL_StatusTypeDef writePxITMutex(uint8_t port, char *buffer, uint16_t n, uint32_
 		/* Wait for the mutex to be available. */
 		if (osSemaphoreWait(PxTxSemaphoreHandle[port], mutexTimeout) == osOK) {
 			result = HAL_UART_Transmit_IT(GetUart(port), (uint8_t *)buffer, n);
+		}
+	}
+	
+	return result;
+}
+
+/* --- Non-blocking (DMA-based) write protected with a semaphore --- 
+*/
+HAL_StatusTypeDef writePxDMAMutex(uint8_t port, char *buffer, uint16_t n, uint32_t mutexTimeout)
+{
+	HAL_StatusTypeDef result = HAL_ERROR; 
+	UART_HandleTypeDef* hUart = GetUart(port);
+
+	if (hUart != NULL) {	
+		/* Wait for the mutex to be available. */
+		if (osSemaphoreWait(PxTxSemaphoreHandle[port], mutexTimeout) == osOK) {
+			/* Setup TX DMA on this port */
+			DMA_MSG_TX_Setup(hUart);
+			/* Transmit the message */
+			result = HAL_UART_Transmit_DMA(hUart, (uint8_t *)buffer, n);
 		}
 	}
 	
