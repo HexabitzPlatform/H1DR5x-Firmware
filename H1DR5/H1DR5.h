@@ -93,6 +93,9 @@
 #define	_ETH_INT_PIN				GPIO_PIN_0
 
 
+#define NUM_MODULE_PARAMS		1
+			
+			
 /* H1DR5_Status Type Definition */  
 typedef enum 
 {
