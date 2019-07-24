@@ -13,6 +13,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "BOS.h"
+#include "H1DR5_MemoryMap.h"	
 #include "H1DR5_uart.h"	
 #include "H1DR5_gpio.h"	
 #include "H1DR5_dma.h"	
