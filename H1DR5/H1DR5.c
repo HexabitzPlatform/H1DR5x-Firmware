@@ -105,12 +105,12 @@ const CLI_Command_Definition_t CLI_Set_DefaultGatewayCommandDefinition =
 
 /* -----------------------------------------------------------------------
  |												 Private Functions	 														|
- ----------------------------------------------------------------------- 
+ -----------------------------------------------------------------------
  */
 
 /**
  * @brief  System Clock Configuration
- *         The system Clock is configured as follow : 
+ *         The system Clock is configured as follow :
  *            System Clock source            = PLL (HSE)
  *            SYSCLK(Hz)                     = 48000000
  *            HCLK(Hz)                       = 48000000
@@ -167,22 +167,22 @@ void SystemClock_Config(void){
 
 	  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
 	  HAL_NVIC_SetPriority(SysTick_IRQn,0,0);
-	
+
 }
 
 /*-----------------------------------------------------------*/
 
 
-/* --- Save array topology and Command Snippets in Flash RO --- 
+/* --- Save array topology and Command Snippets in Flash RO ---
  */
 uint8_t SaveToRO(void){
 	BOS_Status result =BOS_OK;
 	HAL_StatusTypeDef FlashStatus =HAL_OK;
 	uint16_t add =8, temp =0;
 	uint8_t snipBuffer[sizeof(snippet_t) + 1] ={0};
-	
+
 	HAL_FLASH_Unlock();
-	
+
 	/* Erase RO area */
 	FLASH_PageErase(FLASH_BANK_1,RO_START_ADDRESS);
 		FlashStatus =FLASH_WaitForLastOperation((uint32_t ) HAL_FLASH_TIMEOUT_VALUE);
@@ -196,7 +196,7 @@ uint8_t SaveToRO(void){
 		/* Operation is completed, disable the PER Bit */
 		CLEAR_BIT(FLASH->CR,FLASH_CR_PER);
 	}
-	
+
 	/* Save number of modules and myID */
 	if(myID){
 		temp =(uint16_t )(N << 8) + myID;
@@ -211,7 +211,7 @@ uint8_t SaveToRO(void){
 			/* If the program operation is completed, disable the PG Bit */
 			CLEAR_BIT(FLASH->CR,FLASH_CR_PG);
 		}
-		
+
 		/* Save topology */
 		for(uint8_t i =1; i <= N; i++){
 			for(uint8_t j =0; j <= MaxNumOfPorts; j++){
@@ -231,7 +231,7 @@ uint8_t SaveToRO(void){
 			}
 		}
 	}
-	
+
 	// Save Command Snippets
 	int currentAdd = RO_MID_ADDRESS;
 	for(uint8_t s =0; s < numOfRecordedSnippets; s++){
@@ -270,20 +270,20 @@ uint8_t SaveToRO(void){
 			}
 		}
 	}
-	
+
 	HAL_FLASH_Lock();
-	
+
 	return result;
 }
 
-/* --- Clear array topology in SRAM and Flash RO --- 
+/* --- Clear array topology in SRAM and Flash RO ---
  */
 uint8_t ClearROtopology(void){
-	// Clear the array 
+	// Clear the array
 	memset(array,0,sizeof(array));
 	N =1;
 	myID =0;
-	
+
 	return SaveToRO();
 }
 /*-----------------------------------------------------------*/
@@ -432,7 +432,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			result =H1DR5_ERR_UnknownMessage;
 			break;
 	}
-	
+
 	return result;
 }
 
@@ -449,7 +449,7 @@ void RegisterModuleCLICommands(void){
 }
 
 /*-----------------------------------------------------------*/
-/* --- Get the port for a given UART. 
+/* --- Get the port for a given UART.
  */
 uint8_t GetPort(UART_HandleTypeDef *huart){
 
@@ -465,7 +465,7 @@ uint8_t GetPort(UART_HandleTypeDef *huart){
 		return P5;
 	else if(huart->Instance == USART1)
 		return P6;
-	
+
 	return 0;
 }
 
@@ -521,6 +521,10 @@ void ProcessEthernetDataTask(void *argument){
  |								  APIs							          | 																 	|
 /* -----------------------------------------------------------------------
  */
+
+/*
+          Send data to Ethernet module
+ */
 Module_Status EthernetSendData(char *data ,uint16_t length){
 	Module_Status status=H1DR5_OK;
 
@@ -539,6 +543,9 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 }
 
 /*-----------------------------------------------------------*/
+/*\
+ Calculating the number of data received from the devices connected to the module
+ */
 uint32_t EthernetGetDataCount(void){
 
 
@@ -561,6 +568,10 @@ uint32_t EthernetGetDataCount(void){
 		}
 }
 /*-----------------------------------------------------------*/
+
+/*
+ Extracting data ready for processing to execute an order according to the received data
+ */
 Module_Status EthernetGetDataByte(uint8_t* Data)
 {
 
@@ -588,6 +599,10 @@ Module_Status EthernetGetDataByte(uint8_t* Data)
 
 }
 /*-----------------------------------------------------------*/
+
+/*
+ Setting the IP Address  of the Ethernet module
+ */
 Module_Status Set_IP_Address(uint8_t *IP){
 	Module_Status status=H1DR5_OK;
 	uint32_t ip[4]={};
@@ -606,6 +621,10 @@ Module_Status Set_IP_Address(uint8_t *IP){
 
 }
 /*-----------------------------------------------------------*/
+
+/*
+     Setting the Subnet Mask of the Ethernet network
+ */
 Module_Status Set_SubnetMask(uint8_t *SubnetMask){
 	Module_Status status=H1DR5_OK;
 	uint32_t subnetmask[4]={};
@@ -624,6 +643,10 @@ Module_Status Set_SubnetMask(uint8_t *SubnetMask){
 
 }
 /*-----------------------------------------------------------*/
+
+/*
+ Setting the Default Gateway of the device connected the Ethernet module
+ */
 Module_Status Set_DefaultGateway(uint8_t *Gateway){
 	Module_Status status=H1DR5_OK;
 	uint32_t gateway[4]={};
@@ -635,7 +658,7 @@ Module_Status Set_DefaultGateway(uint8_t *Gateway){
 	}
 
 	ip_gateway=inet_addr(gateway[0],gateway[1],gateway[2],gateway[3]);
-
+	ip_dest=ip_gateway;
 	return status;
 
 }

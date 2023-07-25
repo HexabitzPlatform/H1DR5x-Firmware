@@ -5,7 +5,7 @@ uint8_t mac_addr[6] = MAC_ADDR;
 uint32_t ip_addr = IP_ADDR;
 uint32_t ip_mask = IP_SUBNET_MASK;
 uint32_t ip_gateway = IP_DEFAULT_GATEWAY;
-
+uint32_t ip_dest=IP_DEST;
 uint8_t net_buf[ENC28J60_MAXFRAME];
 
 uint8_t arp_cache_wr;
@@ -52,7 +52,7 @@ uint8_t udp_send(eth_frame_t *frame, uint16_t len)
 
 	ip->protocol = IP_PROTOCOL_UDP;
 	ip->from_addr = ip_addr;
-	ip->to_addr = IP_DEST;
+	ip->to_addr = ip_dest;
 	udp->len = htons(len);
 	udp->cksum = 0;
 	udp->cksum = ip_cksum(len + IP_PROTOCOL_UDP,(uint8_t*)udp-8, len+8);
