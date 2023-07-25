@@ -45,10 +45,8 @@ module_param_t modParam[NUM_MODULE_PARAMS] ={{.paramPtr = NULL, .paramFormat =FM
 #define MX_SIZE_USER_BUFFER 512
  uint16_t length;
  uint8_t DataBuffer[MX_SIZE_USER_BUFFER]={0};
- uint8_t UserDataBuffer[MX_SIZE_USER_BUFFER]={0};
  uint32_t indexInput=0;
  uint32_t indexProcess=0;
-
  TaskHandle_t ProcessEthernetDataTaskHandle = NULL;
 
 
@@ -370,7 +368,7 @@ void Module_Peripheral_Init(void){
 	MX_SPI1_Init();
 	lan_init();
 
-	//Circulating DMA Channels ON All Module
+//Circulating DMA Channels ON All Module
 	 for(int i=1;i<=NumOfPorts;i++)
 		{
 		  if(GetUart(i)==&huart1)
@@ -387,9 +385,6 @@ void Module_Peripheral_Init(void){
 				   { index_dma[i-1]=&(DMA1_Channel6->CNDTR); }
 		}
 
-	/* Create module special task (if needed) */
-	if(ProcessEthernetDataTaskHandle == NULL)
-		xTaskCreate(ProcessEthernetDataTask,(const char* ) "ProcessEthernetDataTask",configMINIMAL_STACK_SIZE,NULL,osPriorityNormal - osPriorityIdle,&ProcessEthernetDataTaskHandle);
 }
 
 /*-----------------------------------------------------------*/
@@ -470,52 +465,6 @@ uint8_t GetPort(UART_HandleTypeDef *huart){
 }
 
 /*-----------------------------------------------------------*/
-/* EthernetTask function */
-void ProcessEthernetDataTask(void *argument){
-
-	for(;;){
-	lan_poll(DataBuffer, &length);
-	Delay_ms(10);
-	for(uint16_t i=0; i<length; i++){
-		UserDataBuffer[indexInput]=DataBuffer[i];
-		indexInput++;
-		if(indexInput==MX_SIZE_USER_BUFFER)
-			indexInput=0;
-	}
-
-	length=0;
-
-	taskYIELD();
-	}
-}
-
-
-/*-----------------------------------------------------------*/
-
-
-/* Module special task function (if needed) */
-//void Module_Special_Task(void *argument){
-//
-//	/* Infinite loop */
-//	uint8_t cases; // Test variable.
-//	for(;;){
-//		/*  */
-//		switch(cases){
-//
-//
-//			default:
-//				osDelay(10);
-//				break;
-//		}
-//
-//		taskYIELD();
-//	}
-//
-//}
-
-
-
-/*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
  |								  APIs							          | 																 	|
@@ -523,7 +472,7 @@ void ProcessEthernetDataTask(void *argument){
  */
 
 /*
-          Send data to Ethernet module
+         Send data to Ethernet module
  */
 Module_Status EthernetSendData(char *data ,uint16_t length){
 	Module_Status status=H1DR5_OK;
@@ -534,70 +483,25 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 	}
 	else{
 		status=H1DR5_ERROR;
-
 	}
-
-
 	return status;
-
 }
-
-/*-----------------------------------------------------------*/
-/*\
- Calculating the number of data received from the devices connected to the module
- */
-uint32_t EthernetGetDataCount(void){
-
-
-	if(indexInput== indexProcess)
-		{
-			return 0;
-		}
-
-		else
-		{
-			if(indexInput > indexProcess)
-			{
-				return (indexInput - indexProcess);
-			}
-			else
-			{
-				return (indexInput-indexProcess+MX_SIZE_USER_BUFFER);
-			}
-
-		}
-}
-/*-----------------------------------------------------------*/
-
 /*
- Extracting data ready for processing to execute an order according to the received data
+         Receive data from Ethernet module
  */
-Module_Status EthernetGetDataByte(uint8_t* Data)
+Module_Status Ethernet_Receive_Data(uint8_t *ReceiveData)
 {
-
-	if(EthernetGetDataCount() != 0)
-	{
-		if(Data == NULL)
-		{
-			return H1DR5_ERROR;
-		}
-
-
-		*Data =  UserDataBuffer[indexProcess];
-		indexProcess++;
-		if(indexProcess == MX_SIZE_USER_BUFFER)
-		{
-			indexProcess = 0;
-		}
-		return H1DR5_OK;
+	Module_Status status=H1DR5_OK;
+	lan_poll(DataBuffer, &length);
+	for(uint16_t i=0; i<length; i++){
+		ReceiveData[indexInput]=DataBuffer[i];
+		indexInput++;
+		if(indexInput==MX_SIZE_USER_BUFFER)
+			indexInput=0;
+	}
+	length=0;
 	}
 
-	else
-	{
-		return H1DR5_ERROR;
-	}
-
-}
 /*-----------------------------------------------------------*/
 
 /*

@@ -12,8 +12,7 @@
 uint8_t myGateway[4]={192,168,0,15};
 	uint8_t mySubnet[4]={255,255,255,0};
 	uint8_t myIP[4]={192,168,0,16};
-	uint8_t buffer;
-	uint32_t dataCoun;
+	uint8_t data_res[512];
 /* Private function prototypes -----------------------------------------------*/
 
 
@@ -39,11 +38,11 @@ void UserTask(void *argument){
 
 	// put your code here, to run repeatedly.
 	while(1){
-				EthernetSendData("hello :) hello",14);
-						Delay_ms(1000);
 
-				EthernetGetDataByte(&buffer);
-				dataCoun= EthernetGetDataCount();
+		Ethernet_Receive_Data(data_res);
+				EthernetSendData("moham :) moham",14);
+						Delay_ms(100);
+
 	}
 }
 

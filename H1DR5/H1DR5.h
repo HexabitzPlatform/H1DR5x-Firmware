@@ -135,10 +135,8 @@ extern void ExecuteMonitor(void);
  |								  APIs							          |  																 	|
 /* -----------------------------------------------------------------------
  */
-
+extern Module_Status Ethernet_Receive_Data(uint8_t *ReceiveData);
 extern Module_Status EthernetSendData(char *data ,uint16_t length);
-extern uint32_t EthernetGetDataCount(void);
-extern Module_Status EthernetGetDataByte(uint8_t* Data);
 extern Module_Status Set_IP_Address(uint8_t *IP);
 Module_Status Set_SubnetMask(uint8_t *SubnetMask);
 Module_Status Set_DefaultGateway(uint8_t *Gateway);
