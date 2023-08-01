@@ -99,6 +99,9 @@
 
 #define NUM_MODULE_PARAMS		13
 
+/*..........Enable User Data from external ports (like USB, Ethernet, BLE ...)......*/
+#define __USER_DATA_BUFFER
+
 /* Module EEPROM Variables */
 
 // Module Addressing Space 500 - 599
@@ -135,7 +138,7 @@ extern void ExecuteMonitor(void);
  |								  APIs							          |  																 	|
 /* -----------------------------------------------------------------------
  */
-extern Module_Status Ethernet_Receive_Data(uint8_t *ReceiveData);
+extern Module_Status Ethernet_Receive_Data();
 extern Module_Status EthernetSendData(char *data ,uint16_t length);
 extern Module_Status Set_IP_Address(uint8_t *IP);
 Module_Status Set_SubnetMask(uint8_t *SubnetMask);

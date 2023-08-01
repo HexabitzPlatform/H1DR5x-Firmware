@@ -489,14 +489,15 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 /*
          Receive data from Ethernet module
  */
-Module_Status Ethernet_Receive_Data(uint8_t *ReceiveData)
+Module_Status Ethernet_Receive_Data()
 {
 	Module_Status status=H1DR5_OK;
 	lan_poll(DataBuffer, &length);
 	for(uint16_t i=0; i<length; i++){
-		ReceiveData[indexInput]=DataBuffer[i];
+		UserBufferData[indexInput]=DataBuffer[i];
+//		ReceiveData[indexInput]=DataBuffer[i];
 		indexInput++;
-		if(indexInput==MX_SIZE_USER_BUFFER)
+		if(indexInput==USER_RX_BUF_SIZE)
 			indexInput=0;
 	}
 	length=0;
