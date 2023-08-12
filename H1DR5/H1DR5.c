@@ -506,6 +506,17 @@ Module_Status Ethernet_Receive_Data()
 /*-----------------------------------------------------------*/
 
 /*
+ * Set the connection settings
+ */
+Module_Status Set_reseve_mac_and_ip_Remote()
+{
+ EthernetSendData("0",1);
+     Delay_ms(10);
+     Ethernet_Receive_Data();
+}
+/*-----------------------------------------------------------*/
+
+/*
  Setting the Local_PORT
  */
 Module_Status Set_Local_PORT(uint16_t to_port){
