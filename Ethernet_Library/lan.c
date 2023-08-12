@@ -2,9 +2,9 @@
 
 uint8_t mac_addr[6] = MAC_ADDR;
 
-uint32_t ip_addr = IP_ADDR;
+uint32_t Local_IP = IP_ADDR;
 uint32_t ip_mask = IP_SUBNET_MASK;
-uint32_t ip_gateway = IP_DEFAULT_GATEWAY;
+uint32_t Remote_IP = IP_DEFAULT_GATEWAY;
 uint32_t ip_dest=IP_DEST;
 uint8_t net_buf[ENC28J60_MAXFRAME];
 
@@ -51,13 +51,13 @@ uint8_t udp_send(eth_frame_t *frame, uint16_t len)
 	len += sizeof(udp_packet_t);
 
 	ip->protocol = IP_PROTOCOL_UDP;
-	ip->from_addr = ip_addr;
+	ip->from_addr = Local_IP;
 	ip->to_addr = ip_dest;
 	udp->len = htons(len);
 	udp->cksum = 0;
 	udp->cksum = ip_cksum(len + IP_PROTOCOL_UDP,(uint8_t*)udp-8, len+8);
-	udp->from_port=htons(FROM_PORT);
-	udp->to_port=htons(TO_PORT);
+	udp->from_port=htons(Remote_PORT);
+	udp->to_port=htons(Local_PORT);
 
 	return ip_send(frame, len);
 }
@@ -73,8 +73,8 @@ void udp_reply(eth_frame_t *frame, uint16_t len)
 
 	// Calculate the length of the entire packet
 	len += sizeof(udp_packet_t);
-	udp->from_port=htons(FROM_PORT);
-	udp->to_port=htons(TO_PORT);
+	udp->from_port=htons(Remote_PORT);
+	udp->to_port=htons(Local_PORT);
 	// Swap the port of the sender and receiver
 	temp = udp->from_port;
 	udp->from_port = udp->to_port;
@@ -188,10 +188,10 @@ uint8_t ip_send(eth_frame_t *frame, uint16_t len)
 	uint8_t *mac_addr_to;
 
 	// apply route
-	if( ((ip->to_addr ^ ip_addr) & ip_mask) == 0 )
+	if( ((ip->to_addr ^ Local_IP) & ip_mask) == 0 )
 		route_ip = ip->to_addr;
 	else
-		route_ip = ip_gateway;
+		route_ip = Remote_IP;
 
 	// resolve mac address
 	mac_addr_to = arp_resolve(route_ip);
@@ -210,7 +210,7 @@ uint8_t ip_send(eth_frame_t *frame, uint16_t len)
 	ip->flags_framgent_offset = 0;
 	ip->ttl = IP_PACKET_TTL;
 	ip->cksum = 0;
-	ip->from_addr = ip_addr;
+	ip->from_addr = Local_IP;
 	ip->cksum = ip_cksum(0, (void*)ip, sizeof(ip_packet_t));
 
 	eth_send(frame, len);
@@ -231,7 +231,7 @@ void ip_reply(eth_frame_t *frame, uint16_t len)
 	packet->ttl = IP_PACKET_TTL;
 	packet->cksum = 0;
 	packet->to_addr = packet->from_addr;
-	packet->from_addr = ip_addr;
+	packet->from_addr = Local_IP;
 	packet->cksum = ip_cksum(0, (void*)packet, sizeof(ip_packet_t));
 
 	eth_reply((void*)frame, len);
@@ -245,7 +245,7 @@ void ip_filter(eth_frame_t *frame, uint16_t len,uint8_t mode)
 	//if(len >= sizeof(ip_packet_t))
 	//{
 		if( (packet->ver_head_len == 0x45) &&
-			(packet->to_addr == ip_addr) )
+			(packet->to_addr == Local_IP) )
 		{
 			len = ntohs(packet->total_len) - 
 				sizeof(ip_packet_t);
@@ -306,7 +306,7 @@ uint8_t *arp_resolve(uint32_t node_ip_addr)
 	msg->proto_addr_len = 4;
 	msg->type = ARP_TYPE_REQUEST;
 	memcpy(msg->mac_addr_from, mac_addr, 6);
-	msg->ip_addr_from = ip_addr;
+	msg->ip_addr_from = Local_IP;
 	memset(msg->mac_addr_to, 0x00, 6);
 	msg->ip_addr_to = node_ip_addr;
 
@@ -323,7 +323,7 @@ void arp_filter(eth_frame_t *frame, uint16_t len)
 	{
 		if( (msg->hw_type == ARP_HW_TYPE_ETH) &&
 			(msg->proto_type == ARP_PROTO_TYPE_IP) &&
-			(msg->ip_addr_to == ip_addr) )
+			(msg->ip_addr_to == Local_IP) )
 		{
 			switch(msg->type)
 			{
@@ -332,7 +332,7 @@ void arp_filter(eth_frame_t *frame, uint16_t len)
 				memcpy(msg->mac_addr_to, msg->mac_addr_from, 6);
 				memcpy(msg->mac_addr_from, mac_addr, 6);
 				msg->ip_addr_to = msg->ip_addr_from;
-				msg->ip_addr_from = ip_addr;
+				msg->ip_addr_from = Local_IP;
 				eth_reply(frame, sizeof(arp_message_t));
 				break;
 			case ARP_TYPE_RESPONSE:

@@ -407,7 +407,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			IpAdd[1]= cMessage[port - 1][1 + shift];
 			IpAdd[2]= cMessage[port - 1][2 + shift];
 			IpAdd[3]= cMessage[port - 1][3 + shift];
-			Set_IP_Address(IpAdd);
+			Set_Local_IP(IpAdd);
              break;
 		case CODE_H1DR5_Set_Subnet_Mask:
 			Subnet[0]= cMessage[port - 1][0 + shift];
@@ -421,7 +421,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			IpGate[1]= cMessage[port - 1][1 + shift];
 			IpGate[2]= cMessage[port - 1][2 + shift];
 			IpGate[3]= cMessage[port - 1][3 + shift];
-			Set_DefaultGateway(IpGate);
+			Set_Remote_IP(IpGate);
 			 break;
 		default:
 			result =H1DR5_ERR_UnknownMessage;
@@ -508,7 +508,7 @@ Module_Status Ethernet_Receive_Data()
 /*
  Setting the IP Address  of the Ethernet module
  */
-Module_Status Set_IP_Address(uint8_t *IP){
+Module_Status Set_Local_IP(uint8_t *IP){
 	Module_Status status=H1DR5_OK;
 	uint32_t ip[4]={};
 
@@ -520,7 +520,7 @@ Module_Status Set_IP_Address(uint8_t *IP){
 
 	}
 
-	ip_addr=inet_addr(ip[0],ip[1],ip[2],ip[3]);
+	Local_IP=inet_addr(ip[0],ip[1],ip[2],ip[3]);
 
 	return status;
 
@@ -552,7 +552,7 @@ Module_Status Set_SubnetMask(uint8_t *SubnetMask){
 /*
  Setting the Default Gateway of the device connected the Ethernet module
  */
-Module_Status Set_DefaultGateway(uint8_t *Gateway){
+Module_Status Set_Remote_IP(uint8_t *Gateway){
 	Module_Status status=H1DR5_OK;
 	uint32_t gateway[4]={};
 	if(Gateway==NULL){
@@ -562,8 +562,8 @@ Module_Status Set_DefaultGateway(uint8_t *Gateway){
 		gateway[i]=Gateway[i];
 	}
 
-	ip_gateway=inet_addr(gateway[0],gateway[1],gateway[2],gateway[3]);
-	ip_dest=ip_gateway;
+	Remote_IP=inet_addr(gateway[0],gateway[1],gateway[2],gateway[3]);
+	ip_dest=Remote_IP;
 	return status;
 
 }
@@ -653,7 +653,7 @@ portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 
 		 }
 
-	Set_IP_Address(IP);
+	Set_Local_IP(IP);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
@@ -784,7 +784,7 @@ portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteB
 
 		 }
 
-	Set_DefaultGateway(Gateway);
+	Set_Remote_IP(Gateway);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);

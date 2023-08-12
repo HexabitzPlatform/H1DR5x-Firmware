@@ -3,9 +3,9 @@
 #include <string.h>
 #include "enc28j60.h"
 
-extern uint32_t ip_addr;
+extern uint32_t Local_IP;
 extern uint32_t ip_mask;
-extern uint32_t ip_gateway;
+extern uint32_t Remote_IP;
 extern uint32_t ip_dest;
 /*
  * Config
@@ -22,8 +22,8 @@ extern uint32_t ip_dest;
 #define IP_DEFAULT_GATEWAY	inet_addr(192,168,1,95)
 #define IP_DEST             IP_DEFAULT_GATEWAY
 
-#define TO_PORT             5000
-#define FROM_PORT           5000
+#define Local_PORT          5000
+#define Remote_PORT         5000
 
 
 #define IP_PACKET_TTL		64

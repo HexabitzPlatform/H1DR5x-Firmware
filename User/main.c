@@ -32,15 +32,15 @@ int main(void){
 
 /* User Task */
 void UserTask(void *argument){
-		Set_DefaultGateway(myGateway); //ip laptop
+	  Set_Remote_IP(myGateway); //ip laptop
 		Set_SubnetMask(mySubnet);	// SubnetMask laptop
-		Set_IP_Address(myIP);  // ip ethernet
+		Set_Local_IP(myIP);  // ip ethernet
 
 	// put your code here, to run repeatedly.
 	while(1){
 
 		Ethernet_Receive_Data();
-				EthernetSendData("moham :) moham",14);
+				EthernetSendData(" mohamadkhatib",14);
 						Delay_ms(100);
 
 	}
