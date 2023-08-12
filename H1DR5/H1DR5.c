@@ -506,6 +506,34 @@ Module_Status Ethernet_Receive_Data()
 /*-----------------------------------------------------------*/
 
 /*
+ Setting the Local_PORT
+ */
+Module_Status Set_Local_PORT(uint16_t to_port){
+	Module_Status status=H1DR5_OK;
+	if(to_port>255 || to_port<1)
+	{
+			status=H1DR5_ERROR;
+	}
+	Local_PORT=to_port;
+	return status;
+}
+/*-----------------------------------------------------------*/
+
+/*
+ Setting the Remote_PORT
+ */
+Module_Status Set_Remote_PORT(uint16_t from_port){
+	Module_Status status=H1DR5_OK;
+	if(from_port>255 || from_port<1)
+	{
+			status=H1DR5_ERROR;
+	}
+	Remote_PORT=from_port;
+	return status;
+}
+/*-----------------------------------------------------------*/
+
+/*
  Setting the IP Address  of the Ethernet module
  */
 Module_Status Set_Local_IP(uint8_t *IP){

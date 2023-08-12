@@ -35,13 +35,14 @@ void UserTask(void *argument){
 	  Set_Remote_IP(myGateway); //ip laptop
 		Set_SubnetMask(mySubnet);	// SubnetMask laptop
 		Set_Local_IP(myIP);  // ip ethernet
-
+		Set_Local_PORT(1);
+		Set_Remote_PORT(255);
 	// put your code here, to run repeatedly.
 	while(1){
 
 		Ethernet_Receive_Data();
 				EthernetSendData(" mohamadkhatib",14);
-						Delay_ms(100);
+						Delay_ms(1000);
 
 	}
 }

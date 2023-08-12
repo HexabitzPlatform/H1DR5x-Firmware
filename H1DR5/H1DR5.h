@@ -141,6 +141,8 @@ extern void ExecuteMonitor(void);
 extern Module_Status Ethernet_Receive_Data();
 extern Module_Status EthernetSendData(char *data ,uint16_t length);
 extern Module_Status Set_Local_IP(uint8_t *IP);
+extern Module_Status Set_Local_PORT(uint16_t to_port);
+extern Module_Status Set_Remote_PORT(uint16_t from_port);
 Module_Status Set_SubnetMask(uint8_t *SubnetMask);
 Module_Status Set_Remote_IP(uint8_t *Gateway);
 void SetupPortForRemoteBootloaderUpdate(uint8_t port);
