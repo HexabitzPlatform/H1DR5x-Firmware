@@ -519,13 +519,13 @@ Module_Status Set_reseve_mac_and_ip_Remote()
 /*
  Setting the Local_PORT
  */
-Module_Status Set_Local_PORT(uint16_t to_port){
+Module_Status Set_Local_PORT(uint16_t from_port){
 	Module_Status status=H1DR5_OK;
-	if(to_port>255 || to_port<1)
+	if(from_port>255 || from_port<1)
 	{
 			status=H1DR5_ERROR;
 	}
-	Local_PORT=to_port;
+	Local_PORT=from_port;
 	return status;
 }
 /*-----------------------------------------------------------*/
@@ -533,13 +533,13 @@ Module_Status Set_Local_PORT(uint16_t to_port){
 /*
  Setting the Remote_PORT
  */
-Module_Status Set_Remote_PORT(uint16_t from_port){
+Module_Status Set_Remote_PORT(uint16_t to_port){
 	Module_Status status=H1DR5_OK;
-	if(from_port>255 || from_port<1)
+	if(to_port>255 || to_port<1)
 	{
 			status=H1DR5_ERROR;
 	}
-	Remote_PORT=from_port;
+	Remote_PORT=to_port;
 	return status;
 }
 /*-----------------------------------------------------------*/

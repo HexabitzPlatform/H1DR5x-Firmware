@@ -24,8 +24,8 @@ extern uint16_t Remote_PORT;
 #define IP_DEFAULT_GATEWAY	inet_addr(192,168,1,95)
 #define IP_DEST             IP_DEFAULT_GATEWAY
 
-#define TO_PORT             5000
-#define FROM_PORT           5000
+#define TO_PORT             50001
+#define FROM_PORT           50002
 
 #define IP_PACKET_TTL		64
 

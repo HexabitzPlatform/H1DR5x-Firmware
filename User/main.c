@@ -9,7 +9,7 @@
 #include "BOS.h"
 
 /* Private variables ---------------------------------------------------------*/
-uint8_t myGateway[4]={192,168,0,15};
+uint8_t myGateway[4]={192,168,0,17};
 	uint8_t mySubnet[4]={255,255,255,0};
 	uint8_t myIP[4]={192,168,0,16};
 	uint8_t data_res[512];
@@ -32,18 +32,18 @@ int main(void){
 
 /* User Task */
 void UserTask(void *argument){
-	  Set_Remote_IP(myGateway); //ip laptop
-		Set_SubnetMask(mySubnet);	// SubnetMask laptop
-		Set_Local_IP(myIP);  // ip ethernet
-		Set_Local_PORT(255);
-		Set_Remote_PORT(1);
+    Set_Remote_IP(myGateway); //ip laptop
+	Set_SubnetMask(mySubnet);	// SubnetMask laptop
+	Set_Local_IP(myIP);  // ip ethernet
+	Set_Local_PORT(90);
+	Set_Remote_PORT(95);
+
 		Set_reseve_mac_and_ip_Remote();
 	// put your code here, to run repeatedly.
 	while(1){
-//		Ethernet_Receive_Data();
-
-				EthernetSendData(" abcdefg",8);
-						Delay_ms(1000);
+		Ethernet_Receive_Data();
+		EthernetSendData("zamel",5);
+			Delay_ms(1000);
 
 	}
 }
