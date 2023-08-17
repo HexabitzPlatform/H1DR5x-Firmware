@@ -545,6 +545,22 @@ Module_Status Set_Remote_PORT(uint16_t to_port){
 /*-----------------------------------------------------------*/
 
 /*
+ Setting the Mac_addr
+ */
+Module_Status Set_Remote_mac_addr(uint8_t *Mac_addr){
+	Module_Status status=H1DR5_OK;
+
+	for(int i=0; i<6;i++){
+
+		mac_addr[i]=Mac_addr[i];
+		}
+
+
+	return status;
+}
+/*-----------------------------------------------------------*/
+
+/*
  Setting the IP Address  of the Ethernet module
  */
 Module_Status Set_Local_IP(uint8_t *IP){

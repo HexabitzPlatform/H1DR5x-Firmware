@@ -2,13 +2,14 @@
 
 #include <string.h>
 #include "enc28j60.h"
-
+extern uint8_t mac_addr[6];
 extern uint32_t Local_IP;
 extern uint32_t ip_mask;
 extern uint32_t Remote_IP;
 extern uint32_t ip_dest;
 extern uint16_t Local_PORT;
 extern uint16_t Remote_PORT;
+
 /*
  * Config
  */
@@ -17,7 +18,7 @@ extern uint16_t Remote_PORT;
 
 #define ARP_CACHE_SIZE		3
 
-#define MAC_ADDR			{0x00,0x14,0x35,0x01,0x23,0x45}
+#define MAC_ADDR            {0x00,0x14,0x35,0x01,0x23,0x45}
 
 #define IP_ADDR				inet_addr(192,168,1,100)
 #define IP_SUBNET_MASK		inet_addr(255,255,255,0)

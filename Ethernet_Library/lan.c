@@ -9,6 +9,7 @@ uint32_t ip_dest=IP_DEST;
 uint8_t net_buf[ENC28J60_MAXFRAME];
 uint16_t Local_PORT=FROM_PORT;
 uint16_t Remote_PORT=TO_PORT;
+
 uint8_t arp_cache_wr;
 arp_cache_entry_t arp_cache[ARP_CACHE_SIZE];
 uint8_t data_watch[1460];
@@ -57,8 +58,8 @@ uint8_t udp_send(eth_frame_t *frame, uint16_t len)
 	udp->len = htons(len);
 	udp->cksum = 0;
 	udp->cksum = ip_cksum(len + IP_PROTOCOL_UDP,(uint8_t*)udp-8, len+8);
-    udp->from_port=htons(Remote_PORT);
-    udp->to_port=htons(Local_PORT);
+    udp->from_port=htons(Local_PORT);
+    udp->to_port=htons(Remote_PORT);
 
 	return ip_send(frame, len);
 }
@@ -74,8 +75,8 @@ void udp_reply(eth_frame_t *frame, uint16_t len)
 
 	// Calculate the length of the entire packet
 	len += sizeof(udp_packet_t);
-    udp->from_port=htons(Remote_PORT);
-    udp->to_port=htons(Local_PORT);
+    udp->from_port=htons(Local_PORT);
+    udp->to_port=htons(Remote_PORT);
 	// Swap the port of the sender and receiver
 	temp = udp->from_port;
 	udp->from_port = udp->to_port;
