@@ -7,8 +7,8 @@ extern uint32_t Local_IP;
 extern uint32_t ip_mask;
 extern uint32_t Remote_IP;
 extern uint32_t ip_dest;
-extern uint16_t Local_PORT;
-extern uint16_t Remote_PORT;
+extern uint8_t Local_PORT;
+extern uint8_t Remote_PORT;
 
 /*
  * Config
@@ -25,8 +25,8 @@ extern uint16_t Remote_PORT;
 #define IP_DEFAULT_GATEWAY	inet_addr(192,168,1,95)
 #define IP_DEST             IP_DEFAULT_GATEWAY
 
-#define TO_PORT             50001
-#define FROM_PORT           50002
+#define TO_PORT             10
+#define FROM_PORT           15
 
 #define IP_PACKET_TTL		64
 

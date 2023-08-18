@@ -41,8 +41,8 @@ void UserTask(void *argument){
 	Set_Local_IP(myIP);  // ip ethernet
 	Set_SubnetMask(mySubnet);	// SubnetMask laptop
 	Set_Remote_IP(myGateway); //ip laptop
-//	Set_Local_PORT(90);// port ethernet
-//	Set_Remote_PORT(95);//port laptop
+	Set_Local_PORT(90);// port ethernet
+	Set_Remote_PORT(95);//port laptop
 
      Set_reseve_mac_and_ip_Remote();
 
@@ -51,15 +51,14 @@ void UserTask(void *argument){
 //		HAL_SPI_Transmit(&hspi1,&valuee, 1, 100);
 //		HAL_SPI_Receive(&hspi1,&value, 1, 100);
 //		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET); */
-
+     Defalt_Value();
 		// put your code here, to run repeatedly.
 	while(1){
 //		lan_echo();
 
 		Ethernet_Receive_Data();
-		EthernetSendData("za.amel",7);
+		EthernetSendData("zamaeel",7);
 			Delay_ms(1000);
-
 
 //			char dets[7]="zaamel";
 //			  EthernetSendData(dets,sizeof(dets));

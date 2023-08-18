@@ -1,14 +1,13 @@
 #include "lan.h"
 
 uint8_t mac_addr[6] = MAC_ADDR;
-
 uint32_t Local_IP = IP_ADDR;
 uint32_t ip_mask = IP_SUBNET_MASK;
 uint32_t Remote_IP = IP_DEFAULT_GATEWAY;
 uint32_t ip_dest=IP_DEST;
 uint8_t net_buf[ENC28J60_MAXFRAME];
-uint16_t Local_PORT=FROM_PORT;
-uint16_t Remote_PORT=TO_PORT;
+uint8_t Local_PORT=FROM_PORT;
+uint8_t Remote_PORT=TO_PORT;
 
 uint8_t arp_cache_wr;
 arp_cache_entry_t arp_cache[ARP_CACHE_SIZE];

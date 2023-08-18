@@ -22,6 +22,7 @@
 
 
 
+
 /* Define UART variables */
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -40,7 +41,7 @@ uint16_t length;
 
 
 module_param_t modParam[NUM_MODULE_PARAMS] ={{.paramPtr = NULL, .paramFormat =FMT_FLOAT, .paramName =""}};
-
+defalt_value defalt;
 /* Private variables ---------------------------------------------------------*/
 #define MX_SIZE_USER_BUFFER 512
  uint16_t length;
@@ -61,7 +62,7 @@ portBASE_TYPE CLI_Ethernet_Send_DataCommand(int8_t *pcWriteBuffer,size_t xWriteB
 portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-
+portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 /* CLI command structure : Transmit_Data */
 const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition =
 {
@@ -96,6 +97,14 @@ const CLI_Command_Definition_t CLI_Set_DefaultGatewayCommandDefinition =
 	( const int8_t * ) "set_default_gateway :\r\n Parameters required to execute a Set_DefaultGateway: my Default Gateway \r\n\r\n",
 	CLI_Set_DefaultGatewayCommand, /* The function to run. */
 	1 /* one parameters are expected. */
+};
+/* CLI command structure : Defalt_Value */
+const CLI_Command_Definition_t CLI_Defalt_ValueCommandDefinition =
+{
+	( const int8_t * ) "defalt_value", /* The command string to type. */
+	( const int8_t * ) "defalt_value :\r\n Parameters required to execute a Defalt_Value: my Defalt_Value \r\n\r\n",
+	CLI_Defalt_ValueCommand, /* The function to run. */
+	0 /* zero parameters are expected. */
 };
 
 
@@ -440,6 +449,7 @@ void RegisterModuleCLICommands(void){
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_IP_AddressCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_SubnetMaskCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_DefaultGatewayCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Defalt_ValueCommandDefinition);
 
 }
 
@@ -622,6 +632,44 @@ Module_Status Set_Remote_IP(uint8_t *Gateway){
 	return status;
 
 }
+/*-----------------------------------------------------------*/
+/*
+  API to view Defalt_Value
+ */
+Module_Status Defalt_Value(){
+	Module_Status status=H1DR5_OK;
+
+	 memcpy(defalt.mac_addr, mac_addr, sizeof(mac_addr));
+	 uint8_t Local_ip[4];
+	 Local_ip[0]=Local_IP;
+	 Local_ip[1]=(Local_IP >> 8);
+	 Local_ip[2]=(Local_IP >> 16);
+	 Local_ip[3]=(Local_IP >> 24);
+	 memcpy(defalt.Local_IP, Local_ip, sizeof(Local_ip));
+	 uint8_t Remote_iP[4];
+	 Remote_iP[0]=Remote_IP;
+	 Remote_iP[1]=(Remote_IP >> 8);
+	 Remote_iP[2]=(Remote_IP >> 16);
+	 Remote_iP[3]=(Remote_IP >> 24);
+	 memcpy(defalt.Remote_IP, Remote_iP, sizeof(Remote_iP));
+	 uint8_t ip_Mask[4];
+	 ip_Mask[0]=ip_mask;
+	 ip_Mask[1]=(ip_mask >> 8);
+	 ip_Mask[2]=(ip_mask >> 16);
+	 ip_Mask[3]=(ip_mask >> 24);
+	 memcpy(defalt.ip_mask, ip_Mask, sizeof(ip_Mask));
+	 uint8_t ip_Dest[4];
+	 ip_Dest[0]=ip_dest;
+	 ip_Dest[1]=(ip_dest >> 8);
+	 ip_Dest[2]=(ip_dest >> 16);
+	 ip_Dest[3]=(ip_dest >> 24);
+	 memcpy(defalt.ip_dest, ip_Dest, sizeof(ip_Dest));
+
+	 defalt.Local_PORT = Local_PORT;
+	 defalt.Remote_PORT = Remote_PORT;
+
+}
+
 /* -----------------------------------------------------------------------
  |								Commands							      |
    -----------------------------------------------------------------------
@@ -852,6 +900,45 @@ portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteB
 
 
 	return pdFALSE;
+}
+/*-----------------------------------------------------------*/
+portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+	Module_Status status = H1DR5_OK;
+
+	static const int8_t *pcMessage1 =(int8_t* )"the Defalt_Value of Params: \r\n";
+	static const int8_t *pcMessage2 =(int8_t* )"the mac_addr: %d.%d.%d.%d\r\n";
+	static const int8_t *pcMessage3 =(int8_t* )"the Local_IP: %d\r\n";
+	static const int8_t *pcMessage4 =(int8_t* )"the Remote_IP: %d\r\n";
+	static const int8_t *pcMessage5 =(int8_t* )"the ip_mask: %d\r\n";
+	static const int8_t *pcMessage6 =(int8_t* )"the ip_dest: %d\r\n";
+	static const int8_t *pcMessage7 =(int8_t* )"the Local_PORT: %d\r\n";
+	static const int8_t *pcMessage8 =(int8_t* )"the Remote_PORT: %d\r\n";
+
+	     (void )xWriteBufferLen;
+			configASSERT(pcWriteBuffer);
+
+		 	status=Defalt_Value();
+
+
+		 	if(status == H1DR5_OK)
+		 		 {
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,defalt.mac_addr[0],defalt.mac_addr[1],defalt.mac_addr[2],defalt.mac_addr[3]);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage2);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage3);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage4);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage5);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage6);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage7);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage8);
+
+
+
+
+		 		 }
+
+
+
+		return pdFALSE;
 }
 /*-----------------------------------------------------------*/
 

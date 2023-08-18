@@ -112,6 +112,19 @@ typedef enum {
 	 H1DR5_OK =0, H1DR5_ERR_UnknownMessage,  H1DR5_ERR_WrongParams, H1DR5_ERROR =255
 } Module_Status;
 
+
+typedef struct DefaltValue {
+		uint8_t mac_addr[6];
+		uint8_t Local_IP[4];
+		uint8_t Remote_IP[4];
+		uint8_t ip_mask[4];
+		uint8_t ip_dest[4];
+		uint8_t Local_PORT;
+		uint8_t Remote_PORT;
+
+} defalt_value;
+
+
 /* Indicator LED */
 #define _IND_LED_PORT			GPIOB
 #define _IND_LED_PIN			GPIO_PIN_3
@@ -147,7 +160,7 @@ extern Module_Status Set_Remote_IP(uint8_t *Gateway);
 extern Module_Status Set_Local_PORT(uint16_t from_port);
 extern Module_Status Set_Remote_mac_addr(uint8_t *Mac_addr);
 extern Module_Status Set_Remote_PORT(uint16_t to_port);
-
+extern Module_Status Defalt_Value();
 void SetupPortForRemoteBootloaderUpdate(uint8_t port);
 void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
 
