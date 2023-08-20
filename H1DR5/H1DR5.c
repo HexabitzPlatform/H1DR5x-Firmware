@@ -639,7 +639,8 @@ Module_Status Set_Remote_IP(uint8_t *Gateway){
 Module_Status Defalt_Value(){
 	Module_Status status=H1DR5_OK;
 
-	 memcpy(defalt.mac_addr, mac_addr, sizeof(mac_addr));
+	 memcpy(defalt.Local_mac_addr, mac_addr, sizeof(mac_addr));
+	 memcpy(defalt.Remote_mac_addr, arp_cache[0].mac_addr, sizeof(mac_addr));
 	 uint8_t Local_ip[4];
 	 Local_ip[0]=Local_IP;
 	 Local_ip[1]=(Local_IP >> 8);
@@ -667,7 +668,7 @@ Module_Status Defalt_Value(){
 
 	 defalt.Local_PORT = Local_PORT;
 	 defalt.Remote_PORT = Remote_PORT;
-
+	 return status;
 }
 
 /* -----------------------------------------------------------------------
@@ -905,14 +906,15 @@ portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteB
 portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
-	static const int8_t *pcMessage1 =(int8_t* )"the Defalt_Value of Params: \r\n";
-	static const int8_t *pcMessage2 =(int8_t* )"the mac_addr: %d.%d.%d.%d\r\n";
-	static const int8_t *pcMessage3 =(int8_t* )"the Local_IP: %d\r\n";
-	static const int8_t *pcMessage4 =(int8_t* )"the Remote_IP: %d\r\n";
-	static const int8_t *pcMessage5 =(int8_t* )"the ip_mask: %d\r\n";
-	static const int8_t *pcMessage6 =(int8_t* )"the ip_dest: %d\r\n";
-	static const int8_t *pcMessage7 =(int8_t* )"the Local_PORT: %d\r\n";
-	static const int8_t *pcMessage8 =(int8_t* )"the Remote_PORT: %d\r\n";
+	static const int8_t *pcMessage1 =(int8_t* )"the Defalt_Value of Params: \r\n"
+	"the Local_mac_addr: %d.%d.%d.%d.%d.%d\r\n"
+	"the Remote_mac_addr: %d.%d.%d.%d.%d.%d\r\n"
+	"the Local_IP: %d.%d.%d.%d\r\n"
+	"the Remote_IP: %d.%d.%d.%d\r\n"
+	"the ip_mask: %d.%d.%d.%d\r\n"
+	"the ip_dest: %d.%d.%d.%d\r\n"
+	"the Local_PORT: %d\r\n"
+	"the Remote_PORT: %d\r\n";
 
 	     (void )xWriteBufferLen;
 			configASSERT(pcWriteBuffer);
@@ -922,18 +924,14 @@ portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 
 		 	if(status == H1DR5_OK)
 		 		 {
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,defalt.mac_addr[0],defalt.mac_addr[1],defalt.mac_addr[2],defalt.mac_addr[3]);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage2);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage3);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage4);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage5);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage6);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage7);
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage8);
-
-
-
-
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,defalt.Local_mac_addr[0],defalt.Local_mac_addr[1],defalt.Local_mac_addr[2],defalt.Local_mac_addr[3],defalt.Local_mac_addr[4],defalt.Local_mac_addr[5]
+			    ,defalt.Remote_mac_addr[0],defalt.Remote_mac_addr[1],defalt.Remote_mac_addr[2],defalt.Remote_mac_addr[3],defalt.Remote_mac_addr[4],defalt.Remote_mac_addr[5]
+				,defalt.Local_IP[0],defalt.Local_IP[1],defalt.Local_IP[2],defalt.Local_IP[3]
+                ,defalt.Remote_IP[0],defalt.Remote_IP[1],defalt.Remote_IP[2],defalt.Remote_IP[3]
+			    ,defalt.ip_mask[0],defalt.ip_mask[1],defalt.ip_mask[2],defalt.ip_mask[3]
+			    ,defalt.ip_dest[0],defalt.ip_dest[1],defalt.ip_dest[2],defalt.ip_dest[3]
+			     ,defalt.Local_PORT
+			     ,defalt.Remote_PORT);
 		 		 }
 
 

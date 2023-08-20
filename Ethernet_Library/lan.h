@@ -144,7 +144,7 @@ typedef struct __packed udp_packet {
  */
 
 extern uint8_t net_buf[];
-
+extern arp_cache_entry_t arp_cache[ARP_CACHE_SIZE];
 void lan_init();
 void lan_echo();
 void lan_poll(uint8_t* pData,uint16_t* length);

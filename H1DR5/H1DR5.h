@@ -114,7 +114,8 @@ typedef enum {
 
 
 typedef struct DefaltValue {
-		uint8_t mac_addr[6];
+		uint8_t Local_mac_addr[6];
+		uint8_t Remote_mac_addr[6];
 		uint8_t Local_IP[4];
 		uint8_t Remote_IP[4];
 		uint8_t ip_mask[4];

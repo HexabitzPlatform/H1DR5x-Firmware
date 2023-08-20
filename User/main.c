@@ -46,35 +46,15 @@ void UserTask(void *argument){
 
      Set_reseve_mac_and_ip_Remote();
 
-	/*
-//		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-//		HAL_SPI_Transmit(&hspi1,&valuee, 1, 100);
-//		HAL_SPI_Receive(&hspi1,&value, 1, 100);
-//		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET); */
-     Defalt_Value();
+
 		// put your code here, to run repeatedly.
 	while(1){
-//		lan_echo();
 
-		Ethernet_Receive_Data();
+
+//		Ethernet_Receive_Data();
 		EthernetSendData("zamaeel",7);
 			Delay_ms(1000);
 
-//			char dets[7]="zaamel";
-//			  EthernetSendData(dets,sizeof(dets));
-//			  Delay_ms(1000);
-//			  char myqq[100]={10};
-//			   EthernetSendData(myqq[0],2);
-//			   Delay_ms(1000);
-//			   uint8_t x=20;
-//			   EthernetSendData((char*)&x,2);
-//			   Delay_ms(1000);
-
-
-//			    sprintf(data_to_send, "%d", value);
-//			   EthernetSendData(data_to_send, strlen(data_to_send));
-//			   Delay_ms(100);
-//			   value++;
 	}
 }
 
