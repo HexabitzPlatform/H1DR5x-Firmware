@@ -555,9 +555,9 @@ Module_Status Set_Remote_PORT(uint16_t to_port){
 /*-----------------------------------------------------------*/
 
 /*
- Setting the Mac_addr
+ Setting the Local_Mac_addr
  */
-Module_Status Set_Remote_mac_addr(uint8_t *Mac_addr){
+Module_Status Set_Local_mac_addr(uint8_t *Mac_addr){
 	Module_Status status=H1DR5_OK;
 
 	for(int i=0; i<6;i++){
