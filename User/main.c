@@ -7,17 +7,13 @@
  */
 /* Includes ------------------------------------------------------------------*/
 #include "BOS.h"
-//extern SPI_HandleTypeDef hspi1;
+
 
 /* Private variables ---------------------------------------------------------*/
     uint8_t myGateway[4]={192,168,0,15};
 	uint8_t mySubnet[4]={255,255,255,0};
 	uint8_t myIP[4]={192,168,0,17};
-	uint8_t data_res[512];
-	uint8_t value=0;
-	uint8_t valuee=0x01;
-	 char data_to_send[2];
-	 uint8_t Mac_addres[6]={0x07,0x6,0x2,0x3,0x4,0x5};
+	uint8_t Mac_addres[6]={0x07,0x6,0x2,0x3,0x4,0x5};
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -43,17 +39,12 @@ void UserTask(void *argument){
 	Set_Remote_IP(myGateway); //ip laptop
 	Set_Local_PORT(90);// port ethernet
 	Set_Remote_PORT(95);//port laptop
-
-     Set_reseve_mac_and_ip_Remote();
+    Set_reseve_mac_and_ip_Remote();
 
 
 		// put your code here, to run repeatedly.
 	while(1){
 
-
-//		Ethernet_Receive_Data();
-		EthernetSendData("zamaeel",7);
-			Delay_ms(1000);
 
 	}
 }
