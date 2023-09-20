@@ -34,18 +34,20 @@ int main(void){
 /* User Task */
 void UserTask(void *argument){
 
-	Set_Local_IP(myIP);  // ip ethernet
-	Set_SubnetMask(mySubnet);	// SubnetMask laptop
-	Set_Remote_IP(myGateway); //ip laptop
-	Set_Local_PORT(90);// port ethernet
-	Set_Remote_PORT(95);//port laptop
-    Set_reseve_mac_and_ip_Remote();
+//	Set_Local_IP(myIP);  // ip ethernet
+//	Set_SubnetMask(mySubnet);	// SubnetMask laptop
+//	Set_Remote_IP(myGateway); //ip laptop
+//	Set_Local_PORT(90);// port ethernet
+//	Set_Remote_PORT(95);//port laptop
+//    Set_reseve_mac_and_ip_Remote();
 
 
 		// put your code here, to run repeatedly.
 	while(1){
 
-
+//		        Ethernet_Receive_Data();
+//		        EthernetSendData("zamaeel",7);
+//		            Delay_ms(1000);
 	}
 }
 

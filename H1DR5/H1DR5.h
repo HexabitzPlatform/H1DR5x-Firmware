@@ -170,9 +170,14 @@ void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outpo
 /* -----------------------------------------------------------------------
  */
 extern const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_IP_AddressCommandDefinition;
+extern const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition;
 extern const CLI_Command_Definition_t CLI_Set_SubnetMaskCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_DefaultGatewayCommandDefinition;
+extern const CLI_Command_Definition_t CLI_Set_Remote_IPCommandDefinition;
+extern const CLI_Command_Definition_t CLI_Defalt_ValueCommandDefinition;
+extern const CLI_Command_Definition_t CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition;
+extern const CLI_Command_Definition_t CLI_Set_Local_PORTCommandDefinition;
+extern const CLI_Command_Definition_t CLI_Set_Remote_PORTCommandDefinition;
+
 
 #endif /* H1DR5_H */
 

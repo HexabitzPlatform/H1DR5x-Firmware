@@ -59,10 +59,16 @@ void ExecuteMonitor(void);
 
 /* Create CLI commands --------------------------------------------------------*/
 portBASE_TYPE CLI_Ethernet_Send_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+
+portBASE_TYPE CLI_Set_Local_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_Set_Remote_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+
+
 /* CLI command structure : Transmit_Data */
 const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition =
 {
@@ -72,12 +78,12 @@ const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition =
 	1 /* one parameters are expected. */
 };
 
-/* CLI command structure : Set_IP_Address */
-const CLI_Command_Definition_t CLI_Set_IP_AddressCommandDefinition =
+/* CLI command structure : Set_Local_IP */
+const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition =
 {
-	( const int8_t * ) "set_ip_address", /* The command string to type. */
-	( const int8_t * ) "set_ip_address :\r\n Parameters required to execute a Set_IP_Address: my IP Address  \r\n\r\n",
-	CLI_Set_IP_AddressCommand, /* The function to run. */
+	( const int8_t * ) "set_local_ip", /* The command string to type. */
+	( const int8_t * ) "set_local_ip :\r\n Parameters required to execute a Set_Local_IP: local_iP is  \r\n\r\n",
+	CLI_Set_Local_IPCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
 
@@ -90,12 +96,12 @@ const CLI_Command_Definition_t CLI_Set_SubnetMaskCommandDefinition =
 	1 /* one parameters are expected. */
 };
 
-/* CLI command structure : Set_DefaultGateway */
-const CLI_Command_Definition_t CLI_Set_DefaultGatewayCommandDefinition =
+/* CLI command structure : Set_Remote_IP */
+const CLI_Command_Definition_t CLI_Set_Remote_IPCommandDefinition =
 {
-	( const int8_t * ) "set_default_gateway", /* The command string to type. */
-	( const int8_t * ) "set_default_gateway :\r\n Parameters required to execute a Set_DefaultGateway: my Default Gateway \r\n\r\n",
-	CLI_Set_DefaultGatewayCommand, /* The function to run. */
+	( const int8_t * ) "set_remote_ip", /* The command string to type. */
+	( const int8_t * ) "set_remote_ip :\r\n Parameters required to execute a Set_Remote_IP: my Remote_IP is \r\n\r\n",
+	CLI_Set_Remote_IPCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
 /* CLI command structure : Defalt_Value */
@@ -106,7 +112,30 @@ const CLI_Command_Definition_t CLI_Defalt_ValueCommandDefinition =
 	CLI_Defalt_ValueCommand, /* The function to run. */
 	0 /* zero parameters are expected. */
 };
+const CLI_Command_Definition_t CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition =
+{
+	( const int8_t * ) "set_reseve_mac_and_ip_remote", /* The command string to type. */
+	( const int8_t * ) "set_reseve_mac_and_ip_remote :\r\n Parameters required to execute a Set_reseve_mac_and_ip_Remote: reseve_mac_and_ip_Remote \r\n\r\n",
+	CLI_Set_reseve_mac_and_ip_RemoteCommand, /* The function to run. */
+	0 /* zero parameters are expected. */
+};
 
+/* CLI command structure : Set_Local_PORT */
+const CLI_Command_Definition_t CLI_Set_Local_PORTCommandDefinition =
+{
+	( const int8_t * ) "set_local_port", /* The command string to type. */
+	( const int8_t * ) "set_local_port :\r\n Parameters required to execute a Set_Local_PORT: Local_PORT is \r\n\r\n",
+	CLI_Set_Local_PORTCommand, /* The function to run. */
+	1 /* one parameters are expected. */
+};
+/* CLI command structure : Set_Remote_PORT */
+const CLI_Command_Definition_t CLI_Set_Remote_PORTCommandDefinition =
+{
+	( const int8_t * ) "set_remote_port", /* The command string to type. */
+	( const int8_t * ) "set_remote_port :\r\n Parameters required to execute a Set_Remote_PORT: Remote_PORT is \r\n\r\n",
+	CLI_Set_Remote_PORTCommand, /* The function to run. */
+	1 /* one parameters are expected. */
+};
 
 /*-----------------------------------------------------------*/
 
@@ -446,10 +475,14 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
  */
 void RegisterModuleCLICommands(void){
 	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Send_DataCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_IP_AddressCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_IPCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_SubnetMaskCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_DefaultGatewayCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_IPCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Defalt_ValueCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_PORTCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_PORTCommandDefinition);
+
 
 }
 
@@ -520,9 +553,11 @@ Module_Status Ethernet_Receive_Data()
  */
 Module_Status Set_reseve_mac_and_ip_Remote()
 {
+	Module_Status status=H1DR5_OK;
  EthernetSendData("0",1);
      Delay_ms(10);
      Ethernet_Receive_Data();
+     return status;
 }
 /*-----------------------------------------------------------*/
 
@@ -707,20 +742,40 @@ portBASE_TYPE CLI_Ethernet_Send_DataCommand( int8_t *pcWriteBuffer, size_t xWrit
 }
 
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+	Module_Status status = H1DR5_OK;
+
+	static const int8_t *pcOKMessage=(int8_t* )"The connection has been opened \r\n  \n\r";
+
+
+	(void )xWriteBufferLen;
+
+	Set_reseve_mac_and_ip_Remote();
+	if(status == H1DR5_OK)
+	{
+		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
+
+	}
+
+	return pdFALSE;
+
+}
+
+/*-----------------------------------------------------------*/
+portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
 	int size=15;
 	portBASE_TYPE xParameterStringLength1 =0;
 
-	char IpAddress[size];
+	char Local_IP[size];
 	uint8_t IP[4]={};
 	int x;
 	int k=0;
 	int r=0,f=0;
 
-	static const int8_t *pcOKMessage=(int8_t* )"The IP Address has been changed successfully \r\n  \n\r";
+	static const int8_t *pcOKMessage=(int8_t* )"The Local IP has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 	(void )xWriteBufferLen;
@@ -729,7 +784,7 @@ portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
 
 	for(int y=0;y<xParameterStringLength1;y++){
-		IpAddress[y] = (char )pcParameterString1[y];
+		Local_IP[y] = (char )pcParameterString1[y];
 	}
 
 	size=xParameterStringLength1-1;
@@ -737,7 +792,7 @@ portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 	for(int i=3;i>=0;i--){
 
 		while(x>=0){
-			if(IpAddress[x]=='.'){
+			if(Local_IP[x]=='.'){
 				k=0;
 				x--;
 				break;
@@ -745,7 +800,7 @@ portBASE_TYPE CLI_Set_IP_AddressCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 			}
 			else{
 
-				r=(IpAddress[x]-'0');
+				r=(Local_IP[x]-'0');
 				f=pow(10,k);
 				IP[i]+=r*f;
 				k++;
@@ -839,20 +894,20 @@ portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 
 }
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
 	int size=15;
 	portBASE_TYPE xParameterStringLength1 =0;
 
-	char DefaultGateway[size];
+	char Remote_IP[size];
 	uint8_t Gateway[4]={};
 	int x;
 	int k=0;
 	int r=0,f=0;
 
-	static const int8_t *pcOKMessage=(int8_t* )"The Default Gateway has been changed successfully \r\n  \n\r";
+	static const int8_t *pcOKMessage=(int8_t* )"The Remote_IP has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 	(void )xWriteBufferLen;
@@ -861,14 +916,14 @@ portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteB
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
 
 	for(int y=0;y<xParameterStringLength1;y++){
-		DefaultGateway[y] = (char )pcParameterString1[y];
+		Remote_IP[y] = (char )pcParameterString1[y];
 	}
 	size=xParameterStringLength1-1;
 	x=xParameterStringLength1-1;
 	for(int i=3;i>=0;i--){
 
 		while(x>=0){
-			if(DefaultGateway[x]=='.'){
+			if(Remote_IP[x]=='.'){
 				k=0;
 				x--;
 				break;
@@ -876,7 +931,7 @@ portBASE_TYPE CLI_Set_DefaultGatewayCommand(int8_t *pcWriteBuffer,size_t xWriteB
 			}
 			else{
 
-				r=(DefaultGateway[x]-'0');
+				r=(Remote_IP[x]-'0');
 				f=pow(10,k);
 				Gateway[i]+=r*f;
 				k++;
@@ -939,5 +994,66 @@ portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 		return pdFALSE;
 }
 /*-----------------------------------------------------------*/
+portBASE_TYPE CLI_Set_Local_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+	Module_Status status = H1DR5_OK;
+
+	static int8_t *pcParameterString1;
+	portBASE_TYPE xParameterStringLength1 =0;
+	uint8_t Local_PORT =0;
+	static const int8_t *pcOKMessage=(int8_t* )"The Local_PORT has been changed successfully \r\n  \n\r";
+	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
+
+
+	(void )xWriteBufferLen;
+	configASSERT(pcWriteBuffer);
+
+	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
+	Local_PORT =(uint8_t )atol((char* )pcParameterString1);
+	status=Set_Local_PORT(Local_PORT);
+	if(status == H1DR5_OK)
+	{
+		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage,pcParameterString1);
+
+	}
+
+	else if(status == H1DR5_ERROR)
+		strcpy((char* )pcWriteBuffer,(char* )pcWrongParamsMessage);
+
+
+
+	return pdFALSE;
+}
+/*-----------------------------------------------------------*/
+portBASE_TYPE CLI_Set_Remote_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+	Module_Status status = H1DR5_OK;
+
+	static int8_t *pcParameterString1;
+	portBASE_TYPE xParameterStringLength1 =0;
+	uint8_t Remote_PORT =0;
+	static const int8_t *pcOKMessage=(int8_t* )"The Remote_PORT has been changed successfully \r\n  \n\r";
+	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
+
+
+	(void )xWriteBufferLen;
+	configASSERT(pcWriteBuffer);
+
+	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
+	Remote_PORT =(uint8_t )atol((char* )pcParameterString1);
+	status=Set_Remote_PORT(Remote_PORT);
+	if(status == H1DR5_OK)
+	{
+		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage,pcParameterString1);
+
+	}
+
+	else if(status == H1DR5_ERROR)
+		strcpy((char* )pcWriteBuffer,(char* )pcWrongParamsMessage);
+
+
+
+	return pdFALSE;
+}
+/*-----------------------------------------------------------*/
+
 
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/
