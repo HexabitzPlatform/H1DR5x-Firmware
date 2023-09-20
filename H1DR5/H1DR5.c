@@ -482,7 +482,7 @@ uint8_t GetPort(UART_HandleTypeDef *huart){
  */
 
 /*
-         Send data to Ethernet module
+       Send data from Ethernet module
  */
 Module_Status EthernetSendData(char *data ,uint16_t length){
 	Module_Status status=H1DR5_OK;
@@ -527,7 +527,7 @@ Module_Status Set_reseve_mac_and_ip_Remote()
 /*-----------------------------------------------------------*/
 
 /*
- Setting the Local_PORT
+     Set Local_PORT
  */
 Module_Status Set_Local_PORT(uint8_t from_port){
 	Module_Status status=H1DR5_OK;
@@ -541,7 +541,7 @@ Module_Status Set_Local_PORT(uint8_t from_port){
 /*-----------------------------------------------------------*/
 
 /*
- Setting the Remote_PORT
+     Set Remote_PORT
  */
 Module_Status Set_Remote_PORT(uint8_t to_port){
 	Module_Status status=H1DR5_OK;
@@ -555,7 +555,7 @@ Module_Status Set_Remote_PORT(uint8_t to_port){
 /*-----------------------------------------------------------*/
 
 /*
- Setting the Local_Mac_addr
+     Set Local_Mac_addr
  */
 Module_Status Set_Local_mac_addr(uint8_t *Mac_addr){
 	Module_Status status=H1DR5_OK;
@@ -571,7 +571,7 @@ Module_Status Set_Local_mac_addr(uint8_t *Mac_addr){
 /*-----------------------------------------------------------*/
 
 /*
- Setting the IP Address  of the Ethernet module
+    Set IP address of the Ethernet module.
  */
 Module_Status Set_Local_IP(uint8_t *IP){
 	Module_Status status=H1DR5_OK;
@@ -593,7 +593,7 @@ Module_Status Set_Local_IP(uint8_t *IP){
 /*-----------------------------------------------------------*/
 
 /*
-     Setting the Subnet Mask of the Ethernet network
+     Set subnet mask of the Ethernet network.
  */
 Module_Status Set_SubnetMask(uint8_t *SubnetMask){
 	Module_Status status=H1DR5_OK;
@@ -615,7 +615,7 @@ Module_Status Set_SubnetMask(uint8_t *SubnetMask){
 /*-----------------------------------------------------------*/
 
 /*
- Setting the Default Gateway of the device connected the Ethernet module
+ Set the default gateway of the device to which the Ethernet module is connected
  */
 Module_Status Set_Remote_IP(uint8_t *Gateway){
 	Module_Status status=H1DR5_OK;
@@ -634,7 +634,7 @@ Module_Status Set_Remote_IP(uint8_t *Gateway){
 }
 /*-----------------------------------------------------------*/
 /*
-  API to view Defalt_Value
+   View Defalt_Value
  */
 Module_Status Defalt_Value(){
 	Module_Status status=H1DR5_OK;
