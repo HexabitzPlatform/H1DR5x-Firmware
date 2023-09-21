@@ -21,7 +21,7 @@
 /* Main function ------------------------------------------------------------*/
 
 int main(void){
-//	Set_Local_mac_addr(Mac_addres); // Mac_addr ethernet
+	Set_Local_mac_addr(Mac_addres); // Mac_addr ethernet
 
 	Module_Init();		//Initialize Module &  BitzOS
 
@@ -34,12 +34,12 @@ int main(void){
 /* User Task */
 void UserTask(void *argument){
 
-//	Set_Local_IP(myIP);  // ip ethernet
-//	Set_SubnetMask(mySubnet);	// SubnetMask laptop
-//	Set_Remote_IP(myGateway); //ip laptop
-//	Set_Local_PORT(90);// port ethernet
-//	Set_Remote_PORT(95);//port laptop
-//    Set_reseve_mac_and_ip_Remote();
+	Set_Local_IP(myIP);  // ip ethernet
+	Set_SubnetMask(mySubnet);	// SubnetMask laptop
+	Set_Remote_IP(myGateway); //ip laptop
+	Set_Local_PORT(90);// port ethernet
+	Set_Remote_PORT(95);//port laptop
+    Set_reseve_mac_and_ip_Remote();
 
 
 		// put your code here, to run repeatedly.

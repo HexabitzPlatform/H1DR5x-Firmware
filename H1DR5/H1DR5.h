@@ -169,7 +169,8 @@ void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outpo
  |								Commands							      |															 	|
 /* -----------------------------------------------------------------------
  */
-extern const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition;
+ extern const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition;
+ extern const CLI_Command_Definition_t CLI_Ethernet_Receive_DataCommandDefinition;
 extern const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition;
 extern const CLI_Command_Definition_t CLI_Set_SubnetMaskCommandDefinition;
 extern const CLI_Command_Definition_t CLI_Set_Remote_IPCommandDefinition;

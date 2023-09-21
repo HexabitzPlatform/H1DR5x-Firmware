@@ -39,7 +39,6 @@ extern uint8_t numOfRecordedSnippets;
 uint16_t length;
 
 
-
 module_param_t modParam[NUM_MODULE_PARAMS] ={{.paramPtr = NULL, .paramFormat =FMT_FLOAT, .paramName =""}};
 defalt_value defalt;
 /* Private variables ---------------------------------------------------------*/
@@ -59,12 +58,12 @@ void ExecuteMonitor(void);
 
 /* Create CLI commands --------------------------------------------------------*/
 portBASE_TYPE CLI_Ethernet_Send_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_Ethernet_Receive_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-
 portBASE_TYPE CLI_Set_Local_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Remote_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 
@@ -77,7 +76,13 @@ const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition =
 	CLI_Ethernet_Send_DataCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
-
+const CLI_Command_Definition_t CLI_Ethernet_Receive_DataCommandDefinition =
+{
+	( const int8_t * ) "ethernet_receive_data", /* The command string to type. */
+	( const int8_t * ) "ethernet_receive_data :\r\n Parameters required to execute a Ethernet_Receive_Data: my data Receive \r\n\r\n",
+	CLI_Ethernet_Receive_DataCommand, /* The function to run. */
+	0 /* one parameters are expected. */
+};
 /* CLI command structure : Set_Local_IP */
 const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition =
 {
@@ -491,6 +496,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
  */
 void RegisterModuleCLICommands(void){
 	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Send_DataCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Receive_DataCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_IPCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_SubnetMaskCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_IPCommandDefinition);
@@ -560,6 +566,7 @@ Module_Status Ethernet_Receive_Data()
 			indexInput=0;
 	}
 	length=0;
+	 return status;
 	}
 
 /*-----------------------------------------------------------*/
@@ -757,6 +764,25 @@ portBASE_TYPE CLI_Ethernet_Send_DataCommand( int8_t *pcWriteBuffer, size_t xWrit
 	return pdFALSE;
 }
 
+/*-----------------------------------------------------------*/
+portBASE_TYPE CLI_Ethernet_Receive_DataCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+	Module_Status status = H1DR5_OK;
+
+
+	static  int8_t *pcOKMessage=(int8_t* )"Ethernet Receive: \r\n  \n\r";
+
+	(void )xWriteBufferLen;
+
+	status=Ethernet_Receive_Data();
+	if(status == H1DR5_OK)
+	{
+
+		writePxITMutex(PcPort,pcOKMessage,strlen(pcOKMessage),10);
+		writePxITMutex(PcPort,DataBuffer,strlen(DataBuffer),10);
+	}
+
+	return pdFALSE;
+}
 /*-----------------------------------------------------------*/
 portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
