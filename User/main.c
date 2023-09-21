@@ -21,7 +21,7 @@
 /* Main function ------------------------------------------------------------*/
 
 int main(void){
-	Set_Local_mac_addr(Mac_addres); // Mac_addr ethernet
+//	Set_Local_mac_addr(Mac_addres); // Mac_addr ethernet
 
 	Module_Init();		//Initialize Module &  BitzOS
 

@@ -431,7 +431,10 @@ void Module_Peripheral_Init(void){
 Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_t dst,uint8_t shift){
 	Module_Status result =H1DR5_OK;
 
-	uint8_t IpAdd[4]={};
+	uint8_t Local_IP[4]={};
+	uint8_t Remote_IP[4]={};
+	uint8_t Local_PORT;
+	uint8_t Remote_PORT;
 	uint8_t Subnet[4]={};
 	uint8_t IpGate[4]={};
 	switch(code){
@@ -439,14 +442,23 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			length=(uint16_t)cMessage[port - 1][shift];
 			EthernetSendData(&cMessage[port - 1][1+shift],length);
 			break;
-
-		case CODE_H1DR5_Set_IP_Address:
-			IpAdd[0]= cMessage[port - 1][0 + shift];
-			IpAdd[1]= cMessage[port - 1][1 + shift];
-			IpAdd[2]= cMessage[port - 1][2 + shift];
-			IpAdd[3]= cMessage[port - 1][3 + shift];
-			Set_Local_IP(IpAdd);
+		case CODE_H1DR5_Ethernet_Receive_Data:
+			Ethernet_Receive_Data();
+			break;
+		case CODE_H1DR5_Set_Local_IP:
+			Local_IP[0]= cMessage[port - 1][0 + shift];
+			Local_IP[1]= cMessage[port - 1][1 + shift];
+			Local_IP[2]= cMessage[port - 1][2 + shift];
+			Local_IP[3]= cMessage[port - 1][3 + shift];
+			Set_Local_IP(Local_IP);
              break;
+		case CODE_H1DR5_Set_Remote_IP:
+			Remote_IP[0]= cMessage[port - 1][0 + shift];
+			Remote_IP[1]= cMessage[port - 1][1 + shift];
+			Remote_IP[2]= cMessage[port - 1][2 + shift];
+			Remote_IP[3]= cMessage[port - 1][3 + shift];
+			Set_Remote_IP(Remote_IP);
+			 break;
 		case CODE_H1DR5_Set_Subnet_Mask:
 			Subnet[0]= cMessage[port - 1][0 + shift];
 			Subnet[1]= cMessage[port - 1][1 + shift];
@@ -454,13 +466,17 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			Subnet[3]= cMessage[port - 1][3 + shift];
 			Set_SubnetMask(Subnet);
 			 break;
-		case CODE_H1DR5_Set_Default_Gateway:
-			IpGate[0]= cMessage[port - 1][0 + shift];
-			IpGate[1]= cMessage[port - 1][1 + shift];
-			IpGate[2]= cMessage[port - 1][2 + shift];
-			IpGate[3]= cMessage[port - 1][3 + shift];
-			Set_Remote_IP(IpGate);
+		case CODE_H1DR5_Set_Local_PORT:
+			Local_PORT= cMessage[port - 1][0 + shift];
+			Set_Local_PORT(Local_PORT);
 			 break;
+		case CODE_H1DR5_Set_Remote_PORT:
+			Remote_PORT= cMessage[port - 1][0 + shift];
+			Set_Remote_PORT(Remote_PORT);
+			 break;
+		case CODE_H1DR5_reseve_mac_and_ip_Remote:
+			Set_reseve_mac_and_ip_Remote();
+
 		default:
 			result =H1DR5_ERR_UnknownMessage;
 			break;
