@@ -481,7 +481,17 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			 break;
 		case CODE_H1DR5_reseve_mac_and_ip_Remote:
 			Set_reseve_mac_and_ip_Remote();
-
+		case CODE_H1DR5_Defalt_Value:
+			 Defalt_Value();
+			 memcpy(&messageParams[0], defalt.Local_mac_addr, sizeof(defalt.Local_mac_addr));
+			 memcpy(&messageParams[6],defalt.Remote_mac_addr, sizeof(defalt.Remote_mac_addr));
+			 memcpy(&messageParams[12], defalt.Local_IP, sizeof(defalt.Local_IP));
+			 memcpy(&messageParams[16], defalt.Remote_IP, sizeof(defalt.Remote_IP));
+			 memcpy(&messageParams[20], defalt.ip_mask, sizeof(defalt.ip_mask));
+             memcpy(&messageParams[24], defalt.ip_dest, sizeof(defalt.ip_dest));
+			 messageParams[28]=defalt.Local_PORT;
+			 messageParams[29]=defalt.Remote_PORT ;
+			 SendMessageToModule(src, CODE_H1DR5_receive_Defalt_Value, 30);
 		default:
 			result =H1DR5_ERR_UnknownMessage;
 			break;

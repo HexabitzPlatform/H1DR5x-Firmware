@@ -41,7 +41,7 @@ void UserTask(void *argument){
 	Set_Remote_PORT(95);//port laptop
     Set_reseve_mac_and_ip_Remote();
 
-
+    Defalt_Value();
 		// put your code here, to run repeatedly.
 	while(1){
 
