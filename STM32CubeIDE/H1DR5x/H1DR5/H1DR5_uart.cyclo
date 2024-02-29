@@ -1,0 +1,16 @@
+H1DR5_uart.c:50:6:MX_USART2_UART_Init	1
+H1DR5_uart.c:77:6:MX_USART3_UART_Init	1
+H1DR5_uart.c:104:6:MX_USART4_UART_Init	1
+H1DR5_uart.c:128:6:MX_USART5_UART_Init	1
+H1DR5_uart.c:152:6:MX_USART6_UART_Init	1
+H1DR5_uart.c:174:6:HAL_UART_MspInit	7
+H1DR5_uart.c:393:19:readPxMutex	5
+H1DR5_uart.c:412:19:writePxMutex	5
+H1DR5_uart.c:431:19:readPxITMutex	3
+H1DR5_uart.c:446:19:writePxITMutex	3
+H1DR5_uart.c:461:19:writePxDMAMutex	3
+H1DR5_uart.c:480:12:UpdateBaudrate	1
+H1DR5_uart.c:494:21:GetUart	7
+H1DR5_uart.c:545:6:SwapUartPins	4
+H1DR5_uart.c:563:12:ReadPortsDir	5
+H1DR5_uart.c:586:12:ReadPortsDirMSG	3
