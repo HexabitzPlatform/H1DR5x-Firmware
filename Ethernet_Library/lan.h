@@ -20,13 +20,17 @@ extern uint8_t Remote_PORT;
 
 #define MAC_ADDR            {0x00,0x14,0x35,0x01,0x23,0x45}
 
-#define IP_ADDR				inet_addr(192,168,1,100)
+#define IP_ADDR				inet_addr(192,168,0,100)//ethernet
 #define IP_SUBNET_MASK		inet_addr(255,255,255,0)
-#define IP_DEFAULT_GATEWAY	inet_addr(192,168,1,95)
+#define IP_DEFAULT_GATEWAY	inet_addr(192,168,0,10)//lap
 #define IP_DEST             IP_DEFAULT_GATEWAY
 
-#define TO_PORT             10
-#define FROM_PORT           15
+//poort==137||poort==138||poort==139||poort==445
+
+#define TO_PORT             10//lap
+#define FROM_PORT           15//ethernet
+
+
 
 #define IP_PACKET_TTL		64
 

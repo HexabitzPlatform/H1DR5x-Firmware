@@ -437,26 +437,29 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 		{
 			if(len >= sizeof(eth_frame_t))
 				{
-					switch(frame->type)
+				switch(frame->type)
+				{
+				case ETH_TYPE_ARP:
+					arp_filter(frame, len - sizeof(eth_frame_t));
+					break;
+				case ETH_TYPE_IP:
+					ip_filter(frame, len - sizeof(eth_frame_t),0);
+					ip_packet_t *ip = (void*)(frame->data);
+					udp_packet_t *udp = (void*)(ip->data);
+					*length = ntohs(ip->total_len) -
+						sizeof(ip_packet_t)-8;
+					uint8_t poort=udp->to_port>>8;
+					if(poort!=FROM_PORT)
 					{
-					case ETH_TYPE_ARP:
-						arp_filter(frame, len - sizeof(eth_frame_t));
-						break;
-					case ETH_TYPE_IP:
-						ip_filter(frame, len - sizeof(eth_frame_t),0);
-						ip_packet_t *ip = (void*)(frame->data);
-						udp_packet_t *udp = (void*)(ip->data);
-						*length = ntohs(ip->total_len) -
-							sizeof(ip_packet_t)-8;
-
-						memcpy(pData,udp->data,*length);
-//						for(uint16_t i = 0;i<*length;i++)
-//						{
-//							*(pData + i) = frame->data[i];
-//						}
-
-						break;
+						*length=0;
+						len=0;
+							break;
 					}
+					*length = ntohs(ip->total_len)-
+						sizeof(ip_packet_t)-8;
+					memcpy(pData,udp->data,*length);
+					break;
+				}
 					// Check header length
 //					if(len >= sizeof(udp_packet_t))
 //					{
