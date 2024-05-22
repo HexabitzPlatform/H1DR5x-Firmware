@@ -448,25 +448,30 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 					udp_packet_t *udp = (void*)(ip->data);
 					*length = ntohs(ip->total_len) -
 						sizeof(ip_packet_t)-8;
+					////////////////////
+					uint8_t myMac[6] = MAC_ADDR;
+					uint8_t macBroadcast[6]= {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 					uint8_t poort=udp->to_port>>8;
+
 					if(poort!=FROM_PORT)
 					{
 						*length=0;
 						len=0;
-							break;
+						break;
 					}
-					*length = ntohs(ip->total_len)-
+					else if (memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0)
+					{
+
+						*length = ntohs(ip->total_len)-
 						sizeof(ip_packet_t)-8;
-					memcpy(pData,udp->data,*length);
-					break;
+						memcpy(pData,udp->data,*length);
+						break;
+					}
+
+
+					////////////////////
+
 				}
-					// Check header length
-//					if(len >= sizeof(udp_packet_t))
-//					{
-//					  if(strncmp((char *)data_watch, "hi", 2) == 0){
-//					  ether_send_udp("hi again" ,8);
-//				      memset(data_watch,0,sizeof(data_watch));}
-//				}
 	}
 				}
 }
