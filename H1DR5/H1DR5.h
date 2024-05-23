@@ -25,6 +25,7 @@
 #include "H1DR5_dma.h"
 #include "H1DR5_inputs.h"
 #include "H1DR5_eeprom.h"
+#include "lan.h"
 /* Exported definitions -------------------------------------------------------*/
 
 #define	modulePN		_H1DR5
@@ -153,7 +154,7 @@ extern void ExecuteMonitor(void);
 /* -----------------------------------------------------------------------
  */
 //extern Module_Status Ethernet_Receive_Data();
-extern Module_Status EthernetSendData(char *data ,uint16_t length);
+extern Module_Status EthernetSendData(IPs ips,char *data ,uint16_t length);
 //extern Module_Status Set_reseve_mac_and_ip_Remote();
 extern Module_Status Set_Local_IP(uint8_t *IP);
 extern Module_Status Set_SubnetMask(uint8_t *SubnetMask);

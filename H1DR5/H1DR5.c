@@ -17,7 +17,7 @@
 #include "BOS.h"
 #include "H1DR5_inputs.h"
 #include"H1DR5_spi.h"
-#include "lan.h"
+
 
 
 
@@ -449,7 +449,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 	switch(code){
 		case CODE_H1DR5_Ethernet_Send_Data:
 			length=(uint16_t)cMessage[port - 1][shift];
-			EthernetSendData(&cMessage[port - 1][1+shift],length);
+//			EthernetSendData(&cMessage[port - 1][1+shift],length);
 			break;
 //		case CODE_H1DR5_Ethernet_Receive_Data:
 //			Ethernet_Receive_Data();
@@ -570,15 +570,11 @@ void ProcessEthernetDataTask(void *argument){
 /*
        Send data from Ethernet module
  */
-Module_Status EthernetSendData(char *data ,uint16_t length){
+Module_Status EthernetSendData(IPs ips,char *data ,uint16_t length){
 	Module_Status status=H1DR5_OK;
 
 	if(data!=NULL && length!=0){
-//		ether_send_udp(ip1,data,length);
-//		Delay_ms(300);
-//		ether_send_udp(ip2,data,length);
-//		Delay_ms(300);
-		ether_send_udp(ip3,data,length);
+		ether_send_udp(ips,data,length);
 		 memset (data, 0, length);
 	}
 	else{
@@ -784,7 +780,7 @@ portBASE_TYPE CLI_Ethernet_Send_DataCommand( int8_t *pcWriteBuffer, size_t xWrit
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
 
 
-	status=EthernetSendData(pcParameterString1, xParameterStringLength1);
+//	status=EthernetSendData(pcParameterString1, xParameterStringLength1);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage,pcParameterString1);

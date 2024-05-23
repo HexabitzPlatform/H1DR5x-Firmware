@@ -29,8 +29,12 @@ void UserTask(void *argument){
 //	EthernetSendData("MOHAMAD", 7);
 	// put your code here, to run repeatedly.
 	while(1){
-		EthernetSendData("MOHAMAD", 7);
-			Delay_ms(1000);
+		EthernetSendData(ip1,"MOHAMAD", 7);
+		Delay_ms(1000);
+		EthernetSendData(ip2,"khatib", 6);
+		Delay_ms(1000);
+//		EthernetSendData(ip3,"MOHAMAD", 7);
+//		Delay_ms(1000);
 	}
 }
 

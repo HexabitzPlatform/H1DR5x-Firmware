@@ -476,7 +476,8 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 						}
 						else
 						 {
-						  indexIp=0;
+							break;
+//						  indexIp=0;
 						 }
 
 						*length = ntohs(ip->total_len)-
