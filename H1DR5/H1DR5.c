@@ -45,8 +45,10 @@ defalt_value defalt;
 #define MX_SIZE_USER_BUFFER 512
  uint16_t length;
  uint8_t DataBuffer[MX_SIZE_USER_BUFFER]={0};
- uint32_t indexInput=0;
- uint32_t indexProcess=0;
+ uint8_t ethernetData[NUMIP_DEST+1][MX_SIZE_USER_BUFFER]={0};
+ uint8_t indexInput[NUMIP_DEST+1]={0};
+ uint8_t indexProcess[NUMIP_DEST+1]={0};
+
  TaskHandle_t ProcessEthernetDataTaskHandle = NULL;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -544,13 +546,13 @@ uint8_t GetPort(UART_HandleTypeDef *huart){
 void ProcessEthernetDataTask(void *argument){
 
 	for(;;){
-	lan_poll(DataBuffer, &length);
+	lan_poll(&DataBuffer[0], &length);
 	Delay_ms(10);
 	for(uint16_t i=0; i<length; i++){
-		UserBufferData[indexInput]=DataBuffer[i];
-		indexInput++;
-		if(indexInput==MX_SIZE_USER_BUFFER)
-			indexInput=0;
+		ethernetData[indexIp][indexInput[indexIp]]=DataBuffer[i];
+		indexInput[indexIp]++;
+		if(indexInput[indexIp]==MX_SIZE_USER_BUFFER)
+			indexInput[indexIp]=0;
 	}
 
 	length=0;
@@ -572,11 +574,11 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 	Module_Status status=H1DR5_OK;
 
 	if(data!=NULL && length!=0){
-		ether_send_udp(ip1,data,length);
+//		ether_send_udp(ip1,data,length);
 //		Delay_ms(300);
 //		ether_send_udp(ip2,data,length);
 //		Delay_ms(300);
-//		ether_send_udp(ip3,data,length);
+		ether_send_udp(ip3,data,length);
 		 memset (data, 0, length);
 	}
 	else{

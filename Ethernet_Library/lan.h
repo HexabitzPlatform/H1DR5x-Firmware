@@ -9,6 +9,7 @@ extern uint32_t Remote_IP;
 extern uint32_t ip_dest;
 extern uint8_t Local_PORT;
 extern uint8_t Remote_PORT;
+extern uint8_t indexIp;
 
 /*
  * Config
@@ -23,7 +24,7 @@ extern uint8_t Remote_PORT;
 #define IP_ADDR				inet_addr(192,168,0,100)//ethernet
 #define IP_SUBNET_MASK		inet_addr(255,255,255,0)
 
-
+#define NUMIP_DEST           3
 #define IP_DEST1             inet_addr(192,168,0,10)//lap1
 #define IP_DEST2             inet_addr(192,168,0,11)//lap2
 #define IP_DEST3             inet_addr(192,168,0,12)//lap3

@@ -8,7 +8,7 @@ uint32_t ip_dest=IP_DEST;
 uint8_t net_buf[ENC28J60_MAXFRAME];
 uint8_t Local_PORT=FROM_PORT;
 uint8_t Remote_PORT=TO_PORT;
-
+uint8_t indexIp=0;
 uint8_t arp_cache_wr;
 arp_cache_entry_t arp_cache[ARP_CACHE_SIZE];
 uint8_t data_watch[1460];
@@ -461,6 +461,23 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 					}
 					else if (memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0)
 					{
+
+						if(ip->from_addr==IP_DEST1)
+						{
+							indexIp=1;
+						}
+						else if(ip->from_addr==IP_DEST2)
+						{
+							indexIp=2;
+						}
+						else if(ip->from_addr==IP_DEST3)
+						{
+							indexIp=3;
+						}
+						else
+						 {
+						  indexIp=0;
+						 }
 
 						*length = ntohs(ip->total_len)-
 						sizeof(ip_packet_t)-8;
