@@ -30,7 +30,7 @@ void UserTask(void *argument){
 	// put your code here, to run repeatedly.
 	while(1){
 		EthernetSendData("MOHAMAD", 7);
-			Delay_ms(100);
+			Delay_ms(1000);
 	}
 }
 

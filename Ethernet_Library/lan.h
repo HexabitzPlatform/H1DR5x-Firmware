@@ -22,8 +22,16 @@ extern uint8_t Remote_PORT;
 
 #define IP_ADDR				inet_addr(192,168,0,100)//ethernet
 #define IP_SUBNET_MASK		inet_addr(255,255,255,0)
-#define IP_DEFAULT_GATEWAY	inet_addr(192,168,0,10)//lap
-#define IP_DEST             IP_DEFAULT_GATEWAY
+
+
+#define IP_DEST1             inet_addr(192,168,0,10)//lap1
+#define IP_DEST2             inet_addr(192,168,0,11)//lap2
+#define IP_DEST3             inet_addr(192,168,0,12)//lap3
+
+///delete
+#define IP_DEST              IP_DEST1
+
+
 
 //poort==137||poort==138||poort==139||poort==445
 
@@ -48,6 +56,16 @@ extern uint8_t Remote_PORT;
 
 #define inet_addr(a,b,c,d)	( ((uint32_t)a) | ((uint32_t)b << 8) |\
 								((uint32_t)c << 16) | ((uint32_t)d << 24) )
+
+
+/* Exported types ------------------------------------------------------------*/
+
+typedef enum {
+	ip1=IP_DEST1,
+	ip2=IP_DEST2,
+	ip3=IP_DEST3,
+
+}IPs;
 
 /*
  * Ethernet
@@ -153,6 +171,6 @@ void lan_init();
 void lan_echo();
 void lan_poll(uint8_t* pData,uint16_t* length);
 void udp_packet(eth_frame_t *frame, uint16_t len);
-uint8_t udp_send(eth_frame_t *frame, uint16_t len);
+uint8_t udp_send(IPs ips,eth_frame_t *frame, uint16_t len);
 void udp_reply(eth_frame_t *frame, uint16_t len);
 void udp_answer(eth_frame_t *frame, uint16_t len,char *answer);

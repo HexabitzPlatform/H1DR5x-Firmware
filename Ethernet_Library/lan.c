@@ -3,7 +3,7 @@
 uint8_t mac_addr[6] = MAC_ADDR;
 uint32_t Local_IP = IP_ADDR;
 uint32_t ip_mask = IP_SUBNET_MASK;
-uint32_t Remote_IP = IP_DEFAULT_GATEWAY;
+uint32_t Remote_IP = IP_DEST1;
 uint32_t ip_dest=IP_DEST;
 uint8_t net_buf[ENC28J60_MAXFRAME];
 uint8_t Local_PORT=FROM_PORT;
@@ -19,12 +19,12 @@ uint8_t *arp_resolve(uint32_t node_ip_addr);
 uint8_t ip_send(eth_frame_t *frame, uint16_t len);
 void ip_reply(eth_frame_t *frame, uint16_t len);
 uint16_t ip_cksum(uint32_t sum, uint8_t *buf, size_t len);
-void  ether_send_udp(char *data ,uint16_t length);
+void  ether_send_udp(IPs ips,char *data ,uint16_t length);
 
 /*
  * UDP
  */
-void  ether_send_udp(char *data ,uint16_t length)
+void  ether_send_udp(IPs ips,char *data ,uint16_t length)
 {
 	     static uint8_t buf[576];
 	     eth_frame_t *send=(void*)buf;
@@ -32,7 +32,7 @@ void  ether_send_udp(char *data ,uint16_t length)
 	     memcpy(send->from_addr, mac_addr, 6);
 	     memcpy(send->data,data , length);
 	     send->type=ETH_TYPE_IP;
-	     udp_send(send,length);
+	     udp_send(ips,send,length);
 
 }
 // send UDP packet
@@ -41,7 +41,7 @@ void  ether_send_udp(char *data ,uint16_t length)
 //	- udp.src_port
 //	- udp.dst_port
 // uint16_t len is UDP data payload length
-uint8_t udp_send(eth_frame_t *frame, uint16_t len)
+uint8_t udp_send(IPs ips,eth_frame_t *frame, uint16_t len)
 {
 
 	ip_packet_t *ip = (ip_packet_t*)(frame->data);
@@ -53,7 +53,7 @@ uint8_t udp_send(eth_frame_t *frame, uint16_t len)
 
 	ip->protocol = IP_PROTOCOL_UDP;
 	ip->from_addr = Local_IP;
-	ip->to_addr = ip_dest;
+	ip->to_addr = ips;
 	udp->len = htons(len);
 	udp->cksum = 0;
 	udp->cksum = ip_cksum(len + IP_PROTOCOL_UDP,(uint8_t*)udp-8, len+8);

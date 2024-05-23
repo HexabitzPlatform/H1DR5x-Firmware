@@ -50,7 +50,7 @@ defalt_value defalt;
  TaskHandle_t ProcessEthernetDataTaskHandle = NULL;
 
 /* Private function prototypes -----------------------------------------------*/
-void  ether_send_udp(char *data ,uint16_t length);
+void  ether_send_udp(IPs ips,char *data ,uint16_t length);
 void lan_poll(uint8_t* pData,uint16_t* length);
 void ProcessEthernetDataTask(void *argument);
 void ExecuteMonitor(void);
@@ -572,7 +572,11 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 	Module_Status status=H1DR5_OK;
 
 	if(data!=NULL && length!=0){
-		ether_send_udp(data,length);
+		ether_send_udp(ip1,data,length);
+//		Delay_ms(300);
+//		ether_send_udp(ip2,data,length);
+//		Delay_ms(300);
+//		ether_send_udp(ip3,data,length);
 		 memset (data, 0, length);
 	}
 	else{
