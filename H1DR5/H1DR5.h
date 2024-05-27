@@ -154,7 +154,7 @@ extern void ExecuteMonitor(void);
  */
 //extern Module_Status Ethernet_Receive_Data();
 extern Module_Status EthernetSendData(char *data ,uint16_t length);
-//extern Module_Status Set_reseve_mac_and_ip_Remote();
+extern Module_Status Set_reseve_mac_and_ip_Remote();
 extern Module_Status Set_Local_IP(uint8_t *IP);
 extern Module_Status Set_SubnetMask(uint8_t *SubnetMask);
 extern Module_Status Set_Remote_IP(uint8_t *Gateway);

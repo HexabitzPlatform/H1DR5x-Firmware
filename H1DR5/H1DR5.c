@@ -547,6 +547,10 @@ void ProcessEthernetDataTask(void *argument){
 	lan_poll(DataBuffer, &length);
 	Delay_ms(10);
 	for(uint16_t i=0; i<length; i++){
+		IND_ON();
+		Delay_ms(10);
+		IND_OFF();
+		Delay_ms(10);
 		UserBufferData[indexInput]=DataBuffer[i];
 		indexInput++;
 		if(indexInput==MX_SIZE_USER_BUFFER)
@@ -603,14 +607,13 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 /*
  * Set the connection settings
  */
-//Module_Status Set_reseve_mac_and_ip_Remote()
-//{
-//	Module_Status status=H1DR5_OK;
-// EthernetSendData("0",1);
-//     Delay_ms(10);
-////     Ethernet_Receive_Data();
-//     return status;
-//}
+Module_Status Set_reseve_mac_and_ip_Remote()
+{
+	Module_Status status=H1DR5_OK;
+ EthernetSendData("0",1);
+     Delay_ms(10);
+     return status;
+}
 /*-----------------------------------------------------------*/
 
 /*
