@@ -44,6 +44,7 @@ defalt_value defalt;
 /* Private variables ---------------------------------------------------------*/
 #define MX_SIZE_USER_BUFFER 512
  uint16_t length;
+ uint8_t UserethernetData[MX_SIZE_USER_BUFFER]={0};
  uint8_t DataBuffer[MX_SIZE_USER_BUFFER]={0};
  uint32_t indexInput=0;
  uint32_t indexProcess=0;
@@ -551,7 +552,7 @@ void ProcessEthernetDataTask(void *argument){
 		Delay_ms(10);
 		IND_OFF();
 		Delay_ms(10);
-		UserBufferData[indexInput]=DataBuffer[i];
+		UserethernetData[indexInput]=DataBuffer[i];
 		indexInput++;
 		if(indexInput==MX_SIZE_USER_BUFFER)
 			indexInput=0;
