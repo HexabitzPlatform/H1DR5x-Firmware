@@ -459,12 +459,18 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 						len=0;
 						break;
 					}
-					else if (memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0)
+					else if (ip->from_addr==ip_dest&&(memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0))
 					{
 
 						*length = ntohs(ip->total_len)-
 						sizeof(ip_packet_t)-8;
 						memcpy(pData,udp->data,*length);
+						break;
+					}
+					else
+					{
+						*length=0;
+						len=0;
 						break;
 					}
 
