@@ -437,33 +437,47 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 		{
 			if(len >= sizeof(eth_frame_t))
 				{
-					switch(frame->type)
+				switch(frame->type)
+				{
+				case ETH_TYPE_ARP:
+					arp_filter(frame, len - sizeof(eth_frame_t));
+					break;
+				case ETH_TYPE_IP:
+					ip_filter(frame, len - sizeof(eth_frame_t),0);
+					ip_packet_t *ip = (void*)(frame->data);
+					udp_packet_t *udp = (void*)(ip->data);
+					*length = ntohs(ip->total_len) -
+						sizeof(ip_packet_t)-8;
+					////////////////////
+					uint8_t myMac[6] = MAC_ADDR;
+					uint8_t macBroadcast[6]= {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+					uint8_t poort=udp->to_port>>8;
+
+					if(poort!=FROM_PORT)
 					{
-					case ETH_TYPE_ARP:
-						arp_filter(frame, len - sizeof(eth_frame_t));
-						break;
-					case ETH_TYPE_IP:
-						ip_filter(frame, len - sizeof(eth_frame_t),0);
-						ip_packet_t *ip = (void*)(frame->data);
-						udp_packet_t *udp = (void*)(ip->data);
-						*length = ntohs(ip->total_len) -
-							sizeof(ip_packet_t)-8;
-
-						memcpy(pData,udp->data,*length);
-//						for(uint16_t i = 0;i<*length;i++)
-//						{
-//							*(pData + i) = frame->data[i];
-//						}
-
+						*length=0;
+						len=0;
 						break;
 					}
-					// Check header length
-//					if(len >= sizeof(udp_packet_t))
-//					{
-//					  if(strncmp((char *)data_watch, "hi", 2) == 0){
-//					  ether_send_udp("hi again" ,8);
-//				      memset(data_watch,0,sizeof(data_watch));}
-//				}
+					else if (ip->from_addr==ip_dest&&(memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0))
+					{
+
+						*length = ntohs(ip->total_len)-
+						sizeof(ip_packet_t)-8;
+						memcpy(pData,udp->data,*length);
+						break;
+					}
+					else
+					{
+						*length=0;
+						len=0;
+						break;
+					}
+
+
+					////////////////////
+
+				}
 	}
 				}
 }

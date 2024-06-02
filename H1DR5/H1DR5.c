@@ -1,5 +1,5 @@
 /*
- BitzOS (BOS) V0.3.3 - Copyright (C) 2017-2024 Hexabitz
+ BitzOS (BOS) V0.3.4 - Copyright (C) 2017-2024 Hexabitz
  All rights reserved
 
  File Name     : H1DR5.c
@@ -44,11 +44,11 @@ defalt_value defalt;
 /* Private variables ---------------------------------------------------------*/
 #define MX_SIZE_USER_BUFFER 512
  uint16_t length;
+ uint8_t UserethernetData[MX_SIZE_USER_BUFFER]={0};
  uint8_t DataBuffer[MX_SIZE_USER_BUFFER]={0};
  uint32_t indexInput=0;
  uint32_t indexProcess=0;
  TaskHandle_t ProcessEthernetDataTaskHandle = NULL;
-
 
 /* Private function prototypes -----------------------------------------------*/
 void  ether_send_udp(char *data ,uint16_t length);
@@ -58,12 +58,12 @@ void ExecuteMonitor(void);
 
 /* Create CLI commands --------------------------------------------------------*/
 portBASE_TYPE CLI_Ethernet_Send_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Ethernet_Receive_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+//portBASE_TYPE CLI_Ethernet_Receive_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+//portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Local_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 portBASE_TYPE CLI_Set_Remote_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 
@@ -76,13 +76,13 @@ const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition =
 	CLI_Ethernet_Send_DataCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
-const CLI_Command_Definition_t CLI_Ethernet_Receive_DataCommandDefinition =
-{
-	( const int8_t * ) "ethernet_receive_data", /* The command string to type. */
-	( const int8_t * ) "ethernet_receive_data :\r\n Parameters required to execute a Ethernet_Receive_Data: my data Receive \r\n\r\n",
-	CLI_Ethernet_Receive_DataCommand, /* The function to run. */
-	0 /* one parameters are expected. */
-};
+//const CLI_Command_Definition_t CLI_Ethernet_Receive_DataCommandDefinition =
+//{
+//	( const int8_t * ) "ethernet_receive_data", /* The command string to type. */
+//	( const int8_t * ) "ethernet_receive_data :\r\n Parameters required to execute a Ethernet_Receive_Data: my data Receive \r\n\r\n",
+//	CLI_Ethernet_Receive_DataCommand, /* The function to run. */
+//	0 /* one parameters are expected. */
+//};
 /* CLI command structure : Set_Local_IP */
 const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition =
 {
@@ -117,13 +117,13 @@ const CLI_Command_Definition_t CLI_Defalt_ValueCommandDefinition =
 	CLI_Defalt_ValueCommand, /* The function to run. */
 	0 /* zero parameters are expected. */
 };
-const CLI_Command_Definition_t CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition =
-{
-	( const int8_t * ) "set_reseve_mac_and_ip_remote", /* The command string to type. */
-	( const int8_t * ) "set_reseve_mac_and_ip_remote :\r\n Parameters required to execute a Set_reseve_mac_and_ip_Remote: reseve_mac_and_ip_Remote \r\n\r\n",
-	CLI_Set_reseve_mac_and_ip_RemoteCommand, /* The function to run. */
-	0 /* zero parameters are expected. */
-};
+//const CLI_Command_Definition_t CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition =
+//{
+//	( const int8_t * ) "set_reseve_mac_and_ip_remote", /* The command string to type. */
+//	( const int8_t * ) "set_reseve_mac_and_ip_remote :\r\n Parameters required to execute a Set_reseve_mac_and_ip_Remote: reseve_mac_and_ip_Remote \r\n\r\n",
+//	CLI_Set_reseve_mac_and_ip_RemoteCommand, /* The function to run. */
+//	0 /* zero parameters are expected. */
+//};
 
 /* CLI command structure : Set_Local_PORT */
 const CLI_Command_Definition_t CLI_Set_Local_PORTCommandDefinition =
@@ -427,6 +427,9 @@ void Module_Peripheral_Init(void){
 		  else if(GetUart(i)==&huart6)
 				   { index_dma[i-1]=&(DMA1_Channel6->CNDTR); }
 		}
+	 /* Create module special task (if needed) */
+	 if(ProcessEthernetDataTaskHandle == NULL)
+	 xTaskCreate(ProcessEthernetDataTask,(const char* ) "ProcessEthernetDataTask",configMINIMAL_STACK_SIZE,NULL,osPriorityNormal - osPriorityIdle,&ProcessEthernetDataTaskHandle);
 
 }
 
@@ -447,9 +450,9 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			length=(uint16_t)cMessage[port - 1][shift];
 			EthernetSendData(&cMessage[port - 1][1+shift],length);
 			break;
-		case CODE_H1DR5_Ethernet_Receive_Data:
-			Ethernet_Receive_Data();
-			break;
+//		case CODE_H1DR5_Ethernet_Receive_Data:
+//			Ethernet_Receive_Data();
+//			break;
 		case CODE_H1DR5_Set_Local_IP:
 			Local_IP[0]= cMessage[port - 1][0 + shift];
 			Local_IP[1]= cMessage[port - 1][1 + shift];
@@ -479,8 +482,8 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			Remote_PORT= cMessage[port - 1][0 + shift];
 			Set_Remote_PORT(Remote_PORT);
 			 break;
-		case CODE_H1DR5_reseve_mac_and_ip_Remote:
-			Set_reseve_mac_and_ip_Remote();
+//		case CODE_H1DR5_reseve_mac_and_ip_Remote:
+//			Set_reseve_mac_and_ip_Remote();
 		case CODE_H1DR5_Defalt_Value:
 			 Defalt_Value();
 			 memcpy(&messageParams[0], defalt.Local_mac_addr, sizeof(defalt.Local_mac_addr));
@@ -506,12 +509,12 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
  */
 void RegisterModuleCLICommands(void){
 	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Send_DataCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Receive_DataCommandDefinition);
+//	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Receive_DataCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_IPCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_SubnetMaskCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_IPCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Defalt_ValueCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition);
+//	FreeRTOS_CLIRegisterCommand(&CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_PORTCommandDefinition);
 	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_PORTCommandDefinition);
 
@@ -538,7 +541,28 @@ uint8_t GetPort(UART_HandleTypeDef *huart){
 
 	return 0;
 }
+/* EthernetTask function */
+void ProcessEthernetDataTask(void *argument){
 
+	for(;;){
+	lan_poll(DataBuffer, &length);
+	Delay_ms(10);
+	for(uint16_t i=0; i<length; i++){
+		IND_ON();
+		Delay_ms(10);
+		IND_OFF();
+		Delay_ms(10);
+		UserethernetData[indexInput]=DataBuffer[i];
+		indexInput++;
+		if(indexInput==MX_SIZE_USER_BUFFER)
+			indexInput=0;
+	}
+
+	length=0;
+
+	taskYIELD();
+	}
+}
 /*-----------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------
@@ -564,20 +588,20 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 /*
          Receive data from Ethernet module
  */
-Module_Status Ethernet_Receive_Data()
-{
-	Module_Status status=H1DR5_OK;
-	lan_poll(DataBuffer, &length);
-	for(uint16_t i=0; i<length; i++){
-		UserBufferData[indexInput]=DataBuffer[i];
-//		ReceiveData[indexInput]=DataBuffer[i];
-		indexInput++;
-		if(indexInput==USER_RX_BUF_SIZE)
-			indexInput=0;
-	}
-	length=0;
-	 return status;
-	}
+//Module_Status Ethernet_Receive_Data()
+//{
+//	Module_Status status=H1DR5_OK;
+//	lan_poll(DataBuffer, &length);
+//	for(uint16_t i=0; i<length; i++){
+//		UserBufferData[indexInput]=DataBuffer[i];
+////		ReceiveData[indexInput]=DataBuffer[i];
+//		indexInput++;
+//		if(indexInput==USER_RX_BUF_SIZE)
+//			indexInput=0;
+//	}
+//	length=0;
+//	 return status;
+//	}
 
 /*-----------------------------------------------------------*/
 
@@ -589,7 +613,6 @@ Module_Status Set_reseve_mac_and_ip_Remote()
 	Module_Status status=H1DR5_OK;
  EthernetSendData("0",1);
      Delay_ms(10);
-     Ethernet_Receive_Data();
      return status;
 }
 /*-----------------------------------------------------------*/
@@ -775,43 +798,43 @@ portBASE_TYPE CLI_Ethernet_Send_DataCommand( int8_t *pcWriteBuffer, size_t xWrit
 }
 
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Ethernet_Receive_DataCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
-	Module_Status status = H1DR5_OK;
-
-
-	static  int8_t *pcOKMessage=(int8_t* )"Ethernet Receive: \r\n  \n\r";
-
-	(void )xWriteBufferLen;
-
-	status=Ethernet_Receive_Data();
-	if(status == H1DR5_OK)
-	{
-
-		writePxITMutex(PcPort,pcOKMessage,strlen(pcOKMessage),10);
-		writePxITMutex(PcPort,DataBuffer,strlen(DataBuffer),10);
-	}
-
-	return pdFALSE;
-}
+//portBASE_TYPE CLI_Ethernet_Receive_DataCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+//	Module_Status status = H1DR5_OK;
+//
+//
+//	static  int8_t *pcOKMessage=(int8_t* )"Ethernet Receive: \r\n  \n\r";
+//
+//	(void )xWriteBufferLen;
+//
+//	status=Ethernet_Receive_Data();
+//	if(status == H1DR5_OK)
+//	{
+//
+//		writePxITMutex(PcPort,pcOKMessage,strlen(pcOKMessage),10);
+//		writePxITMutex(PcPort,DataBuffer,strlen(DataBuffer),10);
+//	}
+//
+//	return pdFALSE;
+//}
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
-	Module_Status status = H1DR5_OK;
-
-	static const int8_t *pcOKMessage=(int8_t* )"The connection has been opened \r\n  \n\r";
-
-
-	(void )xWriteBufferLen;
-
-	Set_reseve_mac_and_ip_Remote();
-	if(status == H1DR5_OK)
-	{
-		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
-
-	}
-
-	return pdFALSE;
-
-}
+//portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+//	Module_Status status = H1DR5_OK;
+//
+//	static const int8_t *pcOKMessage=(int8_t* )"The connection has been opened \r\n  \n\r";
+//
+//
+//	(void )xWriteBufferLen;
+//
+//	Set_reseve_mac_and_ip_Remote();
+//	if(status == H1DR5_OK)
+//	{
+//		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
+//
+//	}
+//
+//	return pdFALSE;
+//
+//}
 
 /*-----------------------------------------------------------*/
 portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){

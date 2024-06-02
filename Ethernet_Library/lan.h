@@ -18,15 +18,17 @@ extern uint8_t Remote_PORT;
 
 #define ARP_CACHE_SIZE		3
 
-#define MAC_ADDR            {0x00,0x14,0x35,0x01,0x23,0x45}
+#define MAC_ADDR            {0x00,0x0C,0xD1,0xED,0x34,0x10}
 
-#define IP_ADDR				inet_addr(192,168,1,100)
+#define IP_ADDR				inet_addr(192,168,1,10)//ethernet
 #define IP_SUBNET_MASK		inet_addr(255,255,255,0)
-#define IP_DEFAULT_GATEWAY	inet_addr(192,168,1,95)
+#define IP_DEFAULT_GATEWAY	inet_addr(192,168,1,9)//lap
 #define IP_DEST             IP_DEFAULT_GATEWAY
 
-#define TO_PORT             10
-#define FROM_PORT           15
+//poort==137||poort==138||poort==139||poort==445||poort==443||poort==80
+//max port 120
+#define TO_PORT             1//lap
+#define FROM_PORT           2//ethernet
 
 #define IP_PACKET_TTL		64
 
