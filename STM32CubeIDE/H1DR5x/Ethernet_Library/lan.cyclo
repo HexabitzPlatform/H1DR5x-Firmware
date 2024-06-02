@@ -16,4 +16,4 @@
 ..\..\Ethernet_Library\lan.c:385:6:eth_filter	4
 ..\..\Ethernet_Library\lan.c:411:6:lan_init	1
 ..\..\Ethernet_Library\lan.c:416:6:lan_echo	2
-..\..\Ethernet_Library\lan.c:430:6:lan_poll	5
+..\..\Ethernet_Library\lan.c:430:6:lan_poll	9
