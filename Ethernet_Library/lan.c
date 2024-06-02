@@ -449,11 +449,12 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 					*length = ntohs(ip->total_len) -
 						sizeof(ip_packet_t)-8;
 					////////////////////
-					uint8_t myMac[6] = MAC_ADDR;
+					uint8_t myMac[6] ={0};
+					memcpy(&myMac,mac_addr,6);
 					uint8_t macBroadcast[6]= {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 					uint8_t poort=udp->to_port>>8;
 
-					if(poort!=FROM_PORT)
+					if(poort!=Local_PORT)
 					{
 						*length=0;
 						len=0;
