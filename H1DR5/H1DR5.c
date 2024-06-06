@@ -573,23 +573,6 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 	}
 	return status;
 }
-/*
-         Receive data from Ethernet module
- */
-//Module_Status Ethernet_Receive_Data()
-//{
-//	Module_Status status=H1DR5_OK;
-//	lan_poll(DataBuffer, &length);
-//	for(uint16_t i=0; i<length; i++){
-//		UserBufferData[indexInput]=DataBuffer[i];
-////		ReceiveData[indexInput]=DataBuffer[i];
-//		indexInput++;
-//		if(indexInput==USER_RX_BUF_SIZE)
-//			indexInput=0;
-//	}
-//	length=0;
-//	 return status;
-//	}
 
 /*-----------------------------------------------------------*/
 
@@ -826,40 +809,38 @@ portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
 
-	for(int y=0;y<xParameterStringLength1;y++){
+	for(int y=0;y<xParameterStringLength1;y++)
+	{
 		Local_IP[y] = (char )pcParameterString1[y];
 	}
 
 	size=xParameterStringLength1-1;
 	x=xParameterStringLength1-1;
-	for(int i=3;i>=0;i--){
-
-		while(x>=0){
-			if(Local_IP[x]=='.'){
+	for(int i=3;i>=0;i--)
+	{
+		while(x>=0)
+		{
+			if(Local_IP[x]=='.')
+			{
 				k=0;
 				x--;
 				break;
-
 			}
-			else{
-
+			else
+			{
 				r=(Local_IP[x]-'0');
 				f=pow(10,k);
 				IP[i]+=r*f;
 				k++;
-
 				x--;
 			}
 		}
-
-
-		 }
+	 }
 
 	Set_Local_IP(IP);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
-
 	}
 
 	else if(status == H1DR5_ERROR)

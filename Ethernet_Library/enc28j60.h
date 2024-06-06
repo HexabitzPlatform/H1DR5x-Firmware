@@ -1,3 +1,17 @@
+/*
+ * enc28j60.h
+ * Description: ethernet Header file
+ * Created on: May 20, 2024
+ * Author: @ Hexabitz
+ ******************************************************************************
+ * @attention: this driver requires to set up SPI
+ *
+ * Copyright (c) 2024 Hexabitz.
+ * All rights reserved.
+ *
+ ******************************************************************************
+ */
+
 #include <stdint.h>
 #include <stdbool.h>
 #include "stm32g0xx_hal.h"

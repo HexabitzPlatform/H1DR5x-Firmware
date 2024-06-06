@@ -1,3 +1,16 @@
+/*
+ * lan.h
+ * Description: Includes protocols(Ethernet,ARP,IP,ICMP,UDP) Header file
+ * Created on: May 20, 2024
+ * Author: @ Hexabitz
+ ******************************************************************************
+ * @attention: this driver requires to set up SPI
+ *
+ * Copyright (c) 2024 Hexabitz.
+ * All rights reserved.
+ *
+ ******************************************************************************
+ */
 #pragma once
 
 #include <string.h>
