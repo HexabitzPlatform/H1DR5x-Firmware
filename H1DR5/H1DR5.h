@@ -113,17 +113,17 @@ typedef enum {
 } Module_Status;
 
 
-typedef struct DefaltValue {
-		uint8_t Local_mac_addr[6];
-		uint8_t Remote_mac_addr[6];
-		uint8_t Local_IP[4];
-		uint8_t Remote_IP[4];
-		uint8_t ip_mask[4];
-		uint8_t ip_dest[4];
-		uint8_t Local_PORT;
-		uint8_t Remote_PORT;
+typedef struct DefaultValues {
+		uint8_t LocalMac[6];
+		uint8_t RemoteMac[6];
+		uint8_t LocalIP[4];
+		uint8_t RemoteIP[4];
+		uint8_t SubnetMask[4];
+		uint8_t DestIP[4];
+		uint8_t LocalPort;
+		uint8_t RemotePort;
 
-} defalt_value;
+} defaultValues;
 
 
 /* Indicator LED */
@@ -153,14 +153,14 @@ extern void ExecuteMonitor(void);
 /* -----------------------------------------------------------------------
  */
 extern Module_Status EthernetSendData(char *data ,uint16_t length);
-extern Module_Status Set_reseve_mac_and_ip_Remote();
-extern Module_Status Set_Local_IP(uint8_t *IP);
-extern Module_Status Set_SubnetMask(uint8_t *SubnetMask);
-extern Module_Status Set_Remote_IP(uint8_t *Gateway);
-extern Module_Status Set_Local_PORT(uint8_t from_port);
-extern Module_Status Set_Local_mac_addr(uint8_t *Mac_addr);
-extern Module_Status Set_Remote_PORT(uint8_t to_port);
-extern Module_Status Defalt_Value();
+extern Module_Status SetRemoteIPRemoteMAC();
+extern Module_Status SetLocalIP(uint8_t *localIP);
+extern Module_Status SetSubnetMask(uint8_t *SubnetMask);
+extern Module_Status SetRemoteIP(uint8_t *remoteIP);
+extern Module_Status SetLocalPORT(uint8_t localPort);
+extern Module_Status SetLocalMAC(uint8_t *localMAC);
+extern Module_Status SetRemotePORT(uint8_t remotePort);
+extern Module_Status DefaultValues();
 void SetupPortForRemoteBootloaderUpdate(uint8_t port);
 void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
 
@@ -168,14 +168,14 @@ void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outpo
  |								Commands							      |															 	|
 /* -----------------------------------------------------------------------
  */
- extern const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_SubnetMaskCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_Remote_IPCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Defalt_ValueCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_Local_PORTCommandDefinition;
-extern const CLI_Command_Definition_t CLI_Set_Remote_PORTCommandDefinition;
+ extern const CLI_Command_Definition_t CLI_EthernetSendDataCommandDefinition;
+extern const CLI_Command_Definition_t CLI_SetLocalIPCommandDefinition;
+extern const CLI_Command_Definition_t CLI_SetSubnetMaskCommandDefinition;
+extern const CLI_Command_Definition_t CLI_SetRemoteIPCommandDefinition;
+extern const CLI_Command_Definition_t CLI_DefaultValuesCommandDefinition;
+extern const CLI_Command_Definition_t CLI_SetRemoteIPRemoteMACCommandDefinition;
+extern const CLI_Command_Definition_t CLI_SetLocalPORTCommandDefinition;
+extern const CLI_Command_Definition_t CLI_SetRemotePORTCommandDefinition;
 
 
 #endif /* H1DR5_H */
