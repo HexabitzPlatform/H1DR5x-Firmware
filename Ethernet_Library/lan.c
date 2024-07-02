@@ -1,3 +1,16 @@
+/*
+ * lan.c
+ * Description: Includes protocols(Ethernet,ARP,IP,ICMP,UDP) Source file
+ * Created on: May 20, 2024
+ * Author: @ Hexabitz
+ ******************************************************************************
+ * @attention: this driver requires to set up SPI
+ *
+ * Copyright (c) 2024 Hexabitz.
+ * All rights reserved.
+ *
+ ******************************************************************************
+ */
 #include "lan.h"
 
 uint8_t mac_addr[6] = MAC_ADDR;
@@ -26,14 +39,13 @@ void  ether_send_udp(char *data ,uint16_t length);
  */
 void  ether_send_udp(char *data ,uint16_t length)
 {
-	     static uint8_t buf[576];
-	     eth_frame_t *send=(void*)buf;
-	     memset( send->to_addr ,0xFF,6);
-	     memcpy(send->from_addr, mac_addr, 6);
-	     memcpy(send->data,data , length);
-	     send->type=ETH_TYPE_IP;
-	     udp_send(send,length);
-
+	 static uint8_t buf[576];
+	 eth_frame_t *send=(void*)buf;
+	 memset( send->to_addr ,0xFF,6);
+	 memcpy(send->from_addr, mac_addr, 6);
+	 memcpy(send->data,data , length);
+	 send->type=ETH_TYPE_IP;
+	 udp_send(send,length);
 }
 // send UDP packet
 // fields must be set:
@@ -43,7 +55,6 @@ void  ether_send_udp(char *data ,uint16_t length)
 // uint16_t len is UDP data payload length
 uint8_t udp_send(eth_frame_t *frame, uint16_t len)
 {
-
 	ip_packet_t *ip = (ip_packet_t*)(frame->data);
 	udp_packet_t *udp = (udp_packet_t*)(ip->data);
 
@@ -62,7 +73,6 @@ uint8_t udp_send(eth_frame_t *frame, uint16_t len)
 
 	return ip_send(frame, len);
 }
-
 
 // reply to UDP packet
 // len is UDP data payload length
@@ -105,9 +115,9 @@ void udp_filter(eth_frame_t *frame, uint16_t len)
 	// Check header length
 	if(len >= sizeof(udp_packet_t))
 	{
-		// Give the package to the application
-		 udp_reply(frame, ntohs(udp->len) -
-			sizeof(udp_packet_t));
+	// Give the package to the application
+	 udp_reply(frame, ntohs(udp->len) -
+	sizeof(udp_packet_t));
 
 	}
 }
@@ -118,7 +128,6 @@ void udp_filter_answer(eth_frame_t *frame, uint16_t len)
 	udp_packet_t *udp = (void*)(ip->data);
 	memcpy(data_watch,udp->data,len);
 }
-
 
 /*
  * ICMP
@@ -135,19 +144,19 @@ void icmp_filter(eth_frame_t *frame, uint16_t len)
 	// Check packet length
 	if(len >= sizeof(icmp_echo_packet_t) )
 	{
-		// Received an Echo Request
-		if(icmp->type == ICMP_TYPE_ECHO_RQ)
-		{
-			// Change packet type to response
-			icmp->type = ICMP_TYPE_ECHO_RPLY;
-			// Update the checksum,
-		   //  we only changed one field in the batch,
-		  //   so it is not necessary to recalculate completely
-			icmp->cksum += 8; // update cksum
+	// Received an Echo Request
+	if(icmp->type == ICMP_TYPE_ECHO_RQ)
+	{
+		// Change packet type to response
+		icmp->type = ICMP_TYPE_ECHO_RPLY;
+		// Update the checksum,
+	   //  we only changed one field in the batch,
+	  //   so it is not necessary to recalculate completely
+		icmp->cksum += 8; // update cksum
 
-			// Send the packet back
-			ip_reply(frame, len);
-		}
+		// Send the packet back
+		ip_reply(frame, len);
+	}
 	}
 }
 
@@ -245,25 +254,25 @@ void ip_filter(eth_frame_t *frame, uint16_t len,uint8_t mode)
 	
 	//if(len >= sizeof(ip_packet_t))
 	//{
-		if( (packet->ver_head_len == 0x45) &&
-			(packet->to_addr == Local_IP) )
-		{
-			len = ntohs(packet->total_len) - 
-				sizeof(ip_packet_t);
+	if( (packet->ver_head_len == 0x45) &&
+	(packet->to_addr == Local_IP) )
+	{
+		len = ntohs(packet->total_len) -
+		sizeof(ip_packet_t);
 
-			switch(packet->protocol)
-			{
-#ifdef WITH_ICMP
-			case IP_PROTOCOL_ICMP:
-				icmp_filter(frame, len);
-				break;
-#endif
-			case IP_PROTOCOL_UDP  :
-				if(mode==1)udp_filter(frame, len);
-				if(mode==0)udp_filter_answer(frame, len);
-				break;
-			}
+		switch(packet->protocol)
+		{
+	#ifdef WITH_ICMP
+		case IP_PROTOCOL_ICMP:
+			icmp_filter(frame, len);
+		break;
+	#endif
+		case IP_PROTOCOL_UDP  :
+			if(mode==1)udp_filter(frame, len);
+			if(mode==0)udp_filter_answer(frame, len);
+		break;
 		}
+	}
 	//}
 }
 
@@ -389,21 +398,17 @@ void eth_filter(eth_frame_t *frame, uint16_t len)
    //  rely on the ENC28J60 packet filter
 	if(len >= sizeof(eth_frame_t))
 	{
-		switch(frame->type)
-		{
-		case ETH_TYPE_ARP:
-			arp_filter(frame, len - sizeof(eth_frame_t));
-			break;
-		case ETH_TYPE_IP:
-			ip_filter(frame, len - sizeof(eth_frame_t),1);
-			break;
-		}
+	switch(frame->type)
+	{
+	case ETH_TYPE_ARP:
+		arp_filter(frame, len - sizeof(eth_frame_t));
+		break;
+	case ETH_TYPE_IP:
+		ip_filter(frame, len - sizeof(eth_frame_t),1);
+		break;
+	}
 	}
 }
-
-
-
-
 /*
  * LAN
  */
@@ -433,52 +438,49 @@ void lan_poll(uint8_t* pData,uint16_t* length)
 	uint16_t len;
 	eth_frame_t *frame = (eth_frame_t*)net_buf;
 
-		while((len = enc28j60_recv_packet(net_buf, sizeof(net_buf))))
+	while((len = enc28j60_recv_packet(net_buf, sizeof(net_buf))))
+	{
+		if(len >= sizeof(eth_frame_t))
 		{
-			if(len >= sizeof(eth_frame_t))
+			switch(frame->type)
+			{
+			case ETH_TYPE_ARP:
+				arp_filter(frame, len - sizeof(eth_frame_t));
+				break;
+			case ETH_TYPE_IP:
+				ip_filter(frame, len - sizeof(eth_frame_t),0);
+				ip_packet_t *ip = (void*)(frame->data);
+				udp_packet_t *udp = (void*)(ip->data);
+				*length = ntohs(ip->total_len) -
+					sizeof(ip_packet_t)-8;
+				////////////////////
+				uint8_t myMac[6] ={0};
+				memcpy(&myMac,mac_addr,6);
+				uint8_t macBroadcast[6]= {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+				uint8_t poort=udp->to_port>>8;
+
+				if(poort!=Local_PORT)
 				{
-				switch(frame->type)
-				{
-				case ETH_TYPE_ARP:
-					arp_filter(frame, len - sizeof(eth_frame_t));
+					*length=0;
+					len=0;
 					break;
-				case ETH_TYPE_IP:
-					ip_filter(frame, len - sizeof(eth_frame_t),0);
-					ip_packet_t *ip = (void*)(frame->data);
-					udp_packet_t *udp = (void*)(ip->data);
-					*length = ntohs(ip->total_len) -
-						sizeof(ip_packet_t)-8;
-					////////////////////
-					uint8_t myMac[6] = MAC_ADDR;
-					uint8_t macBroadcast[6]= {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
-					uint8_t poort=udp->to_port>>8;
-
-					if(poort!=FROM_PORT)
-					{
-						*length=0;
-						len=0;
-						break;
-					}
-					else if (ip->from_addr==ip_dest&&(memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0))
-					{
-
-						*length = ntohs(ip->total_len)-
-						sizeof(ip_packet_t)-8;
-						memcpy(pData,udp->data,*length);
-						break;
-					}
-					else
-					{
-						*length=0;
-						len=0;
-						break;
-					}
-
-
-					////////////////////
-
 				}
+				else if (ip->from_addr==ip_dest&&(memcmp(frame->to_addr, myMac, 6) == 0||memcmp(frame->to_addr,macBroadcast, 6) == 0))
+				{
+
+					*length = ntohs(ip->total_len)-
+					sizeof(ip_packet_t)-8;
+					memcpy(pData,udp->data,*length);
+					break;
+				}
+				else
+				{
+					*length=0;
+					len=0;
+					break;
+				}
+
+			}
+		}
 	}
-				}
 }
-

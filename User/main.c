@@ -1,5 +1,5 @@
 /*
- BitzOS (BOS) V0.3.4 - Copyright (C) 2017-2024 Hexabitz
+ BitzOS (BOS) V0.3.5 - Copyright (C) 2017-2024 Hexabitz
  All rights reserved
 
  File Name     : main.c
@@ -28,12 +28,9 @@ int main(void){
 void UserTask(void *argument){
 
 	// put your code here, to run repeatedly.
-	while(1){
-		EthernetSendData("MOHAMAD", 7);
-//		EthernetSendData("KHATIB", 6);
+	while(1)
+	{
 
-//
-			Delay_ms(1000);
 	}
 }
 /*-----------------------------------------------------------*/

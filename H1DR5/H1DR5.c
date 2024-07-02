@@ -1,5 +1,5 @@
 /*
- BitzOS (BOS) V0.3.4 - Copyright (C) 2017-2024 Hexabitz
+ BitzOS (BOS) V0.3.5 - Copyright (C) 2017-2024 Hexabitz
  All rights reserved
 
  File Name     : H1DR5.c
@@ -40,7 +40,7 @@ uint16_t length;
 
 
 module_param_t modParam[NUM_MODULE_PARAMS] ={{.paramPtr = NULL, .paramFormat =FMT_FLOAT, .paramName =""}};
-defalt_value defalt;
+defaultValues defaultValue;
 /* Private variables ---------------------------------------------------------*/
 #define MX_SIZE_USER_BUFFER 512
  uint16_t length;
@@ -57,88 +57,81 @@ void ProcessEthernetDataTask(void *argument);
 void ExecuteMonitor(void);
 
 /* Create CLI commands --------------------------------------------------------*/
-portBASE_TYPE CLI_Ethernet_Send_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-//portBASE_TYPE CLI_Ethernet_Receive_DataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-//portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_Local_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
-portBASE_TYPE CLI_Set_Remote_PORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_EthernetSendDataCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_SetLocalIPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_SetSubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_SetRemoteIPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_DefaultValuesCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_SetRemoteIPRemoteMACCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_SetLocalPORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
+portBASE_TYPE CLI_SetRemotePORTCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString);
 
 
-/* CLI command structure : Transmit_Data */
-const CLI_Command_Definition_t CLI_Ethernet_Send_DataCommandDefinition =
+/* CLI command structure : EthernetSendData */
+const CLI_Command_Definition_t CLI_EthernetSendDataCommandDefinition =
 {
-	( const int8_t * ) "ethernet_send_data", /* The command string to type. */
-	( const int8_t * ) "ethernet_send_data :\r\n Parameters required to execute a EthernetSendData: my data \r\n\r\n",
-	CLI_Ethernet_Send_DataCommand, /* The function to run. */
+	( const int8_t * ) "ethernetsenddata", /* The command string to type. */
+	( const int8_t * ) "ethernetsenddata :\r\n Parameters required to execute a EthernetSendData: my data \r\n\r\n",
+	CLI_EthernetSendDataCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
-//const CLI_Command_Definition_t CLI_Ethernet_Receive_DataCommandDefinition =
-//{
-//	( const int8_t * ) "ethernet_receive_data", /* The command string to type. */
-//	( const int8_t * ) "ethernet_receive_data :\r\n Parameters required to execute a Ethernet_Receive_Data: my data Receive \r\n\r\n",
-//	CLI_Ethernet_Receive_DataCommand, /* The function to run. */
-//	0 /* one parameters are expected. */
-//};
-/* CLI command structure : Set_Local_IP */
-const CLI_Command_Definition_t CLI_Set_Local_IPCommandDefinition =
+/* CLI command structure : SetLocalIP */
+const CLI_Command_Definition_t CLI_SetLocalIPCommandDefinition =
 {
-	( const int8_t * ) "set_local_ip", /* The command string to type. */
-	( const int8_t * ) "set_local_ip :\r\n Parameters required to execute a Set_Local_IP: local_iP is  \r\n\r\n",
-	CLI_Set_Local_IPCommand, /* The function to run. */
+	( const int8_t * ) "setlocalip", /* The command string to type. */
+	( const int8_t * ) "setlocalip :\r\n Parameters required to execute a SetLocalIP: localiP is  \r\n\r\n",
+	CLI_SetLocalIPCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
 
-/* CLI command structure : Set_SubnetMask */
-const CLI_Command_Definition_t CLI_Set_SubnetMaskCommandDefinition =
+/* CLI command structure : SetSubnetMask */
+const CLI_Command_Definition_t CLI_SetSubnetMaskCommandDefinition =
 {
-	( const int8_t * ) "set_subnet_mask", /* The command string to type. */
-	( const int8_t * ) "set_subnet_mask :\r\n Parameters required to execute a Set_SubnetMask: my Subnet mask \r\n\r\n",
-	CLI_Set_SubnetMaskCommand, /* The function to run. */
+	( const int8_t * ) "setsubnetmask", /* The command string to type. */
+	( const int8_t * ) "setsubnetmask :\r\n Parameters required to execute a SetSubnetMask: my SubnetMask \r\n\r\n",
+	CLI_SetSubnetMaskCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
 
-/* CLI command structure : Set_Remote_IP */
-const CLI_Command_Definition_t CLI_Set_Remote_IPCommandDefinition =
+/* CLI command structure : SetRemoteIP */
+const CLI_Command_Definition_t CLI_SetRemoteIPCommandDefinition =
 {
-	( const int8_t * ) "set_remote_ip", /* The command string to type. */
-	( const int8_t * ) "set_remote_ip :\r\n Parameters required to execute a Set_Remote_IP: my Remote_IP is \r\n\r\n",
-	CLI_Set_Remote_IPCommand, /* The function to run. */
+	( const int8_t * ) "setremoteip", /* The command string to type. */
+	( const int8_t * ) "setremoteip :\r\n Parameters required to execute a SetRemoteIP: my RemoteIP is \r\n\r\n",
+	CLI_SetRemoteIPCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
-/* CLI command structure : Defalt_Value */
-const CLI_Command_Definition_t CLI_Defalt_ValueCommandDefinition =
+/* CLI command structure : DefaultValues */
+const CLI_Command_Definition_t CLI_DefaultValuesCommandDefinition =
 {
-	( const int8_t * ) "defalt_value", /* The command string to type. */
-	( const int8_t * ) "defalt_value :\r\n Parameters required to execute a Defalt_Value: my Defalt_Value \r\n\r\n",
-	CLI_Defalt_ValueCommand, /* The function to run. */
+	( const int8_t * ) "defaultvalues", /* The command string to type. */
+	( const int8_t * ) "defaultvalues :\r\n Parameters required to execute a DefaultValues: my DefaultValues \r\n\r\n",
+	CLI_DefaultValuesCommand, /* The function to run. */
 	0 /* zero parameters are expected. */
 };
-//const CLI_Command_Definition_t CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition =
-//{
-//	( const int8_t * ) "set_reseve_mac_and_ip_remote", /* The command string to type. */
-//	( const int8_t * ) "set_reseve_mac_and_ip_remote :\r\n Parameters required to execute a Set_reseve_mac_and_ip_Remote: reseve_mac_and_ip_Remote \r\n\r\n",
-//	CLI_Set_reseve_mac_and_ip_RemoteCommand, /* The function to run. */
-//	0 /* zero parameters are expected. */
-//};
-
-/* CLI command structure : Set_Local_PORT */
-const CLI_Command_Definition_t CLI_Set_Local_PORTCommandDefinition =
+/* CLI command structure : SetRemoteIPRemoteMAC */
+const CLI_Command_Definition_t CLI_SetRemoteIPRemoteMACCommandDefinition =
 {
-	( const int8_t * ) "set_local_port", /* The command string to type. */
-	( const int8_t * ) "set_local_port :\r\n Parameters required to execute a Set_Local_PORT: Local_PORT is \r\n\r\n",
-	CLI_Set_Local_PORTCommand, /* The function to run. */
+	( const int8_t * ) "setremoteipremotemac", /* The command string to type. */
+	( const int8_t * ) "setremoteipremotemac :\r\n Parameters required to execute a SetRemoteIPRemoteMAC: RemoteIPRemoteMAC \r\n\r\n",
+	CLI_SetRemoteIPRemoteMACCommand, /* The function to run. */
+	0 /* zero parameters are expected. */
+};
+
+/* CLI command structure : SetLocalPORT */
+const CLI_Command_Definition_t CLI_SetLocalPORTCommandDefinition =
+{
+	( const int8_t * ) "setlocalport", /* The command string to type. */
+	( const int8_t * ) "setlocalport :\r\n Parameters required to execute a SetLocalPORT: LocalPORT is \r\n\r\n",
+	CLI_SetLocalPORTCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
-/* CLI command structure : Set_Remote_PORT */
-const CLI_Command_Definition_t CLI_Set_Remote_PORTCommandDefinition =
+/* CLI command structure : SetRemotePORT */
+const CLI_Command_Definition_t CLI_SetRemotePORTCommandDefinition =
 {
-	( const int8_t * ) "set_remote_port", /* The command string to type. */
-	( const int8_t * ) "set_remote_port :\r\n Parameters required to execute a Set_Remote_PORT: Remote_PORT is \r\n\r\n",
-	CLI_Set_Remote_PORTCommand, /* The function to run. */
+	( const int8_t * ) "setremoteport", /* The command string to type. */
+	( const int8_t * ) "setremoteport :\r\n Parameters required to execute a SetRemotePORT: RemotePORT is \r\n\r\n",
+	CLI_SetRemotePORTCommand, /* The function to run. */
 	1 /* one parameters are expected. */
 };
 
@@ -439,62 +432,59 @@ void Module_Peripheral_Init(void){
 Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_t dst,uint8_t shift){
 	Module_Status result =H1DR5_OK;
 
-	uint8_t Local_IP[4]={};
-	uint8_t Remote_IP[4]={};
-	uint8_t Local_PORT;
-	uint8_t Remote_PORT;
+	uint8_t LocalIP[4]={};
+	uint8_t RemoteIP[4]={};
+	uint8_t LocalPORT;
+	uint8_t RemotePORT;
 	uint8_t Subnet[4]={};
 	uint8_t IpGate[4]={};
 	switch(code){
-		case CODE_H1DR5_Ethernet_Send_Data:
+		case CODE_H1DR5_EthernetSendData:
 			length=(uint16_t)cMessage[port - 1][shift];
 			EthernetSendData(&cMessage[port - 1][1+shift],length);
 			break;
-//		case CODE_H1DR5_Ethernet_Receive_Data:
-//			Ethernet_Receive_Data();
-//			break;
-		case CODE_H1DR5_Set_Local_IP:
-			Local_IP[0]= cMessage[port - 1][0 + shift];
-			Local_IP[1]= cMessage[port - 1][1 + shift];
-			Local_IP[2]= cMessage[port - 1][2 + shift];
-			Local_IP[3]= cMessage[port - 1][3 + shift];
-			Set_Local_IP(Local_IP);
+		case CODE_H1DR5_SetLocalIP:
+			LocalIP[0]= cMessage[port - 1][0 + shift];
+			LocalIP[1]= cMessage[port - 1][1 + shift];
+			LocalIP[2]= cMessage[port - 1][2 + shift];
+			LocalIP[3]= cMessage[port - 1][3 + shift];
+			SetLocalIP(LocalIP);
              break;
-		case CODE_H1DR5_Set_Remote_IP:
-			Remote_IP[0]= cMessage[port - 1][0 + shift];
-			Remote_IP[1]= cMessage[port - 1][1 + shift];
-			Remote_IP[2]= cMessage[port - 1][2 + shift];
-			Remote_IP[3]= cMessage[port - 1][3 + shift];
-			Set_Remote_IP(Remote_IP);
+		case CODE_H1DR5_SetRemoteIP:
+			RemoteIP[0]= cMessage[port - 1][0 + shift];
+			RemoteIP[1]= cMessage[port - 1][1 + shift];
+			RemoteIP[2]= cMessage[port - 1][2 + shift];
+			RemoteIP[3]= cMessage[port - 1][3 + shift];
+			SetRemoteIP(RemoteIP);
 			 break;
-		case CODE_H1DR5_Set_Subnet_Mask:
+		case CODE_H1DR5_SetSubnetMask:
 			Subnet[0]= cMessage[port - 1][0 + shift];
 			Subnet[1]= cMessage[port - 1][1 + shift];
 			Subnet[2]= cMessage[port - 1][2 + shift];
 			Subnet[3]= cMessage[port - 1][3 + shift];
-			Set_SubnetMask(Subnet);
+			SetSubnetMask(Subnet);
 			 break;
-		case CODE_H1DR5_Set_Local_PORT:
+		case CODE_H1DR5_SetLocalPORT:
 			Local_PORT= cMessage[port - 1][0 + shift];
-			Set_Local_PORT(Local_PORT);
+			SetLocalPORT(LocalPORT);
 			 break;
-		case CODE_H1DR5_Set_Remote_PORT:
+		case CODE_H1DR5_SetRemotePORT:
 			Remote_PORT= cMessage[port - 1][0 + shift];
-			Set_Remote_PORT(Remote_PORT);
+			SetRemotePORT(RemotePORT);
 			 break;
-//		case CODE_H1DR5_reseve_mac_and_ip_Remote:
-//			Set_reseve_mac_and_ip_Remote();
-		case CODE_H1DR5_Defalt_Value:
-			 Defalt_Value();
-			 memcpy(&messageParams[0], defalt.Local_mac_addr, sizeof(defalt.Local_mac_addr));
-			 memcpy(&messageParams[6],defalt.Remote_mac_addr, sizeof(defalt.Remote_mac_addr));
-			 memcpy(&messageParams[12], defalt.Local_IP, sizeof(defalt.Local_IP));
-			 memcpy(&messageParams[16], defalt.Remote_IP, sizeof(defalt.Remote_IP));
-			 memcpy(&messageParams[20], defalt.ip_mask, sizeof(defalt.ip_mask));
-             memcpy(&messageParams[24], defalt.ip_dest, sizeof(defalt.ip_dest));
-			 messageParams[28]=defalt.Local_PORT;
-			 messageParams[29]=defalt.Remote_PORT ;
-			 SendMessageToModule(src, CODE_H1DR5_receive_Defalt_Value, 30);
+		case CODE_H1DR5_SetRemoteIPRemoteMAC:
+			SetRemoteIPRemoteMAC();
+		case CODE_H1DR5_DefaultValues:
+//			 DefaultValues();
+//			 memcpy(&messageParams[0], defaultValue.LocalMac, sizeof(defaultValue.LocalMac));
+//			 memcpy(&messageParams[6],defaultValue.RemoteMac, sizeof(defaultValue.RemoteMac));
+//			 memcpy(&messageParams[12], defaultValue.LocalIP, sizeof(defaultValue.LocalIP));
+//			 memcpy(&messageParams[16], defaultValue.RemoteIP, sizeof(defaultValue.RemoteIP));
+//			 memcpy(&messageParams[20], defaultValue.SubnetMask, sizeof(defaultValue.SubnetMask));
+//             memcpy(&messageParams[24], defaultValue.DestIP, sizeof(defaultValue.DestIP));
+//			 messageParams[28]=defaultValue.LocalPort;
+//			 messageParams[29]=defaultValue.RemotePort ;
+//			 SendMessageToModule(src, CODE_H1DR5_receive_Defalt_Value, 30);
 		default:
 			result =H1DR5_ERR_UnknownMessage;
 			break;
@@ -508,15 +498,14 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 /* --- Register this module CLI Commands
  */
 void RegisterModuleCLICommands(void){
-	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Send_DataCommandDefinition);
-//	FreeRTOS_CLIRegisterCommand(&CLI_Ethernet_Receive_DataCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_IPCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_SubnetMaskCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_IPCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Defalt_ValueCommandDefinition);
-//	FreeRTOS_CLIRegisterCommand(&CLI_Set_reseve_mac_and_ip_RemoteCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_Local_PORTCommandDefinition);
-	FreeRTOS_CLIRegisterCommand(&CLI_Set_Remote_PORTCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_EthernetSendDataCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_SetLocalIPCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_SetSubnetMaskCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_SetRemoteIPCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_DefaultValuesCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_SetRemoteIPRemoteMACCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_SetLocalPORTCommandDefinition);
+	FreeRTOS_CLIRegisterCommand(&CLI_SetRemotePORTCommandDefinition);
 
 
 }
@@ -585,30 +574,13 @@ Module_Status EthernetSendData(char *data ,uint16_t length){
 	}
 	return status;
 }
-/*
-         Receive data from Ethernet module
- */
-//Module_Status Ethernet_Receive_Data()
-//{
-//	Module_Status status=H1DR5_OK;
-//	lan_poll(DataBuffer, &length);
-//	for(uint16_t i=0; i<length; i++){
-//		UserBufferData[indexInput]=DataBuffer[i];
-////		ReceiveData[indexInput]=DataBuffer[i];
-//		indexInput++;
-//		if(indexInput==USER_RX_BUF_SIZE)
-//			indexInput=0;
-//	}
-//	length=0;
-//	 return status;
-//	}
 
 /*-----------------------------------------------------------*/
 
 /*
  * Set the connection settings
  */
-Module_Status Set_reseve_mac_and_ip_Remote()
+Module_Status SetRemoteIPRemoteMAC()
 {
 	Module_Status status=H1DR5_OK;
  EthernetSendData("0",1);
@@ -618,42 +590,42 @@ Module_Status Set_reseve_mac_and_ip_Remote()
 /*-----------------------------------------------------------*/
 
 /*
-     Set Local_PORT
+     SetLocalPORT
  */
-Module_Status Set_Local_PORT(uint8_t from_port){
+Module_Status SetLocalPORT(uint8_t localPort){
 	Module_Status status=H1DR5_OK;
-	if(from_port>255 || from_port<1)
+	if(localPort>255 || localPort<1)
 	{
 			status=H1DR5_ERROR;
 	}
-	Local_PORT=from_port;
+	Local_PORT=localPort;
 	return status;
 }
 /*-----------------------------------------------------------*/
 
 /*
-     Set Remote_PORT
+     SetRemotePORT
  */
-Module_Status Set_Remote_PORT(uint8_t to_port){
+Module_Status SetRemotePORT(uint8_t remotePort){
 	Module_Status status=H1DR5_OK;
-	if(to_port>255 || to_port<1)
+	if(remotePort>255 || remotePort<1)
 	{
 			status=H1DR5_ERROR;
 	}
-	Remote_PORT=to_port;
+	Remote_PORT=remotePort;
 	return status;
 }
 /*-----------------------------------------------------------*/
 
 /*
-     Set Local_Mac_addr
+      SetLocalMAC
  */
-Module_Status Set_Local_mac_addr(uint8_t *Mac_addr){
+Module_Status SetLocalMAC(uint8_t *localMAC){
 	Module_Status status=H1DR5_OK;
 
 	for(int i=0; i<6;i++){
 
-		mac_addr[i]=Mac_addr[i];
+		mac_addr[i]=localMAC[i];
 		}
 
 
@@ -664,15 +636,15 @@ Module_Status Set_Local_mac_addr(uint8_t *Mac_addr){
 /*
     Set IP address of the Ethernet module.
  */
-Module_Status Set_Local_IP(uint8_t *IP){
+Module_Status SetLocalIP(uint8_t *localIP){
 	Module_Status status=H1DR5_OK;
 	uint32_t ip[4]={};
 
-	if(IP==NULL){
+	if(localIP==NULL){
 		status=H1DR5_ERROR;
 	}
 	for(int i=0; i<4;i++){
-		ip[i]=IP[i];
+		ip[i]=localIP[i];
 
 	}
 
@@ -684,9 +656,9 @@ Module_Status Set_Local_IP(uint8_t *IP){
 /*-----------------------------------------------------------*/
 
 /*
-     Set subnet mask of the Ethernet network.
+     Set SetSubnet Mask of the Ethernet network.
  */
-Module_Status Set_SubnetMask(uint8_t *SubnetMask){
+Module_Status SetSubnetMask(uint8_t *SubnetMask){
 	Module_Status status=H1DR5_OK;
 	uint32_t subnetmask[4]={};
 
@@ -708,14 +680,14 @@ Module_Status Set_SubnetMask(uint8_t *SubnetMask){
 /*
  Set the default gateway of the device to which the Ethernet module is connected
  */
-Module_Status Set_Remote_IP(uint8_t *Gateway){
+Module_Status SetRemoteIP(uint8_t *remoteIP){
 	Module_Status status=H1DR5_OK;
 	uint32_t gateway[4]={};
-	if(Gateway==NULL){
+	if(remoteIP==NULL){
 		status=H1DR5_ERROR;
 	}
 	for(int i=0; i<4;i++){
-		gateway[i]=Gateway[i];
+		gateway[i]=remoteIP[i];
 	}
 
 	Remote_IP=inet_addr(gateway[0],gateway[1],gateway[2],gateway[3]);
@@ -725,40 +697,40 @@ Module_Status Set_Remote_IP(uint8_t *Gateway){
 }
 /*-----------------------------------------------------------*/
 /*
-   View Defalt_Value
+   View Default_Values
  */
-Module_Status Defalt_Value(){
+Module_Status DefaultValues(){
 	Module_Status status=H1DR5_OK;
 
-	 memcpy(defalt.Local_mac_addr, mac_addr, sizeof(mac_addr));
-	 memcpy(defalt.Remote_mac_addr, arp_cache[0].mac_addr, sizeof(mac_addr));
-	 uint8_t Local_ip[4];
-	 Local_ip[0]=Local_IP;
-	 Local_ip[1]=(Local_IP >> 8);
-	 Local_ip[2]=(Local_IP >> 16);
-	 Local_ip[3]=(Local_IP >> 24);
-	 memcpy(defalt.Local_IP, Local_ip, sizeof(Local_ip));
-	 uint8_t Remote_iP[4];
-	 Remote_iP[0]=Remote_IP;
-	 Remote_iP[1]=(Remote_IP >> 8);
-	 Remote_iP[2]=(Remote_IP >> 16);
-	 Remote_iP[3]=(Remote_IP >> 24);
-	 memcpy(defalt.Remote_IP, Remote_iP, sizeof(Remote_iP));
-	 uint8_t ip_Mask[4];
-	 ip_Mask[0]=ip_mask;
-	 ip_Mask[1]=(ip_mask >> 8);
-	 ip_Mask[2]=(ip_mask >> 16);
-	 ip_Mask[3]=(ip_mask >> 24);
-	 memcpy(defalt.ip_mask, ip_Mask, sizeof(ip_Mask));
-	 uint8_t ip_Dest[4];
-	 ip_Dest[0]=ip_dest;
-	 ip_Dest[1]=(ip_dest >> 8);
-	 ip_Dest[2]=(ip_dest >> 16);
-	 ip_Dest[3]=(ip_dest >> 24);
-	 memcpy(defalt.ip_dest, ip_Dest, sizeof(ip_Dest));
+	 memcpy(defaultValue.LocalMac, mac_addr, sizeof(mac_addr));
+	 memcpy(defaultValue.RemoteMac, arp_cache[0].mac_addr, sizeof(mac_addr));
+	 uint8_t Localip[4];
+	 Localip[0]=Local_IP;
+	 Localip[1]=(Local_IP >> 8);
+	 Localip[2]=(Local_IP >> 16);
+	 Localip[3]=(Local_IP >> 24);
+	 memcpy(defaultValue.LocalIP, Localip, sizeof(Localip));
+	 uint8_t RemoteiP[4];
+	 RemoteiP[0]=Remote_IP;
+	 RemoteiP[1]=(Remote_IP >> 8);
+	 RemoteiP[2]=(Remote_IP >> 16);
+	 RemoteiP[3]=(Remote_IP >> 24);
+	 memcpy(defaultValue.RemoteIP, RemoteiP, sizeof(RemoteiP));
+	 uint8_t Subnetmask[4];
+	 Subnetmask[0]=ip_mask;
+	 Subnetmask[1]=(ip_mask >> 8);
+	 Subnetmask[2]=(ip_mask >> 16);
+	 Subnetmask[3]=(ip_mask >> 24);
+	 memcpy(defaultValue.SubnetMask, Subnetmask, sizeof(Subnetmask));
+	 uint8_t Destip[4];
+	 Destip[0]=ip_dest;
+	 Destip[1]=(ip_dest >> 8);
+	 Destip[2]=(ip_dest >> 16);
+	 Destip[3]=(ip_dest >> 24);
+	 memcpy(defaultValue.DestIP, Destip, sizeof(Destip));
 
-	 defalt.Local_PORT = Local_PORT;
-	 defalt.Remote_PORT = Remote_PORT;
+	 defaultValue.LocalPort = Local_PORT;
+	 defaultValue.RemotePort = Remote_PORT;
 	 return status;
 }
 
@@ -766,7 +738,7 @@ Module_Status Defalt_Value(){
  |								Commands							      |
    -----------------------------------------------------------------------
  */
-portBASE_TYPE CLI_Ethernet_Send_DataCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+portBASE_TYPE CLI_EthernetSendDataCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
@@ -796,48 +768,28 @@ portBASE_TYPE CLI_Ethernet_Send_DataCommand( int8_t *pcWriteBuffer, size_t xWrit
 
 	return pdFALSE;
 }
+/*-----------------------------------------------------------*/
+portBASE_TYPE CLI_SetRemoteIPRemoteMACCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+	Module_Status status = H1DR5_OK;
+
+	static const int8_t *pcOKMessage=(int8_t* )"The connection has been opened \r\n  \n\r";
+
+
+	(void )xWriteBufferLen;
+
+	SetRemoteIPRemoteMAC();
+	if(status == H1DR5_OK)
+	{
+		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
+
+	}
+
+	return pdFALSE;
+
+}
 
 /*-----------------------------------------------------------*/
-//portBASE_TYPE CLI_Ethernet_Receive_DataCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
-//	Module_Status status = H1DR5_OK;
-//
-//
-//	static  int8_t *pcOKMessage=(int8_t* )"Ethernet Receive: \r\n  \n\r";
-//
-//	(void )xWriteBufferLen;
-//
-//	status=Ethernet_Receive_Data();
-//	if(status == H1DR5_OK)
-//	{
-//
-//		writePxITMutex(PcPort,pcOKMessage,strlen(pcOKMessage),10);
-//		writePxITMutex(PcPort,DataBuffer,strlen(DataBuffer),10);
-//	}
-//
-//	return pdFALSE;
-//}
-/*-----------------------------------------------------------*/
-//portBASE_TYPE CLI_Set_reseve_mac_and_ip_RemoteCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
-//	Module_Status status = H1DR5_OK;
-//
-//	static const int8_t *pcOKMessage=(int8_t* )"The connection has been opened \r\n  \n\r";
-//
-//
-//	(void )xWriteBufferLen;
-//
-//	Set_reseve_mac_and_ip_Remote();
-//	if(status == H1DR5_OK)
-//	{
-//		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
-//
-//	}
-//
-//	return pdFALSE;
-//
-//}
-
-/*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+portBASE_TYPE CLI_SetLocalIPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
@@ -850,7 +802,7 @@ portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 	int k=0;
 	int r=0,f=0;
 
-	static const int8_t *pcOKMessage=(int8_t* )"The Local IP has been changed successfully \r\n  \n\r";
+	static const int8_t *pcOKMessage=(int8_t* )"The LocalIP has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 	(void )xWriteBufferLen;
@@ -858,40 +810,38 @@ portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
 
-	for(int y=0;y<xParameterStringLength1;y++){
+	for(int y=0;y<xParameterStringLength1;y++)
+	{
 		Local_IP[y] = (char )pcParameterString1[y];
 	}
 
 	size=xParameterStringLength1-1;
 	x=xParameterStringLength1-1;
-	for(int i=3;i>=0;i--){
-
-		while(x>=0){
-			if(Local_IP[x]=='.'){
+	for(int i=3;i>=0;i--)
+	{
+		while(x>=0)
+		{
+			if(Local_IP[x]=='.')
+			{
 				k=0;
 				x--;
 				break;
-
 			}
-			else{
-
+			else
+			{
 				r=(Local_IP[x]-'0');
 				f=pow(10,k);
 				IP[i]+=r*f;
 				k++;
-
 				x--;
 			}
 		}
+	 }
 
-
-		 }
-
-	Set_Local_IP(IP);
+	SetLocalIP(IP);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
-
 	}
 
 	else if(status == H1DR5_ERROR)
@@ -903,7 +853,7 @@ portBASE_TYPE CLI_Set_Local_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 
 }
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+portBASE_TYPE CLI_SetSubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
@@ -916,7 +866,7 @@ portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 	int k=0;
 	int r=0,f=0;
 
-	static const int8_t *pcOKMessage=(int8_t* )"The Subnet Mask has been changed successfully \r\n  \n\r";
+	static const int8_t *pcOKMessage=(int8_t* )"The SubnetMask has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 	(void )xWriteBufferLen;
@@ -953,7 +903,7 @@ portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 
 		 }
 
-	Set_SubnetMask(Subnet);
+	SetSubnetMask(Subnet);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
@@ -969,7 +919,7 @@ portBASE_TYPE CLI_Set_SubnetMaskCommand(int8_t *pcWriteBuffer,size_t xWriteBuffe
 
 }
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+portBASE_TYPE CLI_SetRemoteIPCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
@@ -982,7 +932,7 @@ portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBuffer
 	int k=0;
 	int r=0,f=0;
 
-	static const int8_t *pcOKMessage=(int8_t* )"The Remote_IP has been changed successfully \r\n  \n\r";
+	static const int8_t *pcOKMessage=(int8_t* )"The RemoteIP has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 	(void )xWriteBufferLen;
@@ -1018,7 +968,7 @@ portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBuffer
 
 		 }
 
-	Set_Remote_IP(Gateway);
+	SetRemoteIP(Gateway);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage);
@@ -1033,35 +983,35 @@ portBASE_TYPE CLI_Set_Remote_IPCommand(int8_t *pcWriteBuffer,size_t xWriteBuffer
 	return pdFALSE;
 }
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
+portBASE_TYPE CLI_DefaultValuesCommand(int8_t *pcWriteBuffer,size_t xWriteBufferLen,const int8_t *pcCommandString){
 	Module_Status status = H1DR5_OK;
 
-	static const int8_t *pcMessage1 =(int8_t* )"the Defalt_Value of Params: \r\n"
-	"the Local_mac_addr: %d.%d.%d.%d.%d.%d\r\n"
-	"the Remote_mac_addr: %d.%d.%d.%d.%d.%d\r\n"
-	"the Local_IP: %d.%d.%d.%d\r\n"
-	"the Remote_IP: %d.%d.%d.%d\r\n"
-	"the ip_mask: %d.%d.%d.%d\r\n"
-	"the ip_dest: %d.%d.%d.%d\r\n"
-	"the Local_PORT: %d\r\n"
-	"the Remote_PORT: %d\r\n";
+	static const int8_t *pcMessage1 =(int8_t* )"the DefaultValues of Params: \r\n"
+	"the LocalMac: %d.%d.%d.%d.%d.%d\r\n"
+	"the RemoteMac: %d.%d.%d.%d.%d.%d\r\n"
+	"the LocalIP: %d.%d.%d.%d\r\n"
+	"the RemoteIP: %d.%d.%d.%d\r\n"
+	"the SubnetMask: %d.%d.%d.%d\r\n"
+	"the DestIP: %d.%d.%d.%d\r\n"
+	"the LocalPort: %d\r\n"
+	"the RemotePort: %d\r\n";
 
 	     (void )xWriteBufferLen;
 			configASSERT(pcWriteBuffer);
 
-		 	status=Defalt_Value();
+		 	status=DefaultValues();
 
 
 		 	if(status == H1DR5_OK)
 		 		 {
-		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,defalt.Local_mac_addr[0],defalt.Local_mac_addr[1],defalt.Local_mac_addr[2],defalt.Local_mac_addr[3],defalt.Local_mac_addr[4],defalt.Local_mac_addr[5]
-			    ,defalt.Remote_mac_addr[0],defalt.Remote_mac_addr[1],defalt.Remote_mac_addr[2],defalt.Remote_mac_addr[3],defalt.Remote_mac_addr[4],defalt.Remote_mac_addr[5]
-				,defalt.Local_IP[0],defalt.Local_IP[1],defalt.Local_IP[2],defalt.Local_IP[3]
-                ,defalt.Remote_IP[0],defalt.Remote_IP[1],defalt.Remote_IP[2],defalt.Remote_IP[3]
-			    ,defalt.ip_mask[0],defalt.ip_mask[1],defalt.ip_mask[2],defalt.ip_mask[3]
-			    ,defalt.ip_dest[0],defalt.ip_dest[1],defalt.ip_dest[2],defalt.ip_dest[3]
-			     ,defalt.Local_PORT
-			     ,defalt.Remote_PORT);
+		 		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,defaultValue.LocalMac[0],defaultValue.LocalMac[1],defaultValue.LocalMac[2],defaultValue.LocalMac[3],defaultValue.LocalMac[4],defaultValue.LocalMac[5]
+			    ,defaultValue.RemoteMac[0],defaultValue.RemoteMac[1],defaultValue.RemoteMac[2],defaultValue.RemoteMac[3],defaultValue.RemoteMac[4],defaultValue.RemoteMac[5]
+				,defaultValue.LocalIP[0],defaultValue.LocalIP[1],defaultValue.LocalIP[2],defaultValue.LocalIP[3]
+                ,defaultValue.RemoteIP[0],defaultValue.RemoteIP[1],defaultValue.RemoteIP[2],defaultValue.RemoteIP[3]
+			    ,defaultValue.SubnetMask[0],defaultValue.SubnetMask[1],defaultValue.SubnetMask[2],defaultValue.SubnetMask[3]
+			    ,defaultValue.DestIP[0],defaultValue.DestIP[1],defaultValue.DestIP[2],defaultValue.DestIP[3]
+			     ,defaultValue.LocalPort
+			     ,defaultValue.RemotePort);
 		 		 }
 
 
@@ -1069,13 +1019,13 @@ portBASE_TYPE CLI_Defalt_ValueCommand(int8_t *pcWriteBuffer,size_t xWriteBufferL
 		return pdFALSE;
 }
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_Local_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+portBASE_TYPE CLI_SetLocalPORTCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
 	portBASE_TYPE xParameterStringLength1 =0;
-	uint8_t Local_PORT =0;
-	static const int8_t *pcOKMessage=(int8_t* )"The Local_PORT has been changed successfully \r\n  \n\r";
+	uint8_t LocalPORT =0;
+	static const int8_t *pcOKMessage=(int8_t* )"The LocalPORT has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 
@@ -1083,8 +1033,8 @@ portBASE_TYPE CLI_Set_Local_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBuf
 	configASSERT(pcWriteBuffer);
 
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
-	Local_PORT =(uint8_t )atol((char* )pcParameterString1);
-	status=Set_Local_PORT(Local_PORT);
+	LocalPORT =(uint8_t )atol((char* )pcParameterString1);
+	status=SetLocalPORT(LocalPORT);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage,pcParameterString1);
@@ -1099,13 +1049,13 @@ portBASE_TYPE CLI_Set_Local_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBuf
 	return pdFALSE;
 }
 /*-----------------------------------------------------------*/
-portBASE_TYPE CLI_Set_Remote_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
+portBASE_TYPE CLI_SetRemotePORTCommand( int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString ){
 	Module_Status status = H1DR5_OK;
 
 	static int8_t *pcParameterString1;
 	portBASE_TYPE xParameterStringLength1 =0;
-	uint8_t Remote_PORT =0;
-	static const int8_t *pcOKMessage=(int8_t* )"The Remote_PORT has been changed successfully \r\n  \n\r";
+	uint8_t RemotePORT =0;
+	static const int8_t *pcOKMessage=(int8_t* )"The RemotePORT has been changed successfully \r\n  \n\r";
 	static const int8_t *pcWrongParamsMessage =(int8_t* )"Wrong Params!\n\r";
 
 
@@ -1114,7 +1064,7 @@ portBASE_TYPE CLI_Set_Remote_PORTCommand( int8_t *pcWriteBuffer, size_t xWriteBu
 
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
 	Remote_PORT =(uint8_t )atol((char* )pcParameterString1);
-	status=Set_Remote_PORT(Remote_PORT);
+	status=SetRemotePORT(RemotePORT);
 	if(status == H1DR5_OK)
 	{
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage,pcParameterString1);
