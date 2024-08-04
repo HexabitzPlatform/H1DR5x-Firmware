@@ -1,5 +1,0 @@
-..\..\H1DR5\H1DR5_gpio.c:22:6:GPIO_Init	1
-..\..\H1DR5\H1DR5_gpio.c:32:6:Ethernet_GPIO_Init	1
-..\..\H1DR5\H1DR5_gpio.c:62:6:IND_LED_Init	1
-..\..\H1DR5\H1DR5_gpio.c:77:9:IsFactoryReset	3
-..\..\H1DR5\H1DR5_gpio.c:128:12:GetPortGPIOs	7

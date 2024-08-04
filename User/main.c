@@ -19,7 +19,8 @@ int main(void){
 	Module_Init();		//Initialize Module &  BitzOS
 
 	//Don't place your code here.
-	for(;;){}
+	for(;;){
+	}
 }
 
 /*-----------------------------------------------------------*/
@@ -28,8 +29,7 @@ int main(void){
 void UserTask(void *argument){
 
 	// put your code here, to run repeatedly.
-	while(1)
-	{
+	while(1){
 
 	}
 }
