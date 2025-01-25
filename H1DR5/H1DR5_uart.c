@@ -198,6 +198,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart){
 		/* Peripheral interrupt init*/
 		HAL_NVIC_SetPriority(USART1_IRQn,1,0);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
+
+		__HAL_DMA_DISABLE_IT(&hdma_usart1_rx , DMA_IT_HT);
+
 #endif
 	}
 	else if(huart->Instance == USART2){
@@ -239,6 +242,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart){
 		    /* USART2 interrupt Init */
 		    HAL_NVIC_SetPriority(USART2_LPUART2_IRQn, 0, 0);
 		    HAL_NVIC_EnableIRQ(USART2_LPUART2_IRQn);
+
+		    __HAL_DMA_DISABLE_IT(&hdma_usart2_rx , DMA_IT_HT);
+
 #endif
 	}
 	else if(huart->Instance == USART3){
@@ -278,6 +284,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart){
 		    /* USART3 interrupt Init */
 		    HAL_NVIC_SetPriority(USART3_4_5_6_LPUART1_IRQn, 0, 0);
 		    HAL_NVIC_EnableIRQ(USART3_4_5_6_LPUART1_IRQn);
+
+		    __HAL_DMA_DISABLE_IT(&hdma_usart3_rx , DMA_IT_HT);
+
 #endif
 	}
 	else if(huart->Instance == USART4){
@@ -315,6 +324,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart){
 		    /* USART4 interrupt Init */
 		    HAL_NVIC_SetPriority(USART3_4_5_6_LPUART1_IRQn, 0, 0);
 		    HAL_NVIC_EnableIRQ(USART3_4_5_6_LPUART1_IRQn);
+
+		    __HAL_DMA_DISABLE_IT(&hdma_usart4_rx , DMA_IT_HT);
+
 #endif
 	}
 	else if(huart->Instance == USART5){
@@ -350,6 +362,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart){
 		    /* USART5 interrupt Init */
 		    HAL_NVIC_SetPriority(USART3_4_5_6_LPUART1_IRQn, 0, 0);
 		    HAL_NVIC_EnableIRQ(USART3_4_5_6_LPUART1_IRQn);
+
+		    __HAL_DMA_DISABLE_IT(&hdma_usart5_rx , DMA_IT_HT);
+
 #endif
 	}
 	else if(huart->Instance == USART6){
@@ -384,6 +399,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart){
 		    /* USART6 interrupt Init */
 		    HAL_NVIC_SetPriority(USART3_4_5_6_LPUART1_IRQn, 0, 0);
 		    HAL_NVIC_EnableIRQ(USART3_4_5_6_LPUART1_IRQn);
+
+		    __HAL_DMA_DISABLE_IT(&hdma_usart6_rx , DMA_IT_HT);
+
 #endif
 	}
 }
@@ -549,12 +567,14 @@ void SwapUartPins(UART_HandleTypeDef *huart,uint8_t direction){
 			huart->AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
 			huart->AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
 			HAL_UART_Init(huart);
+			HAL_UARTEx_ReceiveToIdle_DMA(huart,(uint8_t* )&UARTRxBuf[GetPort(huart) - 1],MSG_RX_BUF_SIZE);
 		}
 		else if(direction == NORMAL){
 			arrayPortsDir[myID - 1] &=(~(0x8000 >> (GetPort(huart) - 1))); /* Set bit to zero */
 			huart->AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
 			huart->AdvancedInit.Swap = UART_ADVFEATURE_SWAP_DISABLE;
 			HAL_UART_Init(huart);
+			HAL_UARTEx_ReceiveToIdle_DMA(huart,(uint8_t* )&UARTRxBuf[GetPort(huart) - 1],MSG_RX_BUF_SIZE);
 		}
 	}
 }
