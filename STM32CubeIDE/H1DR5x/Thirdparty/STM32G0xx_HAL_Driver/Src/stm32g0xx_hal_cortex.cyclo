@@ -21,4 +21,6 @@
 ..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:312:13:HAL_SYSTICK_Callback	1
 ..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:331:6:HAL_MPU_Enable	1
 ..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:346:6:HAL_MPU_Disable	1
-..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:362:6:HAL_MPU_ConfigRegion	2
+..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:359:6:HAL_MPU_EnableRegion	1
+..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:375:6:HAL_MPU_DisableRegion	1
+..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.c:393:6:HAL_MPU_ConfigRegion	1

@@ -37,6 +37,6 @@
 ..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2032:13:HAL_LPTIM_AutoReloadWriteCallback	1
 ..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2047:13:HAL_LPTIM_DirectionUpCallback	1
 ..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2062:13:HAL_LPTIM_DirectionDownCallback	1
-..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2316:24:HAL_LPTIM_GetState	1
-..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2363:26:LPTIM_WaitForFlag	4
-..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2388:6:LPTIM_Disable	15
+..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2304:24:HAL_LPTIM_GetState	1
+..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2351:26:LPTIM_WaitForFlag	4
+..\..\Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_lptim.c:2376:6:LPTIM_Disable	15

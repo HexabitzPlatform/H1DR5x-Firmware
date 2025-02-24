@@ -22,7 +22,7 @@
 extern uint16_t arrayPortsDir[MaxNumOfModules]; /* Array ports directions */
 #else
 extern uint16_t arrayPortsDir[__N ];
-#endif 
+#endif
 
 // Blocking (polling-based) read
 #define readPx(port, buffer, n, timeout) while(HAL_UART_Receive(GetUart(port), (uint8_t *)buffer, n, timeout) != HAL_OK) {}
