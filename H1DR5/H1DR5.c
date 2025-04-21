@@ -28,16 +28,15 @@ UART_HandleTypeDef huart4;
 UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart6;
 
-defaultValues defaultValue;
+EthernetDefaultValues DefaultValue;
 
 TaskHandle_t ProcessEthernetDataTaskHandle = NULL;
 
 /* Private Variables *******************************************************/
 uint8_t DataBuffer[MX_SIZE_USER_BUFFER] ={0};
 uint8_t UserethernetData[MX_SIZE_USER_BUFFER] ={0};
-uint16_t length =0;
-uint32_t indexInput =0;
-uint32_t indexProcess =0;
+uint16_t TXDataLength =0;
+uint32_t ReceivedDataIndex =0;
 
 /* Module Parameters */
 ModuleParam_t ModuleParam[NUM_MODULE_PARAMS] ={0};
@@ -45,6 +44,8 @@ ModuleParam_t ModuleParam[NUM_MODULE_PARAMS] ={0};
 /* Private function prototypes *********************************************/
 uint8_t ClearROtopology(void);
 void Module_Peripheral_Init(void);
+void SetupPortForRemoteBootloaderUpdate(uint8_t port);
+void RemoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
 Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_t dst,uint8_t shift);
 
 /* Local function prototypes ***********************************************/
@@ -596,8 +597,8 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 	switch(code){
 
 		case CODE_H1DR5_EthernetSendData:
-			length =(uint16_t )cMessage[port - 1][shift];
-			EthernetSendData(&cMessage[port - 1][1 + shift],length);
+			TXDataLength =(uint16_t )cMessage[port - 1][shift];
+			EthernetSendData(&cMessage[port - 1][1 + shift],TXDataLength);
 			break;
 
 		case CODE_H1DR5_SetLocalIP:
@@ -639,19 +640,19 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			break;
 		case CODE_H1DR5_DefaultValues:
 //			 DefaultValues();
-//			 memcpy(&messageParams[0], defaultValue.LocalMac, sizeof(defaultValue.LocalMac));
-//			 memcpy(&messageParams[6],defaultValue.RemoteMac, sizeof(defaultValue.RemoteMac));
-//			 memcpy(&messageParams[12], defaultValue.LocalIP, sizeof(defaultValue.LocalIP));
-//			 memcpy(&messageParams[16], defaultValue.RemoteIP, sizeof(defaultValue.RemoteIP));
-//			 memcpy(&messageParams[20], defaultValue.SubnetMask, sizeof(defaultValue.SubnetMask));
-//             memcpy(&messageParams[24], defaultValue.DestIP, sizeof(defaultValue.DestIP));
-//			 messageParams[28]=defaultValue.LocalPort;
-//			 messageParams[29]=defaultValue.RemotePort ;
+//			 memcpy(&messageParams[0], DefaultValue.LocalMac, sizeof(DefaultValue.LocalMac));
+//			 memcpy(&messageParams[6],DefaultValue.RemoteMac, sizeof(DefaultValue.RemoteMac));
+//			 memcpy(&messageParams[12], DefaultValue.LocalIP, sizeof(DefaultValue.LocalIP));
+//			 memcpy(&messageParams[16], DefaultValue.RemoteIP, sizeof(DefaultValue.RemoteIP));
+//			 memcpy(&messageParams[20], DefaultValue.SubnetMask, sizeof(DefaultValue.SubnetMask));
+//             memcpy(&messageParams[24], DefaultValue.DestIP, sizeof(DefaultValue.DestIP));
+//			 messageParams[28]=DefaultValue.LocalPort;
+//			 messageParams[29]=DefaultValue.RemotePort ;
 //			 SendMessageToModule(src, CODE_H1DR5_receive_Defalt_Value, 30);
 			break;
 
 		default:
-			result =H1DR5_ERR_UnknownMessage;
+			result =H1DR5_ERR_UNKNOWNMESSAGE;
 			break;
 	}
 
@@ -719,20 +720,20 @@ Module_Status GetModuleParameter(uint8_t paramIndex,float *value){
 void ProcessEthernetDataTask(void *argument){
 
 	for(;;){
-		lan_poll(DataBuffer,&length);
+		lan_poll(DataBuffer,&TXDataLength);
 		Delay_ms(10);
-		for(uint16_t i =0; i < length; i++){
+		for(uint16_t i =0; i < TXDataLength; i++){
 			IND_ON();
 			Delay_ms(10);
 			IND_OFF();
 			Delay_ms(10);
-			UserethernetData[indexInput] =DataBuffer[i];
-			indexInput++;
-			if(indexInput == MX_SIZE_USER_BUFFER)
-				indexInput =0;
+			UserethernetData[ReceivedDataIndex] =DataBuffer[i];
+			ReceivedDataIndex++;
+			if(ReceivedDataIndex == MX_SIZE_USER_BUFFER)
+				ReceivedDataIndex =0;
 		}
 
-		length =0;
+		TXDataLength =0;
 
 		taskYIELD();
 	}
@@ -757,7 +758,7 @@ Module_Status EthernetSendData(char *data,uint16_t length){
 
 /***************************************************************************/
 /* Set the connection settings */
-Module_Status SetRemoteIPRemoteMAC(){
+Module_Status SetRemoteIPRemoteMAC(void){
 	Module_Status status =H1DR5_OK;
 	EthernetSendData("0",1);
 	Delay_ms(10);
@@ -866,35 +867,35 @@ Module_Status DefaultValues(void){
 	uint8_t Destip[4];
 	uint8_t Subnetmask[4];
 
-	memcpy(defaultValue.LocalMac,mac_addr,sizeof(mac_addr));
-	memcpy(defaultValue.RemoteMac,arp_cache[0].mac_addr,sizeof(mac_addr));
+	memcpy(DefaultValue.LocalMac,mac_addr,sizeof(mac_addr));
+	memcpy(DefaultValue.RemoteMac,arp_cache[0].mac_addr,sizeof(mac_addr));
 
 	Localip[0] =Local_IP;
 	Localip[1] =(Local_IP >> 8);
 	Localip[2] =(Local_IP >> 16);
 	Localip[3] =(Local_IP >> 24);
-	memcpy(defaultValue.LocalIP,Localip,sizeof(Localip));
+	memcpy(DefaultValue.LocalIP,Localip,sizeof(Localip));
 
 	RemoteiP[0] =Remote_IP;
 	RemoteiP[1] =(Remote_IP >> 8);
 	RemoteiP[2] =(Remote_IP >> 16);
 	RemoteiP[3] =(Remote_IP >> 24);
-	memcpy(defaultValue.RemoteIP,RemoteiP,sizeof(RemoteiP));
+	memcpy(DefaultValue.RemoteIP,RemoteiP,sizeof(RemoteiP));
 
 	Subnetmask[0] =ip_mask;
 	Subnetmask[1] =(ip_mask >> 8);
 	Subnetmask[2] =(ip_mask >> 16);
 	Subnetmask[3] =(ip_mask >> 24);
-	memcpy(defaultValue.SubnetMask,Subnetmask,sizeof(Subnetmask));
+	memcpy(DefaultValue.SubnetMask,Subnetmask,sizeof(Subnetmask));
 
 	Destip[0] =ip_dest;
 	Destip[1] =(ip_dest >> 8);
 	Destip[2] =(ip_dest >> 16);
 	Destip[3] =(ip_dest >> 24);
-	memcpy(defaultValue.DestIP,Destip,sizeof(Destip));
+	memcpy(DefaultValue.DestIP,Destip,sizeof(Destip));
 
-	defaultValue.LocalPort =Local_PORT;
-	defaultValue.RemotePort =Remote_PORT;
+	DefaultValue.LocalPort =Local_PORT;
+	DefaultValue.RemotePort =Remote_PORT;
 
 	return status;
 }
@@ -1136,17 +1137,17 @@ portBASE_TYPE CLI_DefaultValuesCommand(int8_t *pcWriteBuffer,size_t xWriteBuffer
 	status =DefaultValues();
 
 	if(status == H1DR5_OK){
-		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,defaultValue.LocalMac[0],
-			defaultValue.LocalMac[1],defaultValue.LocalMac[2],defaultValue.LocalMac[3],
-			defaultValue.LocalMac[4],defaultValue.LocalMac[5],defaultValue.RemoteMac[0],
-			defaultValue.RemoteMac[1],defaultValue.RemoteMac[2],defaultValue.RemoteMac[3],
-			defaultValue.RemoteMac[4],defaultValue.RemoteMac[5],defaultValue.LocalIP[0],
-			defaultValue.LocalIP[1],defaultValue.LocalIP[2],defaultValue.LocalIP[3],
-			defaultValue.RemoteIP[0],defaultValue.RemoteIP[1],defaultValue.RemoteIP[2],
-			defaultValue.RemoteIP[3],defaultValue.SubnetMask[0],defaultValue.SubnetMask[1],
-			defaultValue.SubnetMask[2],defaultValue.SubnetMask[3],defaultValue.DestIP[0],
-			defaultValue.DestIP[1],defaultValue.DestIP[2],defaultValue.DestIP[3],
-			defaultValue.LocalPort,defaultValue.RemotePort);
+		sprintf((char* )pcWriteBuffer,(char* )pcMessage1,DefaultValue.LocalMac[0],
+			DefaultValue.LocalMac[1],DefaultValue.LocalMac[2],DefaultValue.LocalMac[3],
+			DefaultValue.LocalMac[4],DefaultValue.LocalMac[5],DefaultValue.RemoteMac[0],
+			DefaultValue.RemoteMac[1],DefaultValue.RemoteMac[2],DefaultValue.RemoteMac[3],
+			DefaultValue.RemoteMac[4],DefaultValue.RemoteMac[5],DefaultValue.LocalIP[0],
+			DefaultValue.LocalIP[1],DefaultValue.LocalIP[2],DefaultValue.LocalIP[3],
+			DefaultValue.RemoteIP[0],DefaultValue.RemoteIP[1],DefaultValue.RemoteIP[2],
+			DefaultValue.RemoteIP[3],DefaultValue.SubnetMask[0],DefaultValue.SubnetMask[1],
+			DefaultValue.SubnetMask[2],DefaultValue.SubnetMask[3],DefaultValue.DestIP[0],
+			DefaultValue.DestIP[1],DefaultValue.DestIP[2],DefaultValue.DestIP[3],
+			DefaultValue.LocalPort,DefaultValue.RemotePort);
 	}
 
 	return pdFALSE;

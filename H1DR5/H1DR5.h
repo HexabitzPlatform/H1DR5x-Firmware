@@ -86,10 +86,24 @@
 #define	USART6_RX_PORT		GPIOB
 #define	USART6_AF			GPIO_AF8_USART6
 
-/* Indicator LED */
-#define _IND_LED_PORT			GPIOB
-#define _IND_LED_PIN			GPIO_PIN_3
+/* Ethernet SPI Pin Definitions */
+#define SCK_PIN             GPIO_PIN_5
+#define MISO_PIN            GPIO_PIN_6
+#define MOSI_PIN            GPIO_PIN_7
+#define SPI_PORT            GPIOA
 
+#define ETH_SPI_HANDLER     &hspi1
+
+/* Ethernet GPIO Definitions */
+#define C_SELECT_PIN        GPIO_PIN_4
+#define C_SELECT_PORT       GPIOA
+
+#define RST_PIN             GPIO_PIN_0
+#define RST_PORT            GPIOB
+
+/* Indicator LED */
+#define _IND_LED_PORT		GPIOB
+#define _IND_LED_PIN		GPIO_PIN_3
 
 /* Module-specific Macro Definitions ***************************************/
 #define NUM_MODULE_PARAMS		1
@@ -101,8 +115,8 @@
 /* Module-status Type Definition */
 typedef enum {
 	H1DR5_OK =0,
-	H1DR5_ERR_UnknownMessage,
-	H1DR5_ERR_WrongParams,
+	H1DR5_ERR_UNKNOWNMESSAGE,
+	H1DR5_ERR_WRONGPARAMS,
 	H1DR5_ERROR =255
 } Module_Status;
 
@@ -116,7 +130,7 @@ typedef struct DefaultValues {
 	uint8_t DestIP[4];
 	uint8_t LocalPort;
 	uint8_t RemotePort;
-} defaultValues;
+} EthernetDefaultValues;
 
 /* Export UART variables */
 extern UART_HandleTypeDef huart1;
@@ -138,8 +152,8 @@ extern void SystemClock_Config(void);
 /***************************************************************************/
 /***************************** General Functions ***************************/
 /***************************************************************************/
-Module_Status DefaultValues();
-Module_Status SetRemoteIPRemoteMAC();
+Module_Status DefaultValues(void);
+Module_Status SetRemoteIPRemoteMAC(void);
 Module_Status SetLocalIP(uint8_t *localIP);
 Module_Status SetRemoteIP(uint8_t *remoteIP);
 Module_Status SetLocalMAC(uint8_t *localMAC);
@@ -147,9 +161,6 @@ Module_Status SetLocalPORT(uint8_t localPort);
 Module_Status SetRemotePORT(uint8_t remotePort);
 Module_Status SetSubnetMask(uint8_t *SubnetMask);
 Module_Status EthernetSendData(char *data ,uint16_t length);
-
-void SetupPortForRemoteBootloaderUpdate(uint8_t port);
-void RemoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
 
 #endif /* H1DR5_H */
 
