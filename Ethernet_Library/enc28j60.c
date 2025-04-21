@@ -28,8 +28,8 @@ uint16_t enc28j60_rxrdpt = 0;
 uint8_t enc28j60_rxtx(uint8_t data)
 {
 	//uint8_t spiData;
-	HAL_SPI_Transmit(ETHERNET_SPI_HANDLER, &data, 1, 100);
-	HAL_SPI_Receive(ETHERNET_SPI_HANDLER,&data, 1, 100);
+	HAL_SPI_Transmit(ETH_SPI_HANDLER, &data, 1, 100);
+	HAL_SPI_Receive(ETH_SPI_HANDLER,&data, 1, 100);
 	return data;
 }
 
@@ -39,13 +39,13 @@ uint8_t enc28j60_read_op(uint8_t cmd, uint8_t adr)
 	uint8_t spiData[2];
 	enc28j60_select();
 	spiData[0] = (cmd| (adr & ENC28J60_ADDR_MASK));
-	HAL_SPI_Transmit(ETHERNET_SPI_HANDLER, spiData, 1, 100);
+	HAL_SPI_Transmit(ETH_SPI_HANDLER, spiData, 1, 100);
 	if(adr & 0x80)
 	{
 		//HAL_SPI_Transmit(&hspi1, spiData, 1, 100);
-	HAL_SPI_Receive(ETHERNET_SPI_HANDLER, &spiData[1], 1, 100);
+	HAL_SPI_Receive(ETH_SPI_HANDLER, &spiData[1], 1, 100);
 	}
-	HAL_SPI_Receive(ETHERNET_SPI_HANDLER, &spiData[1], 1, 100);
+	HAL_SPI_Receive(ETH_SPI_HANDLER, &spiData[1], 1, 100);
 	enc28j60_release();
 
 	return spiData[1];
@@ -58,7 +58,7 @@ void enc28j60_write_op(uint8_t cmd, uint8_t adr, uint8_t data)
 	enc28j60_select() ;
 	spiData[0] = (cmd| (adr & ENC28J60_ADDR_MASK)); //((oper<<5)&0xE0)|(addr & ADDR_MASK);
 	spiData[1] = data;
-	HAL_SPI_Transmit(ETHERNET_SPI_HANDLER, spiData, 2, 100);
+	HAL_SPI_Transmit(ETH_SPI_HANDLER, spiData, 2, 100);
 	enc28j60_release();
 }
 
@@ -143,9 +143,9 @@ void enc28j60_read_buffer(uint8_t *buf, uint16_t len)
 	uint8_t spiData[2];
 	enc28j60_select();
 	spiData[0] = ENC28J60_SPI_RBM;
-	HAL_SPI_Transmit(ETHERNET_SPI_HANDLER, spiData, 1, 100);
+	HAL_SPI_Transmit(ETH_SPI_HANDLER, spiData, 1, 100);
 	while(len--)
-	HAL_SPI_Receive(ETHERNET_SPI_HANDLER,&(*(buf++)), 1, 100);
+	HAL_SPI_Receive(ETH_SPI_HANDLER,&(*(buf++)), 1, 100);
 	//*(buf++) = enc28j60_rx();
 	enc28j60_release();
 }
@@ -156,9 +156,9 @@ void enc28j60_write_buffer(uint8_t *buf, uint16_t len)
 	uint8_t spiData[2];
 	enc28j60_select();
 	spiData[0] = ENC28J60_SPI_WBM;
-	HAL_SPI_Transmit(ETHERNET_SPI_HANDLER, spiData, 1, 100);
+	HAL_SPI_Transmit(ETH_SPI_HANDLER, spiData, 1, 100);
 	while(len--)
-	HAL_SPI_Transmit(ETHERNET_SPI_HANDLER, &(*(buf++)), 1, 100);
+	HAL_SPI_Transmit(ETH_SPI_HANDLER, &(*(buf++)), 1, 100);
 	enc28j60_release();
 }
 
