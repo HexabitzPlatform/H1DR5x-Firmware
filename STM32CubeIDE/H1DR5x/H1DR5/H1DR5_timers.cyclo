@@ -1,5 +1,0 @@
-..\..\H1DR5\H1DR5_timers.c:29:6:MX_IWDG_Init	1
-..\..\H1DR5\H1DR5_timers.c:47:6:TIM_USEC_Init	1
-..\..\H1DR5\H1DR5_timers.c:88:6:TIM_MSEC_Init	1
-..\..\H1DR5\H1DR5_timers.c:122:6:StartMicroDelay	3
-..\..\H1DR5\H1DR5_timers.c:140:6:StartMilliDelay	3

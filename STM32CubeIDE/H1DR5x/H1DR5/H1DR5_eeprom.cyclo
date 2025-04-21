@@ -1,7 +1,0 @@
-../../Thirdparty/CMSIS/STM32G0xx/Include/core_cm0plus.h:985:34:__NVIC_SystemReset	1
-..\..\H1DR5\H1DR5_eeprom.c:27:12:EE_Init	3
-..\..\H1DR5\H1DR5_eeprom.c:53:12:EE_ReadVariable	2
-..\..\H1DR5\H1DR5_eeprom.c:71:12:EE_WriteVariable	3
-..\..\H1DR5\H1DR5_eeprom.c:99:12:EE_Format	2
-..\..\H1DR5\H1DR5_eeprom.c:126:10:Flash_WriteVariable	2
-..\..\H1DR5\H1DR5_eeprom.c:156:12:EraseSector	3
