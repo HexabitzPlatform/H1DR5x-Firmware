@@ -1,5 +1,5 @@
 /*
- BitzOS (BOS) V0.3.6 - Copyright (C) 2017-2024 Hexabitz
+ BitzOS (BOS) V0.4.0 - Copyright (C) 2017-2025 Hexabitz
  All rights reserved
  
  File Name     : H1DR5.h
@@ -13,11 +13,11 @@
 
  */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+/* Define to prevent recursive inclusion ***********************************/
 #ifndef H1DR5_H
 #define H1DR5_H
 
-/* Includes ------------------------------------------------------------------*/
+/* Includes ****************************************************************/
 #include "BOS.h"
 #include "H1DR5_MemoryMap.h"
 #include "H1DR5_uart.h"
@@ -25,9 +25,9 @@
 #include "H1DR5_dma.h"
 #include "H1DR5_inputs.h"
 #include "H1DR5_eeprom.h"
-/* Exported definitions -------------------------------------------------------*/
 
-#define	modulePN		_H1DR5
+/* Exported Macros *********************************************************/
+#define	MODULE_PN		_H1DR5
 
 /* Port-related Definitions */
 #define	NUM_OF_PORTS	5
@@ -86,41 +86,37 @@
 #define	USART6_RX_PORT		GPIOB
 #define	USART6_AF			GPIO_AF8_USART6
 
-/* Module-specific Definitions */
-
-
-#define NUM_MODULE_PARAMS		13
-
-/*..........Enable User Data from external ports (like USB, Ethernet, BLE ...)......*/
-#define __USER_DATA_BUFFER
-
-/* Module EEPROM Variables */
-
-// Module Addressing Space 500 - 599
-#define _EE_MODULE							500		
-
-/* Module_Status Type Definition */
-typedef enum {
-	 H1DR5_OK =0, H1DR5_ERR_UnknownMessage,  H1DR5_ERR_WrongParams, H1DR5_ERROR =255
-} Module_Status;
-
-
-typedef struct DefaultValues {
-		uint8_t LocalMac[6];
-		uint8_t RemoteMac[6];
-		uint8_t LocalIP[4];
-		uint8_t RemoteIP[4];
-		uint8_t SubnetMask[4];
-		uint8_t DestIP[4];
-		uint8_t LocalPort;
-		uint8_t RemotePort;
-
-} defaultValues;
-
-
 /* Indicator LED */
 #define _IND_LED_PORT			GPIOB
 #define _IND_LED_PIN			GPIO_PIN_3
+
+
+/* Module-specific Macro Definitions ***************************************/
+#define NUM_MODULE_PARAMS		1
+#define MX_SIZE_USER_BUFFER     512
+/* Enable User Data from external ports */
+#define __USER_DATA_BUFFER
+
+/* Module-specific Type Definition *****************************************/
+/* Module-status Type Definition */
+typedef enum {
+	H1DR5_OK =0,
+	H1DR5_ERR_UnknownMessage,
+	H1DR5_ERR_WrongParams,
+	H1DR5_ERROR =255
+} Module_Status;
+
+/* Default Configuration Type Definition */
+typedef struct DefaultValues {
+	uint8_t LocalMac[6];
+	uint8_t RemoteMac[6];
+	uint8_t LocalIP[4];
+	uint8_t RemoteIP[4];
+	uint8_t SubnetMask[4];
+	uint8_t DestIP[4];
+	uint8_t LocalPort;
+	uint8_t RemotePort;
+} defaultValues;
 
 /* Export UART variables */
 extern UART_HandleTypeDef huart1;
@@ -138,38 +134,23 @@ extern void MX_USART4_UART_Init(void);
 extern void MX_USART5_UART_Init(void);
 extern void MX_USART6_UART_Init(void);
 extern void SystemClock_Config(void);
-extern void ExecuteMonitor(void);
 
-/* -----------------------------------------------------------------------
- |								  APIs							          |  																 	|
-/* -----------------------------------------------------------------------
- */
-extern Module_Status EthernetSendData(char *data ,uint16_t length);
-extern Module_Status SetRemoteIPRemoteMAC();
-extern Module_Status SetLocalIP(uint8_t *localIP);
-extern Module_Status SetSubnetMask(uint8_t *SubnetMask);
-extern Module_Status SetRemoteIP(uint8_t *remoteIP);
-extern Module_Status SetLocalPORT(uint8_t localPort);
-extern Module_Status SetLocalMAC(uint8_t *localMAC);
-extern Module_Status SetRemotePORT(uint8_t remotePort);
-extern Module_Status DefaultValues();
+/***************************************************************************/
+/***************************** General Functions ***************************/
+/***************************************************************************/
+Module_Status DefaultValues();
+Module_Status SetRemoteIPRemoteMAC();
+Module_Status SetLocalIP(uint8_t *localIP);
+Module_Status SetRemoteIP(uint8_t *remoteIP);
+Module_Status SetLocalMAC(uint8_t *localMAC);
+Module_Status SetLocalPORT(uint8_t localPort);
+Module_Status SetRemotePORT(uint8_t remotePort);
+Module_Status SetSubnetMask(uint8_t *SubnetMask);
+Module_Status EthernetSendData(char *data ,uint16_t length);
+
 void SetupPortForRemoteBootloaderUpdate(uint8_t port);
-void remoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
-
-/* -----------------------------------------------------------------------
- |								Commands							      |															 	|
-/* -----------------------------------------------------------------------
- */
- extern const CLI_Command_Definition_t CLI_EthernetSendDataCommandDefinition;
-extern const CLI_Command_Definition_t CLI_SetLocalIPCommandDefinition;
-extern const CLI_Command_Definition_t CLI_SetSubnetMaskCommandDefinition;
-extern const CLI_Command_Definition_t CLI_SetRemoteIPCommandDefinition;
-extern const CLI_Command_Definition_t CLI_DefaultValuesCommandDefinition;
-extern const CLI_Command_Definition_t CLI_SetRemoteIPRemoteMACCommandDefinition;
-extern const CLI_Command_Definition_t CLI_SetLocalPORTCommandDefinition;
-extern const CLI_Command_Definition_t CLI_SetRemotePORTCommandDefinition;
-
+void RemoteBootloaderUpdate(uint8_t src,uint8_t dst,uint8_t inport,uint8_t outport);
 
 #endif /* H1DR5_H */
 
-/************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/
+/***************** (C) COPYRIGHT HEXABITZ ***** END OF FILE ****************/
