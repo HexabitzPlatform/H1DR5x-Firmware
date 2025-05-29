@@ -673,8 +673,6 @@ uint8_t GetPort(UART_HandleTypeDef *huart){
 		return P4;
 	else if(huart->Instance == USART6)
 		return P5;
-	else if(huart->Instance == USART1)
-		return P6;
 
 	return 0;
 }
@@ -1193,7 +1191,7 @@ portBASE_TYPE CLI_SetRemotePORTCommand( int8_t *pcWriteBuffer, size_t xWriteBuff
 	configASSERT(pcWriteBuffer);
 
 	pcParameterString1 =(int8_t* )FreeRTOS_CLIGetParameter(pcCommandString, 1, &xParameterStringLength1 );
-	Remote_PORT =(uint8_t )atol((char* )pcParameterString1);
+	RemotePORT =(uint8_t )atol((char* )pcParameterString1);
 	status=SetRemotePORT(RemotePORT);
 	if(status == H1DR5_OK)
 		sprintf((char* )pcWriteBuffer,(char* )pcOKMessage,pcParameterString1);
