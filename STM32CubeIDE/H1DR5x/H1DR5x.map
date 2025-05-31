@@ -35,7 +35,7 @@ C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.external
 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(libc_a-stdio.o)
                               C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(libc_a-findfp.o) (__sread)
 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(libc_a-memcmp.o)
-                              Ethernet_Library\lan.o (memcmp)
+                              Thirdparty\Ethernet_Library\lan.o (memcmp)
 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(libc_a-memmove.o)
                               C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(libc_a-reallocr.o) (memmove)
 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(libc_a-memset.o)
@@ -303,21 +303,6 @@ Discarded input sections
                 0x00000000       0xb4 BOS\BOS_messaging.o
  .text          0x00000000        0x0 BOS\BOS_msgparser.o
  .data          0x00000000        0x0 BOS\BOS_msgparser.o
- .text          0x00000000        0x0 Ethernet_Library\enc28j60.o
- .data          0x00000000        0x0 Ethernet_Library\enc28j60.o
- .text.enc28j60_rxtx
-                0x00000000       0x34 Ethernet_Library\enc28j60.o
- .text.enc28j60_soft_reset
-                0x00000000       0x38 Ethernet_Library\enc28j60.o
- .text.enc28j60_rcr16
-                0x00000000       0x4a Ethernet_Library\enc28j60.o
- .text.enc28j60_read_phy
-                0x00000000       0x4a Ethernet_Library\enc28j60.o
- .text          0x00000000        0x0 Ethernet_Library\lan.o
- .text.eth_filter
-                0x00000000       0x5e Ethernet_Library\lan.o
- .text.lan_echo
-                0x00000000       0x44 Ethernet_Library\lan.o
  .text          0x00000000        0x0 H1DR5\H1DR5.o
  .text.SetLocalMAC
                 0x00000000       0x48 H1DR5\H1DR5.o
@@ -400,6 +385,21 @@ Discarded input sections
                 0x00000000      0x114 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
  .text.FI_DeleteCorruptedFlashAddress
                 0x00000000       0xdc Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .text          0x00000000        0x0 Thirdparty\Ethernet_Library\enc28j60.o
+ .data          0x00000000        0x0 Thirdparty\Ethernet_Library\enc28j60.o
+ .text.enc28j60_rxtx
+                0x00000000       0x34 Thirdparty\Ethernet_Library\enc28j60.o
+ .text.enc28j60_soft_reset
+                0x00000000       0x38 Thirdparty\Ethernet_Library\enc28j60.o
+ .text.enc28j60_rcr16
+                0x00000000       0x4a Thirdparty\Ethernet_Library\enc28j60.o
+ .text.enc28j60_read_phy
+                0x00000000       0x4a Thirdparty\Ethernet_Library\enc28j60.o
+ .text          0x00000000        0x0 Thirdparty\Ethernet_Library\lan.o
+ .text.eth_filter
+                0x00000000       0x5e Thirdparty\Ethernet_Library\lan.o
+ .text.lan_echo
+                0x00000000       0x44 Thirdparty\Ethernet_Library\lan.o
  .text          0x00000000        0x0 Thirdparty\LSM303AGR\src\LSM303AGR_ACC.o
  .data          0x00000000        0x0 Thirdparty\LSM303AGR\src\LSM303AGR_ACC.o
  .bss           0x00000000        0x0 Thirdparty\LSM303AGR\src\LSM303AGR_ACC.o
@@ -5600,8 +5600,6 @@ LOAD BOS\BOS_dma.o
 LOAD BOS\BOS_freertos.o
 LOAD BOS\BOS_messaging.o
 LOAD BOS\BOS_msgparser.o
-LOAD Ethernet_Library\enc28j60.o
-LOAD Ethernet_Library\lan.o
 LOAD H1DR5\H1DR5.o
 LOAD H1DR5\H1DR5_dma.o
 LOAD H1DR5\H1DR5_eeprom.o
@@ -5616,6 +5614,8 @@ LOAD H1DR5\startup_stm32g0b1ceuxn.o
 LOAD Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
 LOAD Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
 LOAD Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+LOAD Thirdparty\Ethernet_Library\enc28j60.o
+LOAD Thirdparty\Ethernet_Library\lan.o
 LOAD Thirdparty\LSM303AGR\src\LSM303AGR_ACC.o
 LOAD Thirdparty\LSM303AGR\src\LSM303AGR_MAG.o
 LOAD Thirdparty\LSM6DS3\src\LSM6DS3.o
@@ -6098,531 +6098,531 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .text.User_MessagingParser
                 0x0801082c       0x3a BOS\BOS_msgparser.o
                 0x0801082c                User_MessagingParser
- *fill*         0x08010866        0x2 
- .text.enc28j60_read_op
-                0x08010868       0x90 Ethernet_Library\enc28j60.o
-                0x08010868                enc28j60_read_op
- .text.enc28j60_write_op
-                0x080108f8       0x78 Ethernet_Library\enc28j60.o
-                0x080108f8                enc28j60_write_op
- .text.enc28j60_set_bank
-                0x08010970       0x64 Ethernet_Library\enc28j60.o
-                0x08010970                enc28j60_set_bank
- .text.enc28j60_rcr
-                0x080109d4       0x2c Ethernet_Library\enc28j60.o
-                0x080109d4                enc28j60_rcr
- .text.enc28j60_wcr
-                0x08010a00       0x34 Ethernet_Library\enc28j60.o
-                0x08010a00                enc28j60_wcr
- .text.enc28j60_wcr16
-                0x08010a34       0x50 Ethernet_Library\enc28j60.o
-                0x08010a34                enc28j60_wcr16
- .text.enc28j60_bfc
-                0x08010a84       0x34 Ethernet_Library\enc28j60.o
-                0x08010a84                enc28j60_bfc
- .text.enc28j60_bfs
-                0x08010ab8       0x34 Ethernet_Library\enc28j60.o
-                0x08010ab8                enc28j60_bfs
- .text.enc28j60_read_buffer
-                0x08010aec       0x6c Ethernet_Library\enc28j60.o
-                0x08010aec                enc28j60_read_buffer
- .text.enc28j60_write_buffer
-                0x08010b58       0x6c Ethernet_Library\enc28j60.o
-                0x08010b58                enc28j60_write_buffer
- .text.enc28j60_write_phy
-                0x08010bc4       0x46 Ethernet_Library\enc28j60.o
-                0x08010bc4                enc28j60_write_phy
- *fill*         0x08010c0a        0x2 
- .text.enc28j60_init
-                0x08010c0c      0x10c Ethernet_Library\enc28j60.o
-                0x08010c0c                enc28j60_init
- .text.enc28j60_send_packet
-                0x08010d18       0x9c Ethernet_Library\enc28j60.o
-                0x08010d18                enc28j60_send_packet
- .text.enc28j60_recv_packet
-                0x08010db4       0xc0 Ethernet_Library\enc28j60.o
-                0x08010db4                enc28j60_recv_packet
- .text.ether_send_udp
-                0x08010e74       0x78 Ethernet_Library\lan.o
-                0x08010e74                ether_send_udp
- .text.udp_send
-                0x08010eec      0x20c Ethernet_Library\lan.o
-                0x08010eec                udp_send
- .text.udp_reply
-                0x080110f8      0x1a4 Ethernet_Library\lan.o
-                0x080110f8                udp_reply
- .text.udp_filter
-                0x0801129c       0x78 Ethernet_Library\lan.o
-                0x0801129c                udp_filter
- .text.udp_filter_answer
-                0x08011314       0x38 Ethernet_Library\lan.o
-                0x08011314                udp_filter_answer
- .text.icmp_filter
-                0x0801134c       0x7e Ethernet_Library\lan.o
-                0x0801134c                icmp_filter
- .text.ip_cksum
-                0x080113ca       0x82 Ethernet_Library\lan.o
-                0x080113ca                ip_cksum
- .text.ip_send  0x0801144c      0x1d0 Ethernet_Library\lan.o
-                0x0801144c                ip_send
- .text.ip_reply
-                0x0801161c      0x1ac Ethernet_Library\lan.o
-                0x0801161c                ip_reply
- .text.ip_filter
-                0x080117c8       0xcc Ethernet_Library\lan.o
-                0x080117c8                ip_filter
- .text.arp_search_cache
-                0x08011894       0x6c Ethernet_Library\lan.o
-                0x08011894                arp_search_cache
- .text.arp_resolve
-                0x08011900      0x18c Ethernet_Library\lan.o
-                0x08011900                arp_resolve
- .text.arp_filter
-                0x08011a8c      0x254 Ethernet_Library\lan.o
-                0x08011a8c                arp_filter
- .text.eth_send
-                0x08011ce0       0x40 Ethernet_Library\lan.o
-                0x08011ce0                eth_send
- .text.eth_reply
-                0x08011d20       0x4c Ethernet_Library\lan.o
-                0x08011d20                eth_reply
- .text.lan_init
-                0x08011d6c       0x18 Ethernet_Library\lan.o
-                0x08011d6c                lan_init
- .text.lan_poll
-                0x08011d84      0x1c8 Ethernet_Library\lan.o
-                0x08011d84                lan_poll
  .text.SystemClock_Config
-                0x08011f4c       0xb4 H1DR5\H1DR5.o
-                0x08011f4c                SystemClock_Config
+                0x08010866       0xb4 H1DR5\H1DR5.o
+                0x08010866                SystemClock_Config
+ *fill*         0x0801091a        0x2 
  .text.EnableStopModebyUARTx
-                0x08012000       0xb8 H1DR5\H1DR5.o
-                0x08012000                EnableStopModebyUARTx
+                0x0801091c       0xb8 H1DR5\H1DR5.o
+                0x0801091c                EnableStopModebyUARTx
  .text.EnableStandbyModebyWakeupPinx
-                0x080120b8       0x64 H1DR5\H1DR5.o
-                0x080120b8                EnableStandbyModebyWakeupPinx
+                0x080109d4       0x64 H1DR5\H1DR5.o
+                0x080109d4                EnableStandbyModebyWakeupPinx
  .text.DisableStandbyModeWakeupPinx
-                0x0801211c       0x98 H1DR5\H1DR5.o
-                0x0801211c                DisableStandbyModeWakeupPinx
+                0x08010a38       0x98 H1DR5\H1DR5.o
+                0x08010a38                DisableStandbyModeWakeupPinx
  .text.SaveTopologyToRO
-                0x080121b4      0x1bc H1DR5\H1DR5.o
-                0x080121b4                SaveTopologyToRO
+                0x08010ad0      0x1bc H1DR5\H1DR5.o
+                0x08010ad0                SaveTopologyToRO
  .text.SaveSnippetsToRO
-                0x08012370      0x1f8 H1DR5\H1DR5.o
-                0x08012370                SaveSnippetsToRO
+                0x08010c8c      0x1f8 H1DR5\H1DR5.o
+                0x08010c8c                SaveSnippetsToRO
  .text.ClearROtopology
-                0x08012568       0x38 H1DR5\H1DR5.o
-                0x08012568                ClearROtopology
+                0x08010e84       0x38 H1DR5\H1DR5.o
+                0x08010e84                ClearROtopology
  .text.RemoteBootloaderUpdate
-                0x080125a0      0x178 H1DR5\H1DR5.o
-                0x080125a0                RemoteBootloaderUpdate
+                0x08010ebc      0x178 H1DR5\H1DR5.o
+                0x08010ebc                RemoteBootloaderUpdate
  .text.SetupPortForRemoteBootloaderUpdate
-                0x08012718       0x52 H1DR5\H1DR5.o
-                0x08012718                SetupPortForRemoteBootloaderUpdate
- *fill*         0x0801276a        0x2 
+                0x08011034       0x52 H1DR5\H1DR5.o
+                0x08011034                SetupPortForRemoteBootloaderUpdate
+ *fill*         0x08011086        0x2 
  .text.Module_Peripheral_Init
-                0x0801276c      0x160 H1DR5\H1DR5.o
-                0x0801276c                Module_Peripheral_Init
+                0x08011088      0x160 H1DR5\H1DR5.o
+                0x08011088                Module_Peripheral_Init
  .text.Module_MessagingTask
-                0x080128cc      0x2cc H1DR5\H1DR5.o
-                0x080128cc                Module_MessagingTask
- .text.GetPort  0x08012b98       0x6c H1DR5\H1DR5.o
-                0x08012b98                GetPort
+                0x080111e8      0x2cc H1DR5\H1DR5.o
+                0x080111e8                Module_MessagingTask
+ .text.GetPort  0x080114b4       0x6c H1DR5\H1DR5.o
+                0x080114b4                GetPort
  .text.RegisterModuleCLICommands
-                0x08012c04       0x6c H1DR5\H1DR5.o
-                0x08012c04                RegisterModuleCLICommands
+                0x08011520       0x6c H1DR5\H1DR5.o
+                0x08011520                RegisterModuleCLICommands
  .text.GetModuleParameter
-                0x08012c70       0x2a H1DR5\H1DR5.o
-                0x08012c70                GetModuleParameter
- *fill*         0x08012c9a        0x2 
+                0x0801158c       0x2a H1DR5\H1DR5.o
+                0x0801158c                GetModuleParameter
+ *fill*         0x080115b6        0x2 
  .text.ProcessEthernetDataTask
-                0x08012c9c       0xb0 H1DR5\H1DR5.o
-                0x08012c9c                ProcessEthernetDataTask
+                0x080115b8       0xb0 H1DR5\H1DR5.o
+                0x080115b8                ProcessEthernetDataTask
  .text.EthernetSendData
-                0x08012d4c       0x58 H1DR5\H1DR5.o
-                0x08012d4c                EthernetSendData
+                0x08011668       0x58 H1DR5\H1DR5.o
+                0x08011668                EthernetSendData
  .text.SetRemoteIPRemoteMAC
-                0x08012da4       0x2c H1DR5\H1DR5.o
-                0x08012da4                SetRemoteIPRemoteMAC
+                0x080116c0       0x2c H1DR5\H1DR5.o
+                0x080116c0                SetRemoteIPRemoteMAC
  .text.SetLocalPORT
-                0x08012dd0       0x3c H1DR5\H1DR5.o
-                0x08012dd0                SetLocalPORT
+                0x080116ec       0x3c H1DR5\H1DR5.o
+                0x080116ec                SetLocalPORT
  .text.SetRemotePORT
-                0x08012e0c       0x3c H1DR5\H1DR5.o
-                0x08012e0c                SetRemotePORT
+                0x08011728       0x3c H1DR5\H1DR5.o
+                0x08011728                SetRemotePORT
  .text.SetLocalIP
-                0x08012e48       0x88 H1DR5\H1DR5.o
-                0x08012e48                SetLocalIP
+                0x08011764       0x88 H1DR5\H1DR5.o
+                0x08011764                SetLocalIP
  .text.SetSubnetMask
-                0x08012ed0       0x88 H1DR5\H1DR5.o
-                0x08012ed0                SetSubnetMask
+                0x080117ec       0x88 H1DR5\H1DR5.o
+                0x080117ec                SetSubnetMask
  .text.SetRemoteIP
-                0x08012f58       0x94 H1DR5\H1DR5.o
-                0x08012f58                SetRemoteIP
+                0x08011874       0x94 H1DR5\H1DR5.o
+                0x08011874                SetRemoteIP
  .text.DefaultValues
-                0x08012fec      0x150 H1DR5\H1DR5.o
-                0x08012fec                DefaultValues
+                0x08011908      0x150 H1DR5\H1DR5.o
+                0x08011908                DefaultValues
  .text.CLI_EthernetSendDataCommand
-                0x0801313c       0x8c H1DR5\H1DR5.o
-                0x0801313c                CLI_EthernetSendDataCommand
+                0x08011a58       0x8c H1DR5\H1DR5.o
+                0x08011a58                CLI_EthernetSendDataCommand
  .text.CLI_SetRemoteIPRemoteMACCommand
-                0x080131c8       0x3c H1DR5\H1DR5.o
-                0x080131c8                CLI_SetRemoteIPRemoteMACCommand
+                0x08011ae4       0x3c H1DR5\H1DR5.o
+                0x08011ae4                CLI_SetRemoteIPRemoteMACCommand
  .text.CLI_SetLocalIPCommand
-                0x08013204      0x1dc H1DR5\H1DR5.o
-                0x08013204                CLI_SetLocalIPCommand
+                0x08011b20      0x1dc H1DR5\H1DR5.o
+                0x08011b20                CLI_SetLocalIPCommand
  .text.CLI_SetSubnetMaskCommand
-                0x080133e0      0x1dc H1DR5\H1DR5.o
-                0x080133e0                CLI_SetSubnetMaskCommand
+                0x08011cfc      0x1dc H1DR5\H1DR5.o
+                0x08011cfc                CLI_SetSubnetMaskCommand
  .text.CLI_SetRemoteIPCommand
-                0x080135bc      0x1dc H1DR5\H1DR5.o
-                0x080135bc                CLI_SetRemoteIPCommand
+                0x08011ed8      0x1dc H1DR5\H1DR5.o
+                0x08011ed8                CLI_SetRemoteIPCommand
  .text.CLI_DefaultValuesCommand
-                0x08013798      0x180 H1DR5\H1DR5.o
-                0x08013798                CLI_DefaultValuesCommand
+                0x080120b4      0x180 H1DR5\H1DR5.o
+                0x080120b4                CLI_DefaultValuesCommand
  .text.CLI_SetLocalPORTCommand
-                0x08013918       0xa0 H1DR5\H1DR5.o
-                0x08013918                CLI_SetLocalPORTCommand
+                0x08012234       0xa0 H1DR5\H1DR5.o
+                0x08012234                CLI_SetLocalPORTCommand
  .text.CLI_SetRemotePORTCommand
-                0x080139b8       0xa0 H1DR5\H1DR5.o
-                0x080139b8                CLI_SetRemotePORTCommand
+                0x080122d4       0xa0 H1DR5\H1DR5.o
+                0x080122d4                CLI_SetRemotePORTCommand
  .text.DMA_Init
-                0x08013a58       0x74 H1DR5\H1DR5_dma.o
-                0x08013a58                DMA_Init
+                0x08012374       0x74 H1DR5\H1DR5_dma.o
+                0x08012374                DMA_Init
  .text.SetupMessagingRxDMAs
-                0x08013acc       0xf4 H1DR5\H1DR5_dma.o
-                0x08013acc                SetupMessagingRxDMAs
+                0x080123e8       0xf4 H1DR5\H1DR5_dma.o
+                0x080123e8                SetupMessagingRxDMAs
  .text.DMA_MSG_RX_Setup
-                0x08013bc0       0x68 H1DR5\H1DR5_dma.o
-                0x08013bc0                DMA_MSG_RX_Setup
+                0x080124dc       0x68 H1DR5\H1DR5_dma.o
+                0x080124dc                DMA_MSG_RX_Setup
  .text.DMA_STREAM_Setup
-                0x08013c28       0xf0 H1DR5\H1DR5_dma.o
-                0x08013c28                DMA_STREAM_Setup
- .text.StopDMA  0x08013d18       0x98 H1DR5\H1DR5_dma.o
-                0x08013d18                StopDMA
+                0x08012544       0xf0 H1DR5\H1DR5_dma.o
+                0x08012544                DMA_STREAM_Setup
+ .text.StopDMA  0x08012634       0x98 H1DR5\H1DR5_dma.o
+                0x08012634                StopDMA
  .text.SwitchMsgDMAToStream
-                0x08013db0       0x52 H1DR5\H1DR5_dma.o
-                0x08013db0                SwitchMsgDMAToStream
- *fill*         0x08013e02        0x2 
+                0x080126cc       0x52 H1DR5\H1DR5_dma.o
+                0x080126cc                SwitchMsgDMAToStream
+ *fill*         0x0801271e        0x2 
  .text.SwitchStreamDMAToMsg
-                0x08013e04       0xc8 H1DR5\H1DR5_dma.o
-                0x08013e04                SwitchStreamDMAToMsg
+                0x08012720       0xc8 H1DR5\H1DR5_dma.o
+                0x08012720                SwitchStreamDMAToMsg
  .text.CRC_Init
-                0x08013ecc       0x44 H1DR5\H1DR5_dma.o
-                0x08013ecc                CRC_Init
+                0x080127e8       0x44 H1DR5\H1DR5_dma.o
+                0x080127e8                CRC_Init
  .text.HAL_CRC_MspInit
-                0x08013f10       0x30 H1DR5\H1DR5_dma.o
-                0x08013f10                HAL_CRC_MspInit
+                0x0801282c       0x30 H1DR5\H1DR5_dma.o
+                0x0801282c                HAL_CRC_MspInit
  .text.CalculateCRC8
-                0x08013f40      0x154 H1DR5\H1DR5_dma.o
-                0x08013f40                CalculateCRC8
+                0x0801285c      0x154 H1DR5\H1DR5_dma.o
+                0x0801285c                CalculateCRC8
  .text.__NVIC_SystemReset
-                0x08014094       0x24 H1DR5\H1DR5_eeprom.o
- .text.EE_Init  0x080140b8       0x56 H1DR5\H1DR5_eeprom.o
-                0x080140b8                EE_Init
+                0x080129b0       0x24 H1DR5\H1DR5_eeprom.o
+ .text.EE_Init  0x080129d4       0x56 H1DR5\H1DR5_eeprom.o
+                0x080129d4                EE_Init
  .text.EE_ReadVariable
-                0x0801410e       0x42 H1DR5\H1DR5_eeprom.o
-                0x0801410e                EE_ReadVariable
+                0x08012a2a       0x42 H1DR5\H1DR5_eeprom.o
+                0x08012a2a                EE_ReadVariable
  .text.EE_WriteVariable
-                0x08014150       0x72 H1DR5\H1DR5_eeprom.o
-                0x08014150                EE_WriteVariable
+                0x08012a6c       0x72 H1DR5\H1DR5_eeprom.o
+                0x08012a6c                EE_WriteVariable
  .text.EE_Format
-                0x080141c2       0x3a H1DR5\H1DR5_eeprom.o
-                0x080141c2                EE_Format
+                0x08012ade       0x3a H1DR5\H1DR5_eeprom.o
+                0x08012ade                EE_Format
  .text.EE_FormatForFactoryReset
-                0x080141fc       0x2c H1DR5\H1DR5_eeprom.o
-                0x080141fc                EE_FormatForFactoryReset
+                0x08012b18       0x2c H1DR5\H1DR5_eeprom.o
+                0x08012b18                EE_FormatForFactoryReset
  .text.GPIO_Init
-                0x08014228       0x90 H1DR5\H1DR5_gpio.o
-                0x08014228                GPIO_Init
+                0x08012b44       0x90 H1DR5\H1DR5_gpio.o
+                0x08012b44                GPIO_Init
  .text.IND_LED_Init
-                0x080142b8       0x38 H1DR5\H1DR5_gpio.o
-                0x080142b8                IND_LED_Init
+                0x08012bd4       0x38 H1DR5\H1DR5_gpio.o
+                0x08012bd4                IND_LED_Init
  .text.EthernetGPIOInit
-                0x080142f0       0xd4 H1DR5\H1DR5_gpio.o
-                0x080142f0                EthernetGPIOInit
+                0x08012c0c       0xd4 H1DR5\H1DR5_gpio.o
+                0x08012c0c                EthernetGPIOInit
  .text.IsFactoryReset
-                0x080143c4      0x15c H1DR5\H1DR5_gpio.o
-                0x080143c4                IsFactoryReset
+                0x08012ce0      0x15c H1DR5\H1DR5_gpio.o
+                0x08012ce0                IsFactoryReset
  .text.GetPortGPIOs
-                0x08014520      0x124 H1DR5\H1DR5_gpio.o
-                0x08014520                GetPortGPIOs
+                0x08012e3c      0x124 H1DR5\H1DR5_gpio.o
+                0x08012e3c                GetPortGPIOs
  .text.MX_ADC_Init
-                0x08014644       0x88 H1DR5\H1DR5_inputs.o
-                0x08014644                MX_ADC_Init
+                0x08012f60       0x88 H1DR5\H1DR5_inputs.o
+                0x08012f60                MX_ADC_Init
  .text.HAL_ADC_MspInit
-                0x080146cc       0xa8 H1DR5\H1DR5_inputs.o
-                0x080146cc                HAL_ADC_MspInit
+                0x08012fe8       0xa8 H1DR5\H1DR5_inputs.o
+                0x08012fe8                HAL_ADC_MspInit
  .text.Error_Handler
-                0x08014774       0x10 H1DR5\H1DR5_inputs.o
-                0x08014774                Error_Handler
+                0x08013090       0x10 H1DR5\H1DR5_inputs.o
+                0x08013090                Error_Handler
  .text.GetChannel
-                0x08014784       0xa8 H1DR5\H1DR5_inputs.o
-                0x08014784                GetChannel
- .text.GetRank  0x0801482c       0xa4 H1DR5\H1DR5_inputs.o
-                0x0801482c                GetRank
+                0x080130a0       0xa8 H1DR5\H1DR5_inputs.o
+                0x080130a0                GetChannel
+ .text.GetRank  0x08013148       0xa4 H1DR5\H1DR5_inputs.o
+                0x08013148                GetRank
  .text.CheckAttachedButtons
-                0x080148d0      0x580 H1DR5\H1DR5_inputs.o
-                0x080148d0                CheckAttachedButtons
+                0x080131ec      0x580 H1DR5\H1DR5_inputs.o
+                0x080131ec                CheckAttachedButtons
  .text.AddPortButton
-                0x08014e50      0x268 H1DR5\H1DR5_inputs.o
-                0x08014e50                AddPortButton
+                0x0801376c      0x268 H1DR5\H1DR5_inputs.o
+                0x0801376c                AddPortButton
  .text.RemovePortButton
-                0x080150b8      0x194 H1DR5\H1DR5_inputs.o
-                0x080150b8                RemovePortButton
+                0x080139d4      0x194 H1DR5\H1DR5_inputs.o
+                0x080139d4                RemovePortButton
  .text.SetButtonEvents
-                0x0801524c      0x174 H1DR5\H1DR5_inputs.o
-                0x0801524c                SetButtonEvents
+                0x08013b68      0x174 H1DR5\H1DR5_inputs.o
+                0x08013b68                SetButtonEvents
  .text.ADCSelectPort
-                0x080153c0       0x98 H1DR5\H1DR5_inputs.o
-                0x080153c0                ADCSelectPort
+                0x08013cdc       0x98 H1DR5\H1DR5_inputs.o
+                0x08013cdc                ADCSelectPort
  .text.ReadADCChannel
-                0x08015458      0x154 H1DR5\H1DR5_inputs.o
-                0x08015458                ReadADCChannel
+                0x08013d74      0x154 H1DR5\H1DR5_inputs.o
+                0x08013d74                ReadADCChannel
  .text.ReadTempAndVref
-                0x080155ac      0x1dc H1DR5\H1DR5_inputs.o
-                0x080155ac                ReadTempAndVref
+                0x08013ec8      0x1dc H1DR5\H1DR5_inputs.o
+                0x08013ec8                ReadTempAndVref
  .text.GetReadPercentage
-                0x08015788       0x7c H1DR5\H1DR5_inputs.o
-                0x08015788                GetReadPercentage
+                0x080140a4       0x7c H1DR5\H1DR5_inputs.o
+                0x080140a4                GetReadPercentage
  .text.buttonReleasedCallback
-                0x08015804       0x14 H1DR5\H1DR5_inputs.o
-                0x08015804                buttonReleasedCallback
+                0x08014120       0x14 H1DR5\H1DR5_inputs.o
+                0x08014120                buttonReleasedCallback
  .text.buttonClickedCallback
-                0x08015818       0x14 H1DR5\H1DR5_inputs.o
-                0x08015818                buttonClickedCallback
+                0x08014134       0x14 H1DR5\H1DR5_inputs.o
+                0x08014134                buttonClickedCallback
  .text.buttonDblClickedCallback
-                0x0801582c       0x14 H1DR5\H1DR5_inputs.o
-                0x0801582c                buttonDblClickedCallback
+                0x08014148       0x14 H1DR5\H1DR5_inputs.o
+                0x08014148                buttonDblClickedCallback
  .text.__NVIC_SystemReset
-                0x08015840       0x24 H1DR5\H1DR5_it.o
+                0x0801415c       0x24 H1DR5\H1DR5_it.o
  .text.SysTick_Handler
-                0x08015864       0x12 H1DR5\H1DR5_it.o
-                0x08015864                SysTick_Handler
- *fill*         0x08015876        0x2 
+                0x08014180       0x12 H1DR5\H1DR5_it.o
+                0x08014180                SysTick_Handler
+ *fill*         0x08014192        0x2 
  .text.HardFault_Handler
-                0x08015878       0x40 H1DR5\H1DR5_it.o
-                0x08015878                HardFault_Handler
+                0x08014194       0x40 H1DR5\H1DR5_it.o
+                0x08014194                HardFault_Handler
  .text.HAL_UARTEx_RxEventCallback
-                0x080158b8       0x74 H1DR5\H1DR5_it.o
-                0x080158b8                HAL_UARTEx_RxEventCallback
+                0x080141d4       0x74 H1DR5\H1DR5_it.o
+                0x080141d4                HAL_UARTEx_RxEventCallback
  .text.USART1_IRQHandler
-                0x0801592c       0x24 H1DR5\H1DR5_it.o
-                0x0801592c                USART1_IRQHandler
+                0x08014248       0x24 H1DR5\H1DR5_it.o
+                0x08014248                USART1_IRQHandler
  .text.USART2_LPUART2_IRQHandler
-                0x08015950       0xac H1DR5\H1DR5_it.o
-                0x08015950                USART2_LPUART2_IRQHandler
+                0x0801426c       0xac H1DR5\H1DR5_it.o
+                0x0801426c                USART2_LPUART2_IRQHandler
  .text.USART3_4_5_6_LPUART1_IRQHandler
-                0x080159fc      0x254 H1DR5\H1DR5_it.o
-                0x080159fc                USART3_4_5_6_LPUART1_IRQHandler
+                0x08014318      0x254 H1DR5\H1DR5_it.o
+                0x08014318                USART3_4_5_6_LPUART1_IRQHandler
  .text.DMA1_Channel1_IRQHandler
-                0x08015c50        0xa H1DR5\H1DR5_it.o
-                0x08015c50                DMA1_Channel1_IRQHandler
- *fill*         0x08015c5a        0x2 
+                0x0801456c        0xa H1DR5\H1DR5_it.o
+                0x0801456c                DMA1_Channel1_IRQHandler
+ *fill*         0x08014576        0x2 
  .text.DMA1_Channel2_3_IRQHandler
-                0x08015c5c       0x54 H1DR5\H1DR5_it.o
-                0x08015c5c                DMA1_Channel2_3_IRQHandler
+                0x08014578       0x54 H1DR5\H1DR5_it.o
+                0x08014578                DMA1_Channel2_3_IRQHandler
  .text.DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler
-                0x08015cb0       0x80 H1DR5\H1DR5_it.o
-                0x08015cb0                DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler
+                0x080145cc       0x80 H1DR5\H1DR5_it.o
+                0x080145cc                DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler
  .text.HAL_UART_TxCpltCallback
-                0x08015d30       0x38 H1DR5\H1DR5_it.o
-                0x08015d30                HAL_UART_TxCpltCallback
+                0x0801464c       0x38 H1DR5\H1DR5_it.o
+                0x0801464c                HAL_UART_TxCpltCallback
  .text.HAL_UART_ErrorCallback
-                0x08015d68       0xd4 H1DR5\H1DR5_it.o
-                0x08015d68                HAL_UART_ErrorCallback
+                0x08014684       0xd4 H1DR5\H1DR5_it.o
+                0x08014684                HAL_UART_ErrorCallback
  .text.HAL_UART_RxCpltCallback
-                0x08015e3c       0x10 H1DR5\H1DR5_it.o
-                0x08015e3c                HAL_UART_RxCpltCallback
+                0x08014758       0x10 H1DR5\H1DR5_it.o
+                0x08014758                HAL_UART_RxCpltCallback
  .text.HAL_UARTEx_WakeupCallback
-                0x08015e4c       0x5c H1DR5\H1DR5_it.o
-                0x08015e4c                HAL_UARTEx_WakeupCallback
+                0x08014768       0x5c H1DR5\H1DR5_it.o
+                0x08014768                HAL_UARTEx_WakeupCallback
  .text.vApplicationStackOverflowHook
-                0x08015ea8       0x44 H1DR5\H1DR5_it.o
-                0x08015ea8                vApplicationStackOverflowHook
+                0x080147c4       0x44 H1DR5\H1DR5_it.o
+                0x080147c4                vApplicationStackOverflowHook
  .text.vApplicationMallocFailedHook
-                0x08015eec       0x40 H1DR5\H1DR5_it.o
-                0x08015eec                vApplicationMallocFailedHook
+                0x08014808       0x40 H1DR5\H1DR5_it.o
+                0x08014808                vApplicationMallocFailedHook
  .text.RTC_Init
-                0x08015f2c       0xd8 H1DR5\H1DR5_rtc.o
-                0x08015f2c                RTC_Init
+                0x08014848       0xd8 H1DR5\H1DR5_rtc.o
+                0x08014848                RTC_Init
  .text.RTC_CalendarConfig
-                0x08016004      0x18c H1DR5\H1DR5_rtc.o
-                0x08016004                RTC_CalendarConfig
+                0x08014920      0x18c H1DR5\H1DR5_rtc.o
+                0x08014920                RTC_CalendarConfig
  .text.BOS_CalendarConfig
-                0x08016190      0x194 H1DR5\H1DR5_rtc.o
-                0x08016190                BOS_CalendarConfig
+                0x08014aac      0x194 H1DR5\H1DR5_rtc.o
+                0x08014aac                BOS_CalendarConfig
  .text.GetTimeDate
-                0x08016324       0x90 H1DR5\H1DR5_rtc.o
-                0x08016324                GetTimeDate
+                0x08014c40       0x90 H1DR5\H1DR5_rtc.o
+                0x08014c40                GetTimeDate
  .text.HAL_RTC_MspInit
-                0x080163b4       0x74 H1DR5\H1DR5_rtc.o
-                0x080163b4                HAL_RTC_MspInit
+                0x08014cd0       0x74 H1DR5\H1DR5_rtc.o
+                0x08014cd0                HAL_RTC_MspInit
  .text.HAL_RTC_MspDeInit
-                0x08016428       0x44 H1DR5\H1DR5_rtc.o
-                0x08016428                HAL_RTC_MspDeInit
+                0x08014d44       0x44 H1DR5\H1DR5_rtc.o
+                0x08014d44                HAL_RTC_MspDeInit
  .text.MX_SPI1_Init
-                0x0801646c       0x74 H1DR5\H1DR5_spi.o
-                0x0801646c                MX_SPI1_Init
+                0x08014d88       0x74 H1DR5\H1DR5_spi.o
+                0x08014d88                MX_SPI1_Init
  .text.HAL_SPI_MspInit
-                0x080164e0       0x94 H1DR5\H1DR5_spi.o
-                0x080164e0                HAL_SPI_MspInit
+                0x08014dfc       0x94 H1DR5\H1DR5_spi.o
+                0x08014dfc                HAL_SPI_MspInit
  .text.TIM_USEC_Init
-                0x08016574       0x74 H1DR5\H1DR5_timers.o
-                0x08016574                TIM_USEC_Init
+                0x08014e90       0x74 H1DR5\H1DR5_timers.o
+                0x08014e90                TIM_USEC_Init
  .text.TIM_MSEC_Init
-                0x080165e8       0x78 H1DR5\H1DR5_timers.o
-                0x080165e8                TIM_MSEC_Init
+                0x08014f04       0x78 H1DR5\H1DR5_timers.o
+                0x08014f04                TIM_MSEC_Init
  .text.StartMicroDelay
-                0x08016660       0x48 H1DR5\H1DR5_timers.o
-                0x08016660                StartMicroDelay
+                0x08014f7c       0x48 H1DR5\H1DR5_timers.o
+                0x08014f7c                StartMicroDelay
  .text.StartMilliDelay
-                0x080166a8       0x48 H1DR5\H1DR5_timers.o
-                0x080166a8                StartMilliDelay
+                0x08014fc4       0x48 H1DR5\H1DR5_timers.o
+                0x08014fc4                StartMilliDelay
  .text.MX_USART2_UART_Init
-                0x080166f0       0x7c H1DR5\H1DR5_uart.o
-                0x080166f0                MX_USART2_UART_Init
+                0x0801500c       0x7c H1DR5\H1DR5_uart.o
+                0x0801500c                MX_USART2_UART_Init
  .text.MX_USART3_UART_Init
-                0x0801676c       0x7c H1DR5\H1DR5_uart.o
-                0x0801676c                MX_USART3_UART_Init
+                0x08015088       0x7c H1DR5\H1DR5_uart.o
+                0x08015088                MX_USART3_UART_Init
  .text.MX_USART4_UART_Init
-                0x080167e8       0x60 H1DR5\H1DR5_uart.o
-                0x080167e8                MX_USART4_UART_Init
+                0x08015104       0x60 H1DR5\H1DR5_uart.o
+                0x08015104                MX_USART4_UART_Init
  .text.MX_USART5_UART_Init
-                0x08016848       0x60 H1DR5\H1DR5_uart.o
-                0x08016848                MX_USART5_UART_Init
+                0x08015164       0x60 H1DR5\H1DR5_uart.o
+                0x08015164                MX_USART5_UART_Init
  .text.MX_USART6_UART_Init
-                0x080168a8       0x60 H1DR5\H1DR5_uart.o
-                0x080168a8                MX_USART6_UART_Init
+                0x080151c4       0x60 H1DR5\H1DR5_uart.o
+                0x080151c4                MX_USART6_UART_Init
  .text.HAL_UART_MspInit
-                0x08016908      0x518 H1DR5\H1DR5_uart.o
-                0x08016908                HAL_UART_MspInit
+                0x08015224      0x518 H1DR5\H1DR5_uart.o
+                0x08015224                HAL_UART_MspInit
  .text.writePxMutex
-                0x08016e20       0xac H1DR5\H1DR5_uart.o
-                0x08016e20                writePxMutex
+                0x0801573c       0xac H1DR5\H1DR5_uart.o
+                0x0801573c                writePxMutex
  .text.writePxITMutex
-                0x08016ecc       0x80 H1DR5\H1DR5_uart.o
-                0x08016ecc                writePxITMutex
+                0x080157e8       0x80 H1DR5\H1DR5_uart.o
+                0x080157e8                writePxITMutex
  .text.UpdateBaudrate
-                0x08016f4c       0x3e H1DR5\H1DR5_uart.o
-                0x08016f4c                UpdateBaudrate
- *fill*         0x08016f8a        0x2 
- .text.GetUart  0x08016f8c       0x54 H1DR5\H1DR5_uart.o
-                0x08016f8c                GetUart
+                0x08015868       0x3e H1DR5\H1DR5_uart.o
+                0x08015868                UpdateBaudrate
+ *fill*         0x080158a6        0x2 
+ .text.GetUart  0x080158a8       0x54 H1DR5\H1DR5_uart.o
+                0x080158a8                GetUart
  .text.SwapUartPins
-                0x08016fe0      0x118 H1DR5\H1DR5_uart.o
-                0x08016fe0                SwapUartPins
+                0x080158fc      0x118 H1DR5\H1DR5_uart.o
+                0x080158fc                SwapUartPins
  .text.ReadPortsDir
-                0x080170f8       0xa8 H1DR5\H1DR5_uart.o
-                0x080170f8                ReadPortsDir
+                0x08015a14       0xa8 H1DR5\H1DR5_uart.o
+                0x08015a14                ReadPortsDir
  .text.ReadPortsDirMSG
-                0x080171a0       0x80 H1DR5\H1DR5_uart.o
-                0x080171a0                ReadPortsDirMSG
+                0x08015abc       0x80 H1DR5\H1DR5_uart.o
+                0x08015abc                ReadPortsDirMSG
  .text.UpdateMyPortsDir
-                0x08017220       0x84 H1DR5\H1DR5_uart.o
-                0x08017220                UpdateMyPortsDir
+                0x08015b3c       0x84 H1DR5\H1DR5_uart.o
+                0x08015b3c                UpdateMyPortsDir
  .text.Reset_Handler
-                0x080172a4       0x90 H1DR5\startup_stm32g0b1ceuxn.o
-                0x080172a4                Reset_Handler
+                0x08015bc0       0x90 H1DR5\startup_stm32g0b1ceuxn.o
+                0x08015bc0                Reset_Handler
  .text.Default_Handler
-                0x08017334        0x2 H1DR5\startup_stm32g0b1ceuxn.o
-                0x08017334                I2C2_3_IRQHandler
-                0x08017334                TIM1_CC_IRQHandler
-                0x08017334                ADC1_COMP_IRQHandler
-                0x08017334                NMI_Handler
-                0x08017334                I2C1_IRQHandler
-                0x08017334                TIM7_LPTIM2_IRQHandler
-                0x08017334                TIM17_FDCAN_IT1_IRQHandler
-                0x08017334                RCC_CRS_IRQHandler
-                0x08017334                RTC_TAMP_IRQHandler
-                0x08017334                SPI1_IRQHandler
-                0x08017334                USB_UCPD1_2_IRQHandler
-                0x08017334                EXTI2_3_IRQHandler
-                0x08017334                PVD_VDDIO2_IRQHandler
-                0x08017334                EXTI4_15_IRQHandler
-                0x08017334                Default_Handler
-                0x08017334                CEC_IRQHandler
-                0x08017334                TIM14_IRQHandler
-                0x08017334                TIM15_IRQHandler
-                0x08017334                TIM3_TIM4_IRQHandler
-                0x08017334                EXTI0_1_IRQHandler
-                0x08017334                SPI2_3_IRQHandler
-                0x08017334                TIM6_DAC_LPTIM1_IRQHandler
-                0x08017334                WWDG_IRQHandler
-                0x08017334                TIM2_IRQHandler
-                0x08017334                FLASH_IRQHandler
-                0x08017334                TIM16_FDCAN_IT0_IRQHandler
-                0x08017334                TIM1_BRK_UP_TRG_COM_IRQHandler
+                0x08015c50        0x2 H1DR5\startup_stm32g0b1ceuxn.o
+                0x08015c50                I2C2_3_IRQHandler
+                0x08015c50                TIM1_CC_IRQHandler
+                0x08015c50                ADC1_COMP_IRQHandler
+                0x08015c50                NMI_Handler
+                0x08015c50                I2C1_IRQHandler
+                0x08015c50                TIM7_LPTIM2_IRQHandler
+                0x08015c50                TIM17_FDCAN_IT1_IRQHandler
+                0x08015c50                RCC_CRS_IRQHandler
+                0x08015c50                RTC_TAMP_IRQHandler
+                0x08015c50                SPI1_IRQHandler
+                0x08015c50                USB_UCPD1_2_IRQHandler
+                0x08015c50                EXTI2_3_IRQHandler
+                0x08015c50                PVD_VDDIO2_IRQHandler
+                0x08015c50                EXTI4_15_IRQHandler
+                0x08015c50                Default_Handler
+                0x08015c50                CEC_IRQHandler
+                0x08015c50                TIM14_IRQHandler
+                0x08015c50                TIM15_IRQHandler
+                0x08015c50                TIM3_TIM4_IRQHandler
+                0x08015c50                EXTI0_1_IRQHandler
+                0x08015c50                SPI2_3_IRQHandler
+                0x08015c50                TIM6_DAC_LPTIM1_IRQHandler
+                0x08015c50                WWDG_IRQHandler
+                0x08015c50                TIM2_IRQHandler
+                0x08015c50                FLASH_IRQHandler
+                0x08015c50                TIM16_FDCAN_IT0_IRQHandler
+                0x08015c50                TIM1_BRK_UP_TRG_COM_IRQHandler
  .text.SystemInit
-                0x08017336        0xa Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
-                0x08017336                SystemInit
+                0x08015c52        0xa Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+                0x08015c52                SystemInit
  .text.LL_CRC_ResetCRCCalculationUnit
-                0x08017340       0x1c Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015c5c       0x1c Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.LL_CRC_SetPolynomialSize
-                0x0801735c       0x24 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015c78       0x24 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.LL_CRC_SetPolynomialCoef
-                0x08017380       0x18 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015c9c       0x18 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.LL_CRC_FeedData32
-                0x08017398       0x18 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015cb4       0x18 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.LL_CRC_FeedData16
-                0x080173b0       0x22 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015ccc       0x22 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.LL_CRC_ReadData16
-                0x080173d2       0x16 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015cee       0x16 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.LL_AHB1_GRP1_EnableClock
-                0x080173e8       0x2c Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015d04       0x2c Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.EEPROM_Init
-                0x08017414     0x1874 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x08017414                EEPROM_Init
+                0x08015d30     0x1874 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08015d30                EEPROM_Init
  .text.EEPROM_Format
-                0x08018c88      0x2a8 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x08018c88                EEPROM_Format
+                0x080175a4      0x2a8 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x080175a4                EEPROM_Format
  .text.EE_ReadVariable16bits
-                0x08018f30       0x60 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x08018f30                EE_ReadVariable16bits
+                0x0801784c       0x60 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x0801784c                EE_ReadVariable16bits
  .text.EE_WriteVariable16bits
-                0x08018f90       0x48 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x08018f90                EE_WriteVariable16bits
+                0x080178ac       0x48 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x080178ac                EE_WriteVariable16bits
  .text.EE_CleanUp
-                0x08018fd8      0x2a4 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x08018fd8                EE_CleanUp
+                0x080178f4      0x2a4 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x080178f4                EE_CleanUp
  .text.ReadVariable
-                0x0801927c      0x340 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08017b98      0x340 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.WriteVariable
-                0x080195bc       0x52 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08017ed8       0x52 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.VerifyPageFullyErased
-                0x0801960e       0x4e Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08017f2a       0x4e Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.FindPage
-                0x0801965c      0x444 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08017f78      0x444 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.PagesTransfer
-                0x08019aa0      0x8ec Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x080183bc      0x8ec Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.VerifyPagesFullWriteVariable
-                0x0801a38c      0x1ac Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08018ca8      0x1ac Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.SetPageState
-                0x0801a538      0x364 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08018e54      0x364 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.GetPageState
-                0x0801a89c       0xa0 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x080191b8       0xa0 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .text.ConfigureCrc
-                0x0801a93c       0x34 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x0801a93c                ConfigureCrc
+                0x08019258       0x34 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x08019258                ConfigureCrc
  .text.CalculateCrc
-                0x0801a970       0x48 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x0801a970                CalculateCrc
+                0x0801928c       0x48 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x0801928c                CalculateCrc
  .text.FI_WriteDoubleWord
-                0x0801a9b8       0x22 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
-                0x0801a9b8                FI_WriteDoubleWord
- *fill*         0x0801a9da        0x2 
+                0x080192d4       0x22 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x080192d4                FI_WriteDoubleWord
+ *fill*         0x080192f6        0x2 
  .text.FI_PageErase
-                0x0801a9dc      0x120 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
-                0x0801a9dc                FI_PageErase
+                0x080192f8      0x120 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x080192f8                FI_PageErase
  .text.FI_CacheFlush
-                0x0801aafc        0xa Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
-                0x0801aafc                FI_CacheFlush
- *fill*         0x0801ab06        0x2 
+                0x08019418        0xa Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x08019418                FI_CacheFlush
+ *fill*         0x08019422        0x2 
  .text.GetBankNumber
-                0x0801ab08       0x90 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x08019424       0x90 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
  .text.FI_CheckBankConfig
-                0x0801ab98       0x18 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
-                0x0801ab98                FI_CheckBankConfig
+                0x080194b4       0x18 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x080194b4                FI_CheckBankConfig
+ .text.enc28j60_read_op
+                0x080194cc       0x90 Thirdparty\Ethernet_Library\enc28j60.o
+                0x080194cc                enc28j60_read_op
+ .text.enc28j60_write_op
+                0x0801955c       0x78 Thirdparty\Ethernet_Library\enc28j60.o
+                0x0801955c                enc28j60_write_op
+ .text.enc28j60_set_bank
+                0x080195d4       0x64 Thirdparty\Ethernet_Library\enc28j60.o
+                0x080195d4                enc28j60_set_bank
+ .text.enc28j60_rcr
+                0x08019638       0x2c Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019638                enc28j60_rcr
+ .text.enc28j60_wcr
+                0x08019664       0x34 Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019664                enc28j60_wcr
+ .text.enc28j60_wcr16
+                0x08019698       0x50 Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019698                enc28j60_wcr16
+ .text.enc28j60_bfc
+                0x080196e8       0x34 Thirdparty\Ethernet_Library\enc28j60.o
+                0x080196e8                enc28j60_bfc
+ .text.enc28j60_bfs
+                0x0801971c       0x34 Thirdparty\Ethernet_Library\enc28j60.o
+                0x0801971c                enc28j60_bfs
+ .text.enc28j60_read_buffer
+                0x08019750       0x6c Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019750                enc28j60_read_buffer
+ .text.enc28j60_write_buffer
+                0x080197bc       0x6c Thirdparty\Ethernet_Library\enc28j60.o
+                0x080197bc                enc28j60_write_buffer
+ .text.enc28j60_write_phy
+                0x08019828       0x46 Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019828                enc28j60_write_phy
+ *fill*         0x0801986e        0x2 
+ .text.enc28j60_init
+                0x08019870      0x10c Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019870                enc28j60_init
+ .text.enc28j60_send_packet
+                0x0801997c       0x9c Thirdparty\Ethernet_Library\enc28j60.o
+                0x0801997c                enc28j60_send_packet
+ .text.enc28j60_recv_packet
+                0x08019a18       0xc0 Thirdparty\Ethernet_Library\enc28j60.o
+                0x08019a18                enc28j60_recv_packet
+ .text.ether_send_udp
+                0x08019ad8       0x78 Thirdparty\Ethernet_Library\lan.o
+                0x08019ad8                ether_send_udp
+ .text.udp_send
+                0x08019b50      0x20c Thirdparty\Ethernet_Library\lan.o
+                0x08019b50                udp_send
+ .text.udp_reply
+                0x08019d5c      0x1a4 Thirdparty\Ethernet_Library\lan.o
+                0x08019d5c                udp_reply
+ .text.udp_filter
+                0x08019f00       0x78 Thirdparty\Ethernet_Library\lan.o
+                0x08019f00                udp_filter
+ .text.udp_filter_answer
+                0x08019f78       0x38 Thirdparty\Ethernet_Library\lan.o
+                0x08019f78                udp_filter_answer
+ .text.icmp_filter
+                0x08019fb0       0x7e Thirdparty\Ethernet_Library\lan.o
+                0x08019fb0                icmp_filter
+ .text.ip_cksum
+                0x0801a02e       0x82 Thirdparty\Ethernet_Library\lan.o
+                0x0801a02e                ip_cksum
+ .text.ip_send  0x0801a0b0      0x1d0 Thirdparty\Ethernet_Library\lan.o
+                0x0801a0b0                ip_send
+ .text.ip_reply
+                0x0801a280      0x1ac Thirdparty\Ethernet_Library\lan.o
+                0x0801a280                ip_reply
+ .text.ip_filter
+                0x0801a42c       0xcc Thirdparty\Ethernet_Library\lan.o
+                0x0801a42c                ip_filter
+ .text.arp_search_cache
+                0x0801a4f8       0x6c Thirdparty\Ethernet_Library\lan.o
+                0x0801a4f8                arp_search_cache
+ .text.arp_resolve
+                0x0801a564      0x18c Thirdparty\Ethernet_Library\lan.o
+                0x0801a564                arp_resolve
+ .text.arp_filter
+                0x0801a6f0      0x254 Thirdparty\Ethernet_Library\lan.o
+                0x0801a6f0                arp_filter
+ .text.eth_send
+                0x0801a944       0x40 Thirdparty\Ethernet_Library\lan.o
+                0x0801a944                eth_send
+ .text.eth_reply
+                0x0801a984       0x4c Thirdparty\Ethernet_Library\lan.o
+                0x0801a984                eth_reply
+ .text.lan_init
+                0x0801a9d0       0x18 Thirdparty\Ethernet_Library\lan.o
+                0x0801a9d0                lan_init
+ .text.lan_poll
+                0x0801a9e8      0x1c8 Thirdparty\Ethernet_Library\lan.o
+                0x0801a9e8                lan_poll
  .text.inHandlerMode
                 0x0801abb0       0x1c Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .text.osKernelStart
@@ -7693,29 +7693,29 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  *fill*         0x0802f3e6        0x2 
  .rodata        0x0802f3e8       0x2c BOS\BOS_messaging.o
  .rodata        0x0802f414      0x228 BOS\BOS_msgparser.o
- .rodata        0x0802f63c        0xa Ethernet_Library\enc28j60.o
- *fill*         0x0802f646        0x2 
- .rodata        0x0802f648        0xe Ethernet_Library\lan.o
- *fill*         0x0802f656        0x2 
- .rodata        0x0802f658      0x680 H1DR5\H1DR5.o
-                0x0802f6cc                CLI_EthernetSendDataCommandDefinition
-                0x0802f738                CLI_SetLocalIPCommandDefinition
-                0x0802f7b0                CLI_SetSubnetMaskCommandDefinition
-                0x0802f820                CLI_SetRemoteIPCommandDefinition
-                0x0802f898                CLI_DefaultValuesCommandDefinition
-                0x0802f928                CLI_SetRemoteIPRemoteMACCommandDefinition
-                0x0802f99c                CLI_SetLocalPORTCommandDefinition
-                0x0802fa14                CLI_SetRemotePORTCommandDefinition
- .rodata        0x0802fcd8       0x13 H1DR5\H1DR5_inputs.o
- *fill*         0x0802fceb        0x1 
- .rodata        0x0802fcec       0x55 H1DR5\H1DR5_it.o
- *fill*         0x0802fd41        0x3 
- .rodata        0x0802fd44       0x1d H1DR5\H1DR5_rtc.o
- *fill*         0x0802fd61        0x3 
- .rodata        0x0802fd64       0x20 H1DR5\H1DR5_uart.o
- .rodata        0x0802fd84       0x68 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
-                0x0802fd8c                AHBPrescTable
-                0x0802fdcc                APBPrescTable
+ .rodata        0x0802f63c      0x680 H1DR5\H1DR5.o
+                0x0802f6b0                CLI_EthernetSendDataCommandDefinition
+                0x0802f71c                CLI_SetLocalIPCommandDefinition
+                0x0802f794                CLI_SetSubnetMaskCommandDefinition
+                0x0802f804                CLI_SetRemoteIPCommandDefinition
+                0x0802f87c                CLI_DefaultValuesCommandDefinition
+                0x0802f90c                CLI_SetRemoteIPRemoteMACCommandDefinition
+                0x0802f980                CLI_SetLocalPORTCommandDefinition
+                0x0802f9f8                CLI_SetRemotePORTCommandDefinition
+ .rodata        0x0802fcbc       0x13 H1DR5\H1DR5_inputs.o
+ *fill*         0x0802fccf        0x1 
+ .rodata        0x0802fcd0       0x55 H1DR5\H1DR5_it.o
+ *fill*         0x0802fd25        0x3 
+ .rodata        0x0802fd28       0x1d H1DR5\H1DR5_rtc.o
+ *fill*         0x0802fd45        0x3 
+ .rodata        0x0802fd48       0x20 H1DR5\H1DR5_uart.o
+ .rodata        0x0802fd68       0x68 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+                0x0802fd70                AHBPrescTable
+                0x0802fdb0                APBPrescTable
+ .rodata        0x0802fdd0        0xa Thirdparty\Ethernet_Library\enc28j60.o
+ *fill*         0x0802fdda        0x2 
+ .rodata        0x0802fddc        0xe Thirdparty\Ethernet_Library\lan.o
+ *fill*         0x0802fdea        0x2 
  .rodata        0x0802fdec      0x14b Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
  *fill*         0x0802ff37        0x1 
  .rodata        0x0802ff38       0x6c Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\tasks.o
@@ -7846,22 +7846,22 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .data          0x200001c8        0x1 BOS\BOS_messaging.o
                 0x200001c8                StreamCplt
  *fill*         0x200001c9        0x3 
- .data          0x200001cc       0x1a Ethernet_Library\lan.o
-                0x200001cc                mac_addr
-                0x200001d4                Local_IP
-                0x200001d8                ip_mask
-                0x200001dc                Remote_IP
-                0x200001e0                ip_dest
-                0x200001e4                Local_PORT
-                0x200001e5                Remote_PORT
- *fill*         0x200001e6        0x2 
- .data          0x200001e8       0x38 H1DR5\H1DR5.o
- .data          0x20000220        0x4 H1DR5\H1DR5_it.o
-                0x20000220                error_restart_message
- .data          0x20000224        0x4 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
-                0x20000224                SystemCoreClock
- .data          0x20000228        0x4 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x20000228                uwAddressNextWrite
+ .data          0x200001cc       0x38 H1DR5\H1DR5.o
+ .data          0x20000204        0x4 H1DR5\H1DR5_it.o
+                0x20000204                error_restart_message
+ .data          0x20000208        0x4 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+                0x20000208                SystemCoreClock
+ .data          0x2000020c        0x4 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x2000020c                uwAddressNextWrite
+ .data          0x20000210       0x1a Thirdparty\Ethernet_Library\lan.o
+                0x20000210                mac_addr
+                0x20000218                Local_IP
+                0x2000021c                ip_mask
+                0x20000220                Remote_IP
+                0x20000224                ip_dest
+                0x20000228                Local_PORT
+                0x20000229                Remote_PORT
+ *fill*         0x2000022a        0x2 
  .data          0x2000022c        0xc Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
                 0x2000022c                xRegisteredCommands
  .data          0x20000238        0x4 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\GCC\ARM_CM0\port.o
@@ -8019,77 +8019,77 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x200023f8                EthernetDefaultSetting
                 0x20002418                RemoteDataBuffer
  *fill*         0x20002592        0x2 
- .bss           0x20002594       0x54 Ethernet_Library\enc28j60.o
-                0x200025e4                enc28j60_current_bank
-                0x200025e6                enc28j60_rxrdpt
- .bss           0x200025e8      0xe18 Ethernet_Library\lan.o
-                0x200025e8                net_buf
-                0x200027e8                arp_cache_wr
-                0x200027ec                arp_cache
-                0x2000280c                data_watch
- .bss           0x20003400      0x818 H1DR5\H1DR5.o
-                0x20003450                huart1
-                0x200034e4                huart2
-                0x20003578                huart3
-                0x2000360c                huart4
-                0x200036a0                huart5
-                0x20003734                huart6
-                0x200037c8                DefaultValue
-                0x200037e8                ProcessEthernetDataTaskHandle
-                0x200037ec                DataBuffer
-                0x200039ec                UserethernetData
-                0x20003bec                TXDataLength
-                0x20003bf0                ReceivedDataIndex
-                0x20003bf4                ModuleParam
- .bss           0x20003c18       0x8c H1DR5\H1DR5_dma.o
-                0x20003c68                UARTDMAHandler
-                0x20003c80                hcrc
- .bss           0x20003ca4      0x131 H1DR5\H1DR5_inputs.o
-                0x20003cf4                DelayButtonStateReset
-                0x20003cf5                NeedToDelayButtonStateReset
-                0x20003cf8                dblCounter
-                0x20003d00                PressCounter
-                0x20003d18                ReleaseCounter
-                0x20003d30                Button
-                0x20003d44                adcSelectFlag
-                0x20003d46                adcEnableFlag
-                0x20003d47                adcChannelRank
-                0x20003d48                Channel
-                0x20003d4c                adcChannelValue
-                0x20003d54                adcValueTemp
-                0x20003d56                adcValueVref
-                0x20003d58                Percentage
-                0x20003d5c                Current
-                0x20003d60                adcDeInitFlag
-                0x20003d64                hadc
-                0x20003dc8                sConfig
- *fill*         0x20003dd5        0x3 
- .bss           0x20003dd8       0x53 H1DR5\H1DR5_it.o
-                0x20003e28                PacketLength
-                0x20003e2a                Count
- *fill*         0x20003e2b        0x1 
- .bss           0x20003e2c       0x80 H1DR5\H1DR5_rtc.o
-                0x20003e7c                BootStatus
-                0x20003e80                RtcHandle
- .bss           0x20003eac       0xb4 H1DR5\H1DR5_spi.o
-                0x20003efc                hspi1
- .bss           0x20003f60       0xf8 H1DR5\H1DR5_timers.o
-                0x20003fb0                htim16
-                0x20003ffc                htim17
-                0x20004048                hiwdg
- .bss           0x20004058      0x290 H1DR5\H1DR5_uart.o
-                0x200040a8                hdma_usart1_rx
-                0x20004108                hdma_usart2_rx
-                0x20004168                hdma_usart3_rx
-                0x200041c8                hdma_usart4_rx
-                0x20004228                hdma_usart5_rx
-                0x20004288                hdma_usart6_rx
- .bss           0x200042e8        0x9 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
-                0x200042e8                uhNbWrittenElements
-                0x200042ea                ubCurrentActivePage
-                0x200042ec                AddressRead
-                0x200042f0                CleanupPhase
- *fill*         0x200042f1        0x3 
+ .bss           0x20002594      0x818 H1DR5\H1DR5.o
+                0x200025e4                huart1
+                0x20002678                huart2
+                0x2000270c                huart3
+                0x200027a0                huart4
+                0x20002834                huart5
+                0x200028c8                huart6
+                0x2000295c                DefaultValue
+                0x2000297c                ProcessEthernetDataTaskHandle
+                0x20002980                DataBuffer
+                0x20002b80                UserethernetData
+                0x20002d80                TXDataLength
+                0x20002d84                ReceivedDataIndex
+                0x20002d88                ModuleParam
+ .bss           0x20002dac       0x8c H1DR5\H1DR5_dma.o
+                0x20002dfc                UARTDMAHandler
+                0x20002e14                hcrc
+ .bss           0x20002e38      0x131 H1DR5\H1DR5_inputs.o
+                0x20002e88                DelayButtonStateReset
+                0x20002e89                NeedToDelayButtonStateReset
+                0x20002e8c                dblCounter
+                0x20002e94                PressCounter
+                0x20002eac                ReleaseCounter
+                0x20002ec4                Button
+                0x20002ed8                adcSelectFlag
+                0x20002eda                adcEnableFlag
+                0x20002edb                adcChannelRank
+                0x20002edc                Channel
+                0x20002ee0                adcChannelValue
+                0x20002ee8                adcValueTemp
+                0x20002eea                adcValueVref
+                0x20002eec                Percentage
+                0x20002ef0                Current
+                0x20002ef4                adcDeInitFlag
+                0x20002ef8                hadc
+                0x20002f5c                sConfig
+ *fill*         0x20002f69        0x3 
+ .bss           0x20002f6c       0x53 H1DR5\H1DR5_it.o
+                0x20002fbc                PacketLength
+                0x20002fbe                Count
+ *fill*         0x20002fbf        0x1 
+ .bss           0x20002fc0       0x80 H1DR5\H1DR5_rtc.o
+                0x20003010                BootStatus
+                0x20003014                RtcHandle
+ .bss           0x20003040       0xb4 H1DR5\H1DR5_spi.o
+                0x20003090                hspi1
+ .bss           0x200030f4       0xf8 H1DR5\H1DR5_timers.o
+                0x20003144                htim16
+                0x20003190                htim17
+                0x200031dc                hiwdg
+ .bss           0x200031ec      0x290 H1DR5\H1DR5_uart.o
+                0x2000323c                hdma_usart1_rx
+                0x2000329c                hdma_usart2_rx
+                0x200032fc                hdma_usart3_rx
+                0x2000335c                hdma_usart4_rx
+                0x200033bc                hdma_usart5_rx
+                0x2000341c                hdma_usart6_rx
+ .bss           0x2000347c        0x9 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x2000347c                uhNbWrittenElements
+                0x2000347e                ubCurrentActivePage
+                0x20003480                AddressRead
+                0x20003484                CleanupPhase
+ *fill*         0x20003485        0x3 
+ .bss           0x20003488       0x54 Thirdparty\Ethernet_Library\enc28j60.o
+                0x200034d8                enc28j60_current_bank
+                0x200034da                enc28j60_rxrdpt
+ .bss           0x200034dc      0xe18 Thirdparty\Ethernet_Library\lan.o
+                0x200034dc                net_buf
+                0x200036dc                arp_cache_wr
+                0x200036e0                arp_cache
+                0x20003700                data_watch
  .bss           0x200042f4      0x2c5 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
  *fill*         0x200045b9        0x3 
  .bss           0x200045bc    0x15fb0 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\MemMang\heap_4.o
@@ -8183,37 +8183,37 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .ARM.attributes
                 0x00000152       0x2c BOS\BOS_msgparser.o
  .ARM.attributes
-                0x0000017e       0x2c Ethernet_Library\enc28j60.o
+                0x0000017e       0x2c H1DR5\H1DR5.o
  .ARM.attributes
-                0x000001aa       0x2c Ethernet_Library\lan.o
+                0x000001aa       0x2c H1DR5\H1DR5_dma.o
  .ARM.attributes
-                0x000001d6       0x2c H1DR5\H1DR5.o
+                0x000001d6       0x2c H1DR5\H1DR5_eeprom.o
  .ARM.attributes
-                0x00000202       0x2c H1DR5\H1DR5_dma.o
+                0x00000202       0x2c H1DR5\H1DR5_gpio.o
  .ARM.attributes
-                0x0000022e       0x2c H1DR5\H1DR5_eeprom.o
+                0x0000022e       0x2c H1DR5\H1DR5_inputs.o
  .ARM.attributes
-                0x0000025a       0x2c H1DR5\H1DR5_gpio.o
+                0x0000025a       0x2c H1DR5\H1DR5_it.o
  .ARM.attributes
-                0x00000286       0x2c H1DR5\H1DR5_inputs.o
+                0x00000286       0x2c H1DR5\H1DR5_rtc.o
  .ARM.attributes
-                0x000002b2       0x2c H1DR5\H1DR5_it.o
+                0x000002b2       0x2c H1DR5\H1DR5_spi.o
  .ARM.attributes
-                0x000002de       0x2c H1DR5\H1DR5_rtc.o
+                0x000002de       0x2c H1DR5\H1DR5_timers.o
  .ARM.attributes
-                0x0000030a       0x2c H1DR5\H1DR5_spi.o
+                0x0000030a       0x2c H1DR5\H1DR5_uart.o
  .ARM.attributes
-                0x00000336       0x2c H1DR5\H1DR5_timers.o
+                0x00000336       0x22 H1DR5\startup_stm32g0b1ceuxn.o
  .ARM.attributes
-                0x00000362       0x2c H1DR5\H1DR5_uart.o
+                0x00000358       0x2c Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
  .ARM.attributes
-                0x0000038e       0x22 H1DR5\startup_stm32g0b1ceuxn.o
+                0x00000384       0x2c Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .ARM.attributes
-                0x000003b0       0x2c Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+                0x000003b0       0x2c Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
  .ARM.attributes
-                0x000003dc       0x2c Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x000003dc       0x2c Thirdparty\Ethernet_Library\enc28j60.o
  .ARM.attributes
-                0x00000408       0x2c Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x00000408       0x2c Thirdparty\Ethernet_Library\lan.o
  .ARM.attributes
                 0x00000434       0x2c Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .ARM.attributes
@@ -8524,21 +8524,21 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_info    0x00007d5d      0x8ce BOS\BOS_freertos.o
  .debug_info    0x0000862b     0x1905 BOS\BOS_messaging.o
  .debug_info    0x00009f30     0x1b7e BOS\BOS_msgparser.o
- .debug_info    0x0000baae      0xc4e Ethernet_Library\enc28j60.o
- .debug_info    0x0000c6fc      0xb14 Ethernet_Library\lan.o
- .debug_info    0x0000d210     0x28ab H1DR5\H1DR5.o
- .debug_info    0x0000fabb     0x12f7 H1DR5\H1DR5_dma.o
- .debug_info    0x00010db2      0x8c5 H1DR5\H1DR5_eeprom.o
- .debug_info    0x00011677      0xf78 H1DR5\H1DR5_gpio.o
- .debug_info    0x000125ef     0x1d08 H1DR5\H1DR5_inputs.o
- .debug_info    0x000142f7     0x12bd H1DR5\H1DR5_it.o
- .debug_info    0x000155b4      0xe11 H1DR5\H1DR5_rtc.o
- .debug_info    0x000163c5      0xa84 H1DR5\H1DR5_spi.o
- .debug_info    0x00016e49      0xbbb H1DR5\H1DR5_timers.o
- .debug_info    0x00017a04     0x1754 H1DR5\H1DR5_uart.o
- .debug_info    0x00019158      0x30b Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
- .debug_info    0x00019463      0xeed Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
- .debug_info    0x0001a350      0x572 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_info    0x0000baae     0x28ab H1DR5\H1DR5.o
+ .debug_info    0x0000e359     0x12f7 H1DR5\H1DR5_dma.o
+ .debug_info    0x0000f650      0x8c5 H1DR5\H1DR5_eeprom.o
+ .debug_info    0x0000ff15      0xf78 H1DR5\H1DR5_gpio.o
+ .debug_info    0x00010e8d     0x1d08 H1DR5\H1DR5_inputs.o
+ .debug_info    0x00012b95     0x12bd H1DR5\H1DR5_it.o
+ .debug_info    0x00013e52      0xe11 H1DR5\H1DR5_rtc.o
+ .debug_info    0x00014c63      0xa84 H1DR5\H1DR5_spi.o
+ .debug_info    0x000156e7      0xbbb H1DR5\H1DR5_timers.o
+ .debug_info    0x000162a2     0x1754 H1DR5\H1DR5_uart.o
+ .debug_info    0x000179f6      0x30b Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+ .debug_info    0x00017d01      0xeed Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+ .debug_info    0x00018bee      0x572 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_info    0x00019160      0xc4e Thirdparty\Ethernet_Library\enc28j60.o
+ .debug_info    0x00019dae      0xb14 Thirdparty\Ethernet_Library\lan.o
  .debug_info    0x0001a8c2     0x17a2 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .debug_info    0x0001c064      0x6a4 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
  .debug_info    0x0001c708      0x2a4 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
@@ -8578,21 +8578,21 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_abbrev  0x00000ceb      0x2a5 BOS\BOS_freertos.o
  .debug_abbrev  0x00000f90      0x353 BOS\BOS_messaging.o
  .debug_abbrev  0x000012e3      0x386 BOS\BOS_msgparser.o
- .debug_abbrev  0x00001669      0x23b Ethernet_Library\enc28j60.o
- .debug_abbrev  0x000018a4      0x2b1 Ethernet_Library\lan.o
- .debug_abbrev  0x00001b55      0x3f0 H1DR5\H1DR5.o
- .debug_abbrev  0x00001f45      0x2be H1DR5\H1DR5_dma.o
- .debug_abbrev  0x00002203      0x20d H1DR5\H1DR5_eeprom.o
- .debug_abbrev  0x00002410      0x21c H1DR5\H1DR5_gpio.o
- .debug_abbrev  0x0000262c      0x330 H1DR5\H1DR5_inputs.o
- .debug_abbrev  0x0000295c      0x37f H1DR5\H1DR5_it.o
- .debug_abbrev  0x00002cdb      0x264 H1DR5\H1DR5_rtc.o
- .debug_abbrev  0x00002f3f      0x1f1 H1DR5\H1DR5_spi.o
- .debug_abbrev  0x00003130      0x204 H1DR5\H1DR5_timers.o
- .debug_abbrev  0x00003334      0x30f H1DR5\H1DR5_uart.o
- .debug_abbrev  0x00003643      0x117 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
- .debug_abbrev  0x0000375a      0x2ac Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
- .debug_abbrev  0x00003a06      0x1d4 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_abbrev  0x00001669      0x3f0 H1DR5\H1DR5.o
+ .debug_abbrev  0x00001a59      0x2be H1DR5\H1DR5_dma.o
+ .debug_abbrev  0x00001d17      0x20d H1DR5\H1DR5_eeprom.o
+ .debug_abbrev  0x00001f24      0x21c H1DR5\H1DR5_gpio.o
+ .debug_abbrev  0x00002140      0x330 H1DR5\H1DR5_inputs.o
+ .debug_abbrev  0x00002470      0x37f H1DR5\H1DR5_it.o
+ .debug_abbrev  0x000027ef      0x264 H1DR5\H1DR5_rtc.o
+ .debug_abbrev  0x00002a53      0x1f1 H1DR5\H1DR5_spi.o
+ .debug_abbrev  0x00002c44      0x204 H1DR5\H1DR5_timers.o
+ .debug_abbrev  0x00002e48      0x30f H1DR5\H1DR5_uart.o
+ .debug_abbrev  0x00003157      0x117 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+ .debug_abbrev  0x0000326e      0x2ac Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+ .debug_abbrev  0x0000351a      0x1d4 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_abbrev  0x000036ee      0x23b Thirdparty\Ethernet_Library\enc28j60.o
+ .debug_abbrev  0x00003929      0x2b1 Thirdparty\Ethernet_Library\lan.o
  .debug_abbrev  0x00003bda      0x331 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .debug_abbrev  0x00003f0b      0x1fa Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
  .debug_abbrev  0x00004105       0xf3 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
@@ -8640,35 +8640,35 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_aranges
                 0x00000410       0x38 BOS\BOS_msgparser.o
  .debug_aranges
-                0x00000448       0xa8 Ethernet_Library\enc28j60.o
+                0x00000448      0x118 H1DR5\H1DR5.o
  .debug_aranges
-                0x000004f0       0xb0 Ethernet_Library\lan.o
+                0x00000560       0x70 H1DR5\H1DR5_dma.o
  .debug_aranges
-                0x000005a0      0x118 H1DR5\H1DR5.o
+                0x000005d0       0x58 H1DR5\H1DR5_eeprom.o
  .debug_aranges
-                0x000006b8       0x70 H1DR5\H1DR5_dma.o
+                0x00000628       0x40 H1DR5\H1DR5_gpio.o
  .debug_aranges
-                0x00000728       0x58 H1DR5\H1DR5_eeprom.o
+                0x00000668       0xc0 H1DR5\H1DR5_inputs.o
  .debug_aranges
-                0x00000780       0x40 H1DR5\H1DR5_gpio.o
+                0x00000728       0x98 H1DR5\H1DR5_it.o
  .debug_aranges
-                0x000007c0       0xc0 H1DR5\H1DR5_inputs.o
+                0x000007c0       0x48 H1DR5\H1DR5_rtc.o
  .debug_aranges
-                0x00000880       0x98 H1DR5\H1DR5_it.o
+                0x00000808       0x30 H1DR5\H1DR5_spi.o
  .debug_aranges
-                0x00000918       0x48 H1DR5\H1DR5_rtc.o
+                0x00000838       0x40 H1DR5\H1DR5_timers.o
  .debug_aranges
-                0x00000960       0x30 H1DR5\H1DR5_spi.o
+                0x00000878       0x98 H1DR5\H1DR5_uart.o
  .debug_aranges
-                0x00000990       0x40 H1DR5\H1DR5_timers.o
+                0x00000910       0x28 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
  .debug_aranges
-                0x000009d0       0x98 H1DR5\H1DR5_uart.o
+                0x00000938      0x100 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .debug_aranges
-                0x00000a68       0x28 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+                0x00000a38       0x50 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
  .debug_aranges
-                0x00000a90      0x100 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x00000a88       0xa8 Thirdparty\Ethernet_Library\enc28j60.o
  .debug_aranges
-                0x00000b90       0x50 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x00000b30       0xb0 Thirdparty\Ethernet_Library\lan.o
  .debug_aranges
                 0x00000be0      0x1d8 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .debug_aranges
@@ -8747,35 +8747,35 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x0000034b       0x34 BOS\BOS_msgparser.o
  .debug_rnglists
-                0x0000037f       0x7d Ethernet_Library\enc28j60.o
+                0x0000037f       0xe1 H1DR5\H1DR5.o
  .debug_rnglists
-                0x000003fc       0x88 Ethernet_Library\lan.o
+                0x00000460       0x54 H1DR5\H1DR5_dma.o
  .debug_rnglists
-                0x00000484       0xe1 H1DR5\H1DR5.o
+                0x000004b4       0x3d H1DR5\H1DR5_eeprom.o
  .debug_rnglists
-                0x00000565       0x54 H1DR5\H1DR5_dma.o
+                0x000004f1       0x2f H1DR5\H1DR5_gpio.o
  .debug_rnglists
-                0x000005b9       0x3d H1DR5\H1DR5_eeprom.o
+                0x00000520       0x97 H1DR5\H1DR5_inputs.o
  .debug_rnglists
-                0x000005f6       0x2f H1DR5\H1DR5_gpio.o
+                0x000005b7       0x71 H1DR5\H1DR5_it.o
  .debug_rnglists
-                0x00000625       0x97 H1DR5\H1DR5_inputs.o
+                0x00000628       0x35 H1DR5\H1DR5_rtc.o
  .debug_rnglists
-                0x000006bc       0x71 H1DR5\H1DR5_it.o
+                0x0000065d       0x20 H1DR5\H1DR5_spi.o
  .debug_rnglists
-                0x0000072d       0x35 H1DR5\H1DR5_rtc.o
+                0x0000067d       0x2b H1DR5\H1DR5_timers.o
  .debug_rnglists
-                0x00000762       0x20 H1DR5\H1DR5_spi.o
+                0x000006a8       0x75 H1DR5\H1DR5_uart.o
  .debug_rnglists
-                0x00000782       0x2b H1DR5\H1DR5_timers.o
+                0x0000071d       0x1a Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
  .debug_rnglists
-                0x000007ad       0x75 H1DR5\H1DR5_uart.o
+                0x00000737       0xc5 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .debug_rnglists
-                0x00000822       0x1a Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+                0x000007fc       0x3b Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
  .debug_rnglists
-                0x0000083c       0xc5 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+                0x00000837       0x7d Thirdparty\Ethernet_Library\enc28j60.o
  .debug_rnglists
-                0x00000901       0x3b Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+                0x000008b4       0x88 Thirdparty\Ethernet_Library\lan.o
  .debug_rnglists
                 0x0000093c      0x168 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .debug_rnglists
@@ -8837,7 +8837,7 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x00001f9a       0x3d syscalls.o
 
-.debug_line     0x00000000    0x29b35
+.debug_line     0x00000000    0x29b82
  .debug_line    0x00000000     0x22c9 BOS\BOS.o
  .debug_line    0x000022c9      0xbc2 BOS\BOS_CLI.o
  .debug_line    0x00002e8b     0x1705 BOS\BOS_CLIcommands.o
@@ -8845,53 +8845,53 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x000049cc      0x542 BOS\BOS_freertos.o
  .debug_line    0x00004f0e      0xd99 BOS\BOS_messaging.o
  .debug_line    0x00005ca7     0x25cf BOS\BOS_msgparser.o
- .debug_line    0x00008276      0x627 Ethernet_Library\enc28j60.o
- .debug_line    0x0000889d      0x948 Ethernet_Library\lan.o
- .debug_line    0x000091e5     0x1316 H1DR5\H1DR5.o
- .debug_line    0x0000a4fb      0x7df H1DR5\H1DR5_dma.o
- .debug_line    0x0000acda      0x526 H1DR5\H1DR5_eeprom.o
- .debug_line    0x0000b200      0x46c H1DR5\H1DR5_gpio.o
- .debug_line    0x0000b66c      0xd8a H1DR5\H1DR5_inputs.o
- .debug_line    0x0000c3f6      0xb0f H1DR5\H1DR5_it.o
- .debug_line    0x0000cf05      0x671 H1DR5\H1DR5_rtc.o
- .debug_line    0x0000d576      0x3b5 H1DR5\H1DR5_spi.o
- .debug_line    0x0000d92b      0x47e H1DR5\H1DR5_timers.o
- .debug_line    0x0000dda9      0x96e H1DR5\H1DR5_uart.o
- .debug_line    0x0000e717      0x392 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
- .debug_line    0x0000eaa9     0x1d25 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
- .debug_line    0x000107ce      0x5c5 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
- .debug_line    0x00010d93     0x10b0 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
- .debug_line    0x00011e43      0x78d Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
- .debug_line    0x000125d0      0x3f5 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
- .debug_line    0x000129c5      0x4b0 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\GCC\ARM_CM0\port.o
- .debug_line    0x00012e75      0x67f Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\MemMang\heap_4.o
- .debug_line    0x000134f4      0xea2 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\queue.o
- .debug_line    0x00014396     0x1890 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\tasks.o
- .debug_line    0x00015c26      0x93d Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\timers.o
- .debug_line    0x00016563      0x743 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal.o
- .debug_line    0x00016ca6     0x1564 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_adc.o
- .debug_line    0x0001820a      0x787 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.o
- .debug_line    0x00018991      0x65e Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc.o
- .debug_line    0x00018fef      0x3bf Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc_ex.o
- .debug_line    0x000193ae      0xa5c Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_dma.o
- .debug_line    0x00019e0a      0x6bd Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash.o
- .debug_line    0x0001a4c7      0xc03 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash_ex.o
- .debug_line    0x0001b0ca      0x74a Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_gpio.o
- .debug_line    0x0001b814      0x2d0 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_msp_template.o
- .debug_line    0x0001bae4      0x49c Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr.o
- .debug_line    0x0001bf80      0x7f1 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr_ex.o
- .debug_line    0x0001c771      0xb94 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc.o
- .debug_line    0x0001d305      0xdd8 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc_ex.o
- .debug_line    0x0001e0dd      0xd47 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc.o
- .debug_line    0x0001ee24     0x1147 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc_ex.o
- .debug_line    0x0001ff6b     0x1fbd Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_spi.o
- .debug_line    0x00021f28     0x3938 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_tim.o
- .debug_line    0x00025860     0x330d Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart.o
- .debug_line    0x00028b6d      0xa43 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart_ex.o
- .debug_line    0x000295b0      0x295 User\main.o
- .debug_line    0x00029845      0x2f0 syscalls.o
+ .debug_line    0x00008276     0x134d H1DR5\H1DR5.o
+ .debug_line    0x000095c3      0x7df H1DR5\H1DR5_dma.o
+ .debug_line    0x00009da2      0x526 H1DR5\H1DR5_eeprom.o
+ .debug_line    0x0000a2c8      0x46c H1DR5\H1DR5_gpio.o
+ .debug_line    0x0000a734      0xd8a H1DR5\H1DR5_inputs.o
+ .debug_line    0x0000b4be      0xb0f H1DR5\H1DR5_it.o
+ .debug_line    0x0000bfcd      0x671 H1DR5\H1DR5_rtc.o
+ .debug_line    0x0000c63e      0x3b5 H1DR5\H1DR5_spi.o
+ .debug_line    0x0000c9f3      0x47e H1DR5\H1DR5_timers.o
+ .debug_line    0x0000ce71      0x96e H1DR5\H1DR5_uart.o
+ .debug_line    0x0000d7df      0x392 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+ .debug_line    0x0000db71     0x1d25 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+ .debug_line    0x0000f896      0x5c5 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_line    0x0000fe5b      0x632 Thirdparty\Ethernet_Library\enc28j60.o
+ .debug_line    0x0001048d      0x953 Thirdparty\Ethernet_Library\lan.o
+ .debug_line    0x00010de0     0x10b0 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
+ .debug_line    0x00011e90      0x78d Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
+ .debug_line    0x0001261d      0x3f5 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
+ .debug_line    0x00012a12      0x4b0 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\GCC\ARM_CM0\port.o
+ .debug_line    0x00012ec2      0x67f Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\MemMang\heap_4.o
+ .debug_line    0x00013541      0xea2 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\queue.o
+ .debug_line    0x000143e3     0x1890 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\tasks.o
+ .debug_line    0x00015c73      0x93d Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\timers.o
+ .debug_line    0x000165b0      0x743 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal.o
+ .debug_line    0x00016cf3     0x1564 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_adc.o
+ .debug_line    0x00018257      0x787 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.o
+ .debug_line    0x000189de      0x65e Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc.o
+ .debug_line    0x0001903c      0x3bf Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc_ex.o
+ .debug_line    0x000193fb      0xa5c Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_dma.o
+ .debug_line    0x00019e57      0x6bd Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash.o
+ .debug_line    0x0001a514      0xc03 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash_ex.o
+ .debug_line    0x0001b117      0x74a Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_gpio.o
+ .debug_line    0x0001b861      0x2d0 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_msp_template.o
+ .debug_line    0x0001bb31      0x49c Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr.o
+ .debug_line    0x0001bfcd      0x7f1 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr_ex.o
+ .debug_line    0x0001c7be      0xb94 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc.o
+ .debug_line    0x0001d352      0xdd8 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc_ex.o
+ .debug_line    0x0001e12a      0xd47 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc.o
+ .debug_line    0x0001ee71     0x1147 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc_ex.o
+ .debug_line    0x0001ffb8     0x1fbd Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_spi.o
+ .debug_line    0x00021f75     0x3938 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_tim.o
+ .debug_line    0x000258ad     0x330d Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart.o
+ .debug_line    0x00028bba      0xa43 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart_ex.o
+ .debug_line    0x000295fd      0x295 User\main.o
+ .debug_line    0x00029892      0x2f0 syscalls.o
 
-.debug_str      0x00000000     0xd592
+.debug_str      0x00000000     0xd5a8
  .debug_str     0x00000000     0x1b51 BOS\BOS.o
                                0x1d50 (size before relaxing)
  .debug_str     0x00001b51      0x2ef BOS\BOS_CLI.o
@@ -8906,95 +8906,95 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                                0x12e5 (size before relaxing)
  .debug_str     0x000032d3      0x39a BOS\BOS_msgparser.o
                                0x16a2 (size before relaxing)
- .debug_str     0x0000366d      0x343 Ethernet_Library\enc28j60.o
-                                0x91c (size before relaxing)
- .debug_str     0x000039b0      0x2bc Ethernet_Library\lan.o
-                                0x53f (size before relaxing)
- .debug_str     0x00003c6c      0x906 H1DR5\H1DR5.o
+ .debug_str     0x0000366d      0x953 H1DR5\H1DR5.o
                                0x1b92 (size before relaxing)
- .debug_str     0x00004572      0x528 H1DR5\H1DR5_dma.o
+ .debug_str     0x00003fc0      0x532 H1DR5\H1DR5_dma.o
                                0x1150 (size before relaxing)
- .debug_str     0x00004a9a      0x2b1 H1DR5\H1DR5_eeprom.o
+ .debug_str     0x000044f2      0x2b1 H1DR5\H1DR5_eeprom.o
                                 0x9d5 (size before relaxing)
- .debug_str     0x00004d4b       0x60 H1DR5\H1DR5_gpio.o
+ .debug_str     0x000047a3       0x60 H1DR5\H1DR5_gpio.o
                                 0xce4 (size before relaxing)
- .debug_str     0x00004dab      0x4e8 H1DR5\H1DR5_inputs.o
+ .debug_str     0x00004803      0x4e8 H1DR5\H1DR5_inputs.o
                                0x162b (size before relaxing)
- .debug_str     0x00005293      0x281 H1DR5\H1DR5_it.o
+ .debug_str     0x00004ceb      0x281 H1DR5\H1DR5_it.o
                                 0xbeb (size before relaxing)
- .debug_str     0x00005514      0x4eb H1DR5\H1DR5_rtc.o
+ .debug_str     0x00004f6c      0x4eb H1DR5\H1DR5_rtc.o
                                 0xd17 (size before relaxing)
- .debug_str     0x000059ff       0x51 H1DR5\H1DR5_spi.o
+ .debug_str     0x00005457      0x1d4 H1DR5\H1DR5_spi.o
                                 0x87e (size before relaxing)
- .debug_str     0x00005a50      0x3c2 H1DR5\H1DR5_timers.o
+ .debug_str     0x0000562b      0x3c2 H1DR5\H1DR5_timers.o
                                 0x9dc (size before relaxing)
- .debug_str     0x00005e12      0x15e H1DR5\H1DR5_uart.o
+ .debug_str     0x000059ed      0x15e H1DR5\H1DR5_uart.o
                                0x149b (size before relaxing)
- .debug_str     0x00005f70       0xb8 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+ .debug_str     0x00005b4b       0xb8 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
                                 0x312 (size before relaxing)
- .debug_str     0x00006028      0x571 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+ .debug_str     0x00005c03      0x571 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
                                 0xada (size before relaxing)
- .debug_str     0x00006599       0x79 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_str     0x00006174       0x79 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
                                 0x58e (size before relaxing)
- .debug_str     0x00006612      0x835 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
+ .debug_str     0x000061ed      0x1c1 Thirdparty\Ethernet_Library\enc28j60.o
+                                0x927 (size before relaxing)
+ .debug_str     0x000063ae      0x27a Thirdparty\Ethernet_Library\lan.o
+                                0x54a (size before relaxing)
+ .debug_str     0x00006628      0x835 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
                                 0xeac (size before relaxing)
- .debug_str     0x00006e47      0x135 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
+ .debug_str     0x00006e5d      0x135 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
                                 0x6c3 (size before relaxing)
- .debug_str     0x00006f7c      0x145 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
+ .debug_str     0x00006f92      0x145 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
                                 0x2f0 (size before relaxing)
- .debug_str     0x000070c1      0x15d Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\GCC\ARM_CM0\port.o
+ .debug_str     0x000070d7      0x15d Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\GCC\ARM_CM0\port.o
                                 0x398 (size before relaxing)
- .debug_str     0x0000721e      0x2cf Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\MemMang\heap_4.o
+ .debug_str     0x00007234      0x2cf Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\portable\MemMang\heap_4.o
                                 0x507 (size before relaxing)
- .debug_str     0x000074ed      0x60b Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\queue.o
+ .debug_str     0x00007503      0x60b Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\queue.o
                                 0xb0b (size before relaxing)
- .debug_str     0x00007af8      0x9c3 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\tasks.o
+ .debug_str     0x00007b0e      0x9c3 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\tasks.o
                                0x1224 (size before relaxing)
- .debug_str     0x000084bb      0x4e1 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\timers.o
+ .debug_str     0x000084d1      0x4e1 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\timers.o
                                 0x9ce (size before relaxing)
- .debug_str     0x0000899c      0x440 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal.o
+ .debug_str     0x000089b2      0x440 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal.o
                                 0xa5f (size before relaxing)
- .debug_str     0x00008ddc      0x77e Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_adc.o
+ .debug_str     0x00008df2      0x77e Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_adc.o
                                 0xfbb (size before relaxing)
- .debug_str     0x0000955a      0x307 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.o
+ .debug_str     0x00009570      0x307 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_cortex.o
                                 0x7ef (size before relaxing)
- .debug_str     0x00009861       0x9f Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc.o
+ .debug_str     0x00009877       0x9f Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc.o
                                 0x47e (size before relaxing)
- .debug_str     0x00009900       0xaa Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc_ex.o
+ .debug_str     0x00009916       0xaa Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_crc_ex.o
                                 0x424 (size before relaxing)
- .debug_str     0x000099aa      0x265 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_dma.o
+ .debug_str     0x000099c0      0x265 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_dma.o
                                 0x78e (size before relaxing)
- .debug_str     0x00009c0f      0x169 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash.o
+ .debug_str     0x00009c25      0x169 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash.o
                                 0x552 (size before relaxing)
- .debug_str     0x00009d78      0x3f5 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash_ex.o
+ .debug_str     0x00009d8e      0x3f5 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_flash_ex.o
                                 0x794 (size before relaxing)
- .debug_str     0x0000a16d      0x134 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_gpio.o
+ .debug_str     0x0000a183      0x134 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_gpio.o
                                 0x42f (size before relaxing)
- .debug_str     0x0000a2a1       0x69 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_msp_template.o
+ .debug_str     0x0000a2b7       0x69 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_msp_template.o
                                 0x203 (size before relaxing)
- .debug_str     0x0000a30a      0x170 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr.o
+ .debug_str     0x0000a320      0x170 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr.o
                                 0x4df (size before relaxing)
- .debug_str     0x0000a47a      0x412 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr_ex.o
+ .debug_str     0x0000a490      0x412 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_pwr_ex.o
                                 0x7a2 (size before relaxing)
- .debug_str     0x0000a88c      0x226 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc.o
+ .debug_str     0x0000a8a2      0x226 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc.o
                                 0x7f5 (size before relaxing)
- .debug_str     0x0000aab2      0x2b8 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc_ex.o
+ .debug_str     0x0000aac8      0x2b8 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rcc_ex.o
                                 0x8cb (size before relaxing)
- .debug_str     0x0000ad6a      0x27c Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc.o
+ .debug_str     0x0000ad80      0x27c Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc.o
                                 0x7e0 (size before relaxing)
- .debug_str     0x0000afe6      0x6c0 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc_ex.o
+ .debug_str     0x0000affc      0x6c0 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_rtc_ex.o
                                 0xc4c (size before relaxing)
- .debug_str     0x0000b6a6      0x598 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_spi.o
+ .debug_str     0x0000b6bc      0x598 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_spi.o
                                 0xd3f (size before relaxing)
- .debug_str     0x0000bc3e      0xf40 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_tim.o
+ .debug_str     0x0000bc54      0xf40 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_tim.o
                                0x1828 (size before relaxing)
- .debug_str     0x0000cb7e      0x72a Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart.o
+ .debug_str     0x0000cb94      0x72a Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart.o
                                0x1160 (size before relaxing)
- .debug_str     0x0000d2a8      0x193 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart_ex.o
+ .debug_str     0x0000d2be      0x193 Thirdparty\STM32G0xx_HAL_Driver\Src\stm32g0xx_hal_uart_ex.o
                                 0xb6d (size before relaxing)
- .debug_str     0x0000d43b       0x17 User\main.o
+ .debug_str     0x0000d451       0x17 User\main.o
                                 0x1db (size before relaxing)
- .debug_str     0x0000d452      0x140 syscalls.o
+ .debug_str     0x0000d468      0x140 syscalls.o
                                 0x2f7 (size before relaxing)
 
 .comment        0x00000000       0x43
@@ -9006,8 +9006,6 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .comment       0x00000043       0x44 BOS\BOS_freertos.o
  .comment       0x00000043       0x44 BOS\BOS_messaging.o
  .comment       0x00000043       0x44 BOS\BOS_msgparser.o
- .comment       0x00000043       0x44 Ethernet_Library\enc28j60.o
- .comment       0x00000043       0x44 Ethernet_Library\lan.o
  .comment       0x00000043       0x44 H1DR5\H1DR5.o
  .comment       0x00000043       0x44 H1DR5\H1DR5_dma.o
  .comment       0x00000043       0x44 H1DR5\H1DR5_eeprom.o
@@ -9021,6 +9019,8 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .comment       0x00000043       0x44 Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
  .comment       0x00000043       0x44 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
  .comment       0x00000043       0x44 Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .comment       0x00000043       0x44 Thirdparty\Ethernet_Library\enc28j60.o
+ .comment       0x00000043       0x44 Thirdparty\Ethernet_Library\lan.o
  .comment       0x00000043       0x44 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .comment       0x00000043       0x44 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
  .comment       0x00000043       0x44 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o
@@ -9060,21 +9060,21 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_frame   0x00000c14       0x8c BOS\BOS_freertos.o
  .debug_frame   0x00000ca0      0x244 BOS\BOS_messaging.o
  .debug_frame   0x00000ee4       0xa0 BOS\BOS_msgparser.o
- .debug_frame   0x00000f84      0x250 Ethernet_Library\enc28j60.o
- .debug_frame   0x000011d4      0x278 Ethernet_Library\lan.o
- .debug_frame   0x0000144c      0x450 H1DR5\H1DR5.o
- .debug_frame   0x0000189c      0x170 H1DR5\H1DR5_dma.o
- .debug_frame   0x00001a0c      0x110 H1DR5\H1DR5_eeprom.o
- .debug_frame   0x00001b1c       0xb4 H1DR5\H1DR5_gpio.o
- .debug_frame   0x00001bd0      0x2b8 H1DR5\H1DR5_inputs.o
- .debug_frame   0x00001e88      0x200 H1DR5\H1DR5_it.o
- .debug_frame   0x00002088       0xd4 H1DR5\H1DR5_rtc.o
- .debug_frame   0x0000215c       0x6c H1DR5\H1DR5_spi.o
- .debug_frame   0x000021c8       0xac H1DR5\H1DR5_timers.o
- .debug_frame   0x00002274      0x210 H1DR5\H1DR5_uart.o
- .debug_frame   0x00002484       0x4c Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
- .debug_frame   0x000024d0      0x3c8 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
- .debug_frame   0x00002898       0xec Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_frame   0x00000f84      0x450 H1DR5\H1DR5.o
+ .debug_frame   0x000013d4      0x170 H1DR5\H1DR5_dma.o
+ .debug_frame   0x00001544      0x110 H1DR5\H1DR5_eeprom.o
+ .debug_frame   0x00001654       0xb4 H1DR5\H1DR5_gpio.o
+ .debug_frame   0x00001708      0x2b8 H1DR5\H1DR5_inputs.o
+ .debug_frame   0x000019c0      0x200 H1DR5\H1DR5_it.o
+ .debug_frame   0x00001bc0       0xd4 H1DR5\H1DR5_rtc.o
+ .debug_frame   0x00001c94       0x6c H1DR5\H1DR5_spi.o
+ .debug_frame   0x00001d00       0xac H1DR5\H1DR5_timers.o
+ .debug_frame   0x00001dac      0x210 H1DR5\H1DR5_uart.o
+ .debug_frame   0x00001fbc       0x4c Thirdparty\CMSIS\STM32G0xx\Device\ST\STM32G0xx\Source\Templates\system_stm32g0xx.o
+ .debug_frame   0x00002008      0x3c8 Thirdparty\EEPROM_Emul\Core\eeprom_emul.o
+ .debug_frame   0x000023d0       0xec Thirdparty\EEPROM_Emul\Porting\STM32G0\flash_interface.o
+ .debug_frame   0x000024bc      0x250 Thirdparty\Ethernet_Library\enc28j60.o
+ .debug_frame   0x0000270c      0x278 Thirdparty\Ethernet_Library\lan.o
  .debug_frame   0x00002984      0x6f4 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o
  .debug_frame   0x00003078       0xcc Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\FreeRTOS_CLI.o
  .debug_frame   0x00003144       0xb0 Thirdparty\Middleware\STM32G0xx\FreeRTOS\Source\list.o

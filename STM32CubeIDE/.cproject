@@ -60,7 +60,7 @@
 									<listOptionValue builtIn="false" value="../../H1DR5"/>
 									<listOptionValue builtIn="false" value="../../BOS"/>
 									<listOptionValue builtIn="false" value="../../User"/>
-									<listOptionValue builtIn="false" value="../../Ethernet_Library"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Thirdparty/Ethernet_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="../../Thirdparty/CMSIS/STM32G0xx/Include"/>
 									<listOptionValue builtIn="false" value="../../Thirdparty/CMSIS/STM32G0xx/Device/ST/STM32G0xx/Include"/>
 									<listOptionValue builtIn="false" value="../../Thirdparty/Middleware/STM32G0xx/FreeRTOS/Source/include"/>
