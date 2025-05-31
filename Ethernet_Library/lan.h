@@ -165,3 +165,6 @@ void udp_packet(eth_frame_t *frame, uint16_t len);
 uint8_t udp_send(eth_frame_t *frame, uint16_t len);
 void udp_reply(eth_frame_t *frame, uint16_t len);
 void udp_answer(eth_frame_t *frame, uint16_t len,char *answer);
+
+void  ether_send_udp(char *data ,uint16_t length);
+void lan_poll(uint8_t* pData,uint16_t* length);

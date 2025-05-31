@@ -17,7 +17,6 @@
 #include "stm32g0xx_hal.h"
 #include <string.h>
 
-extern SPI_HandleTypeDef hspi1;
 #pragma once
 #define ENC28J60_SPI_DDR	DDRB
 #define ENC28J60_SPI_PORT	PORTB

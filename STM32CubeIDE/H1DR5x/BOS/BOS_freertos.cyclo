@@ -1,5 +1,0 @@
-..\..\BOS\BOS_freertos.c:101:6:MX_FREERTOS_Init	1
-..\..\BOS\BOS_freertos.c:181:6:StartDefaultTask	7
-..\..\BOS\BOS_freertos.c:236:6:ExecuteMonitor	24
-..\..\BOS\BOS_freertos.c:433:6:vMainConfigureTimerForRunTimeStats	1
-..\..\BOS\BOS_freertos.c:440:10:ulMainGetRunTimeCounterValue	2

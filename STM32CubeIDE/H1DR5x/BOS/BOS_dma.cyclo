@@ -1,3 +1,0 @@
-..\..\BOS\BOS_dma.c:44:12:StartDMAstream	5
-..\..\BOS\BOS_dma.c:80:6:DMA_IRQHandler	7
-..\..\BOS\BOS_dma.c:110:6:ResetUartORE	1

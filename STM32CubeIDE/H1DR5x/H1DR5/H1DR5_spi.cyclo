@@ -1,3 +1,0 @@
-..\..\H1DR5\H1DR5_spi.c:23:6:MX_SPI1_Init	1
-..\..\H1DR5\H1DR5_spi.c:55:6:HAL_SPI_MspInit	2
-..\..\H1DR5\H1DR5_spi.c:86:6:HAL_SPI_MspDeInit	2
