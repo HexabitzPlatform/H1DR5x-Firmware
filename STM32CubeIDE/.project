@@ -34,11 +34,6 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>Ethernet_Library</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>H1DR5</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -122,26 +117,6 @@
 			<name>BOS/FreeRTOSConfig.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/BOS/FreeRTOSConfig.h</locationURI>
-		</link>
-		<link>
-			<name>Ethernet_Library/enc28j60.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Ethernet_Library/enc28j60.c</locationURI>
-		</link>
-		<link>
-			<name>Ethernet_Library/enc28j60.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Ethernet_Library/enc28j60.h</locationURI>
-		</link>
-		<link>
-			<name>Ethernet_Library/lan.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Ethernet_Library/lan.c</locationURI>
-		</link>
-		<link>
-			<name>Ethernet_Library/lan.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Ethernet_Library/lan.h</locationURI>
 		</link>
 		<link>
 			<name>H1DR5/H1DR5.c</name>
@@ -254,6 +229,16 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Thirdparty/EEPROM_Emul</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/H08R7x-Firmware/Thirdparty/EEPROM_Emul</locationURI>
+		</link>
+		<link>
+			<name>Thirdparty/Ethernet_Library</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Thirdparty/Ethernet_Library</locationURI>
+		</link>
+		<link>
 			<name>Thirdparty/LSM303AGR</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -297,6 +282,16 @@
 			<name>Thirdparty/CMSIS/STM32G0xx</name>
 			<type>2</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Thirdparty/CMSIS/STM32G0xx</locationURI>
+		</link>
+		<link>
+			<name>Thirdparty/EEPROM_Emul/Core</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Thirdparty/EEPROM_Emul/Core</locationURI>
+		</link>
+		<link>
+			<name>Thirdparty/EEPROM_Emul/Porting</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Thirdparty/EEPROM_Emul/Porting</locationURI>
 		</link>
 		<link>
 			<name>Thirdparty/LSM303AGR/inc</name>
