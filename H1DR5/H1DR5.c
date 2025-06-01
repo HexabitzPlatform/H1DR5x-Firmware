@@ -596,12 +596,12 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 
 	switch(code){
 
-		case CODE_H1DR5_EthernetSendData:
+		case CODE_H1DR5_ETHERNET_SEND_DATA:
 			TXDataLength =(uint16_t )cMessage[port - 1][shift];
 			EthernetSendData(&cMessage[port - 1][1 + shift],TXDataLength);
 			break;
 
-		case CODE_H1DR5_SetLocalIP:
+		case CODE_H1DR5_SET_LOCAL_IP:
 			LocalIP[0] =cMessage[port - 1][0 + shift];
 			LocalIP[1] =cMessage[port - 1][1 + shift];
 			LocalIP[2] =cMessage[port - 1][2 + shift];
@@ -609,7 +609,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			SetLocalIP(LocalIP);
 			break;
 
-		case CODE_H1DR5_SetRemoteIP:
+		case CODE_H1DR5_SET_REMOTE_IP:
 			RemoteIP[0] =cMessage[port - 1][0 + shift];
 			RemoteIP[1] =cMessage[port - 1][1 + shift];
 			RemoteIP[2] =cMessage[port - 1][2 + shift];
@@ -617,7 +617,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			SetRemoteIP(RemoteIP);
 			break;
 
-		case CODE_H1DR5_SetSubnetMask:
+		case CODE_H1DR5_SET_SUBNET_MASK:
 			Subnet[0] =cMessage[port - 1][0 + shift];
 			Subnet[1] =cMessage[port - 1][1 + shift];
 			Subnet[2] =cMessage[port - 1][2 + shift];
@@ -625,20 +625,20 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 			SetSubnetMask(Subnet);
 			break;
 
-		case CODE_H1DR5_SetLocalPORT:
+		case CODE_H1DR5_SET_LOCAL_PORT:
 			Local_PORT =cMessage[port - 1][0 + shift];
 			SetLocalPORT(LocalPORT);
 			break;
 
-		case CODE_H1DR5_SetRemotePORT:
+		case CODE_H1DR5_SET_REMOTE_PORT:
 			Remote_PORT =cMessage[port - 1][0 + shift];
 			SetRemotePORT(RemotePORT);
 			break;
 
-		case CODE_H1DR5_SetRemoteIPRemoteMAC:
+		case CODE_H1DR5_SET_REMOTE_IP_REMOTE_MAC:
 			SetRemoteIPRemoteMAC();
 			break;
-		case CODE_H1DR5_DefaultValues:
+		case CODE_H1DR5_DEFAULT_VALUES:
 //			 DefaultValues();
 //			 memcpy(&messageParams[0], DefaultValue.LocalMac, sizeof(DefaultValue.LocalMac));
 //			 memcpy(&messageParams[6],DefaultValue.RemoteMac, sizeof(DefaultValue.RemoteMac));
@@ -648,7 +648,7 @@ Module_Status Module_MessagingTask(uint16_t code,uint8_t port,uint8_t src,uint8_
 //             memcpy(&messageParams[24], DefaultValue.DestIP, sizeof(DefaultValue.DestIP));
 //			 messageParams[28]=DefaultValue.LocalPort;
 //			 messageParams[29]=DefaultValue.RemotePort ;
-//			 SendMessageToModule(src, CODE_H1DR5_receive_Defalt_Value, 30);
+//			 SendMessageToModule(src, CODE_H1DR5_RECEIVE_DEFAULT_VALUE, 30);
 			break;
 
 		default:
