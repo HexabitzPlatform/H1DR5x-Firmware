@@ -3,14 +3,12 @@
  All rights reserved
 
  File Name     : H1DR5.c
- Description   : Source code for module H1DR5.
- 	 	 	 	 (Description_of_module)
-
-(Description of Special module peripheral configuration):
->>
->>
->>
-
+ Description   : Manages Ethernet communication and network configuration for module H1DR5.
+ Module_Peripheral_Init: Initialization of UART2-6, SPI1, Ethernet GPIO, and LAN interface.
+ CLI: Commands for network configuration and data transfer ("ethernetsenddata", "setlocalip", "setremoteip",
+      "setsubnetmask", "setlocalport", "setremoteport", "defaultvalues", "setremoteipremotemac").
+ Messages: Processes network-related requests (send data, set IP, set ports, set subnet mask, set MAC).
+ Module-specific functions: Ethernet data transmission, reception, and network settings configuration.
  */
 
 /* Includes ****************************************************************/

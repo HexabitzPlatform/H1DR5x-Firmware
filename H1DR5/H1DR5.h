@@ -1,17 +1,14 @@
 /*
  BitzOS (BOS) V0.4.0 - Copyright (C) 2017-2025 Hexabitz
  All rights reserved
- 
- File Name     : H1DR5.h
- Description   : Header file for module H1DR5.
- 	 	 	 	 (Description_of_module)
 
-(Description of Special module peripheral configuration):
->>
->>
->>
-
- */
+ File Name  : H1DR5.h
+ Description: Header file for module H1DR5 hardware configuration and Ethernet interfaces.
+ UART: Five ports (P1-P5) mapped to USART2-6 with GPIO pin assignments.
+ SPI1: Configured on PA5(SCK)/PA6(MISO)/PA7(MOSI) for Ethernet communication.
+ GPIO: Indicator LED on PB3, Ethernet control pins (CS on PA4, RST on PB0).
+ Ethernet: Supports UDP data transfer and network configuration (IP, MAC, ports, subnet mask).
+*/
 
 /* Define to prevent recursive inclusion ***********************************/
 #ifndef H1DR5_H
